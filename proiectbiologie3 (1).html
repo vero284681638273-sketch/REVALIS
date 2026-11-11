@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REVALIS – De la deșeu la valoare</title>
+<meta name="description" content="REVALIS – platformă științifică, educațională și interactivă pentru transformarea deșeurilor vegetale în resurse sustenabile.">
+<meta name="application-name" content="REVALIS">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef3ea;--surf:#fff;--ink:#14281c;--mute:#51675a;--line:#cfdac8;--g:#2f7a4a;--g2:#1c4a2d;--acc:#e0a21b;--bad:#c0452f;--onacc:#1a1405}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a13;--surf:#172419;--ink:#e6efe4;--mute:#9bb2a2;--line:#2a3d2f;--g:#5fb67b;--g2:#9be0b1;--acc:#f0b73a}}
+:root[data-theme="dark"]{--bg:#0f1a13;--surf:#172419;--ink:#e6efe4;--mute:#9bb2a2;--line:#2a3d2f;--g:#5fb67b;--g2:#9be0b1;--acc:#f0b73a}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,.brand{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surf);z-index:30}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#load{position:fixed;inset:0;z-index:50;background:var(--g2);color:#eaf5e6;display:grid;place-content:center;text-align:center;transition:opacity .5s}
+#load .brand{font-size:clamp(2.6rem,12vw,5rem);letter-spacing:.06em;font-weight:800}
+#load p{margin:.3rem 0 1.4rem;opacity:.8}
+#load i{display:block;width:180px;height:4px;background:#ffffff30;margin:auto;overflow:hidden;border-radius:2px}
+#load i::after{content:"";display:block;height:100%;width:40%;background:var(--acc);animation:ld 1.1s ease-in-out infinite}
+@keyframes ld{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+@media(prefers-reduced-motion:reduce){#load i::after{animation:none;width:100%}}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surf);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;flex-wrap:wrap}
+.logo{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);margin-right:auto;line-height:1}
+.logo b{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1.35rem;letter-spacing:.08em}
+.logo small{font-size:.68rem;color:var(--mute)}
+nav a.l{padding:.4rem .75rem;border-radius:99px;text-decoration:none;color:var(--ink);font-size:.92rem}
+nav a.l[aria-current="page"]{background:var(--g);color:#fff}
+#th{border:1px solid var(--line);background:none;border-radius:99px;padding:.3rem .7rem}
+main{max-width:1000px;margin:0 auto;padding:1.5rem 1rem 3rem}
+section[hidden]{display:none}
+.hero{padding:2.5rem 0 1.5rem}
+.hero h1{font-size:clamp(3rem,13vw,7rem);letter-spacing:.04em;font-weight:800;color:var(--g2)}
+.hero .tag{font-size:1.2rem;color:var(--g);font-weight:700;margin:.3rem 0 1rem}
+.hero p{max-width:56ch;color:var(--mute)}
+.btn{background:var(--g);color:#fff;border:0;border-radius:10px;padding:.65rem 1.1rem;font-weight:600;text-decoration:none;display:inline-block}
+.btn.a{background:var(--acc);color:var(--onacc)}
+.btn.o{background:none;border:1px solid var(--line);color:var(--ink)}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:1.5rem}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:1.1rem}
+.card h3{font-size:1.15rem;margin-bottom:.4rem}
+.card p{margin:.2rem 0;color:var(--mute);font-size:.95rem}
+.stat{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:2rem;font-weight:800;color:var(--g)}
+h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:.4rem;color:var(--g2)}
+.sub{color:var(--mute);margin:0 0 1rem;max-width:60ch}
+details{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;margin-bottom:.6rem}
+summary{cursor:pointer;font-weight:700}
+details p{color:var(--mute);margin:.6rem 0 0}
+.opt{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 1rem}
+.opt button{background:var(--surf);border:1px solid var(--line);border-radius:99px;padding:.4rem .9rem}
+.opt button[aria-pressed="true"]{background:var(--g);color:#fff;border-color:var(--g)}
+label{font-weight:600;display:block;margin-top:.8rem}
+input[type=range]{width:100%;accent-color:var(--g)}
+.res{margin-top:1rem;border-left:5px solid var(--acc);padding:.8rem 1rem;background:var(--surf);border-radius:0 12px 12px 0}
+.res .stat{color:var(--g2)}
+.hud{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem;margin:1rem 0}
+.hud div{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:.5rem .8rem}
+.hud b{display:block;font-size:1.3rem}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:.3rem}
+.bar i{display:block;height:100%;background:var(--bad);transition:width .4s}
+#map{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-width:480px}
+#map button{aspect-ratio:1;background:var(--surf);border:1px solid var(--line);border-radius:8px;font-size:clamp(1.2rem,6vw,1.9rem);padding:0}
+#map button:hover{background:var(--bg)}
+.q{margin-top:1rem}
+.q .opt button.ok{background:var(--g);color:#fff}
+.q .opt button.no{background:var(--bad);color:#fff}
+.msg{min-height:1.5em;color:var(--mute)}
+footer{text-align:center;color:var(--mute);font-size:.85rem;padding:1rem}
+#gameApp button{font:inherit;color:inherit;cursor:pointer}
+#gameApp :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#gameApp{height:100%;display:grid;grid-template-columns:280px 1fr;grid-template-rows:auto 1fr}
+#gameApp header{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;padding:.5rem .8rem;background:var(--surf);border-bottom:1px solid var(--line)}
+#gameApp .logo{display:flex;flex-direction:column;line-height:1}
+#gameApp .logo b{font:800 1.3rem "Bricolage Grotesque",system-ui,sans-serif;letter-spacing:.08em}
+#gameApp .logo small{font-size:.65rem;color:var(--mute)}
+#gameApp h1{font:600 .95rem "Bricolage Grotesque",system-ui,sans-serif;margin:0;color:var(--g);letter-spacing:.05em}
+#gameApp #hud{display:flex;gap:.4rem;flex-wrap:wrap;flex:1}
+#gameApp .hi{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.2rem .55rem;display:flex;gap:.35rem;align-items:center;white-space:nowrap}
+#gameApp .hi small{color:var(--mute)}
+#gameApp .bw{min-width:96px;display:block}
+#gameApp .bw i{display:block;height:7px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:2px}
+#gameApp .bw u{display:block;height:100%;transition:width .5s}
+#gameApp .act{display:flex;gap:.4rem}
+#gameApp .act button,#gameApp #tools button{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:.35rem .7rem;font-weight:600}
+#gameApp #side{background:var(--surf);border-right:1px solid var(--line);overflow:auto;padding:.6rem;display:flex;flex-direction:column;gap:.45rem}
+#gameApp #side h2{font:800 1rem "Bricolage Grotesque",system-ui,sans-serif;margin:.1rem 0}
+#gameApp .bc{display:flex;gap:.6rem;align-items:center;text-align:left;background:var(--bg);border:2px solid transparent;border-radius:12px;padding:.5rem;width:100%}
+#gameApp .bc .e{font-size:1.6rem}
+#gameApp .bc span:nth-child(2){flex:1;display:flex;flex-direction:column}
+#gameApp .bc small{color:var(--mute);font-size:.72rem}
+#gameApp .bc em{font-style:normal;font-weight:700}
+#gameApp .bc.on{border-color:var(--g)}
+#gameApp .bc.poor em{color:#c0452f}
+#gameApp .bc:disabled{opacity:.45;cursor:not-allowed}
+#gameApp #stage{position:relative;overflow:hidden;background:linear-gradient(var(--sky1),var(--sky2))}
+#gameApp canvas{display:block;width:100%;height:100%;touch-action:none}
+#gameApp #tools{position:absolute;left:10px;bottom:10px;display:flex;gap:.4rem;flex-wrap:wrap}
+#gameApp #tools button[aria-pressed="true"]{background:var(--g);color:#fff;border-color:var(--g)}
+#gameApp #toast{position:absolute;top:10px;left:50%;transform:translateX(-50%);max-width:90%;background:var(--ink);color:var(--bg);padding:.5rem .9rem;border-radius:12px;opacity:0;transition:opacity .3s;pointer-events:none;text-align:center}
+#gameApp #toast.on{opacity:1}
+#gameApp #mp{position:absolute;right:10px;top:10px;width:min(340px,calc(100% - 20px));background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:.8rem}
+#gameApp #mp[hidden]{display:none}
+#gameApp #mp h2{margin:0 0 .4rem;font:800 1rem "Bricolage Grotesque",system-ui,sans-serif}
+#gameApp #mp div{padding:.3rem 0;border-top:1px solid var(--line)}
+#gameApp #mp .d{color:var(--g);text-decoration:line-through}
+@media(max-width:720px){#gameApp{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}
+#gameApp h1{display:none}
+#gameApp #side{order:3;flex-direction:row;border-right:0;border-top:1px solid var(--line);padding:.4rem}
+#gameApp #side h2{display:none}
+#gameApp .bc{min-width:170px;width:auto}
+#gameApp #tools{bottom:8px}}
+
+#gameApp{--bg:#dff3e6;--surf:#fffffff2;--ink:#14281c;--mute:#566b5e;--line:#cfe0d3;--g:#2f9e5a;--acc:#f0a421;--sky1:#bfe8f7;--sky2:#e5f6d3;
+height:min(84dvh,840px);min-height:560px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:1rem;font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) #gameApp{--bg:#0f1a13;--surf:#16251bf2;--ink:#e6f1e7;--mute:#9fb6a6;--line:#2b4033;--sky1:#1d3a4f;--sky2:#223d2c}}
+:root[data-theme="dark"] #gameApp{--bg:#0f1a13;--surf:#16251bf2;--ink:#e6f1e7;--mute:#9fb6a6;--line:#2b4033;--sky1:#1d3a4f;--sky2:#223d2c}
+#gameApp .logo{margin-right:0}
+#gameApp #side h2,#gameApp #mp h2{color:var(--ink)}
+#gameApp #toast{z-index:6}
+#gameApp #mp{z-index:3;max-height:calc(100% - 20px);overflow:auto}
+#gameApp #obj{position:absolute;left:10px;top:10px;z-index:2;width:min(280px,calc(100% - 20px));background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:.5rem .7rem;font-size:.82rem}
+#gameApp #obj .gb{height:7px;border-radius:4px;background:var(--line);overflow:hidden;margin:.3rem 0}
+#gameApp #obj .gb i{display:block;height:100%;background:var(--g);transition:width .5s}
+#gameApp #obj .gl{padding:.1rem 0}#gameApp #obj .gl.ok{color:var(--g)}
+#gameApp #win{position:absolute;inset:0;z-index:8;background:#0009;display:grid;place-items:center;padding:10px;overflow:auto}
+#gameApp #win[hidden]{display:none}
+#gameApp .wc{position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:1.2rem;max-width:440px;text-align:center}
+#gameApp .wc h2{font:800 1.6rem "Bricolage Grotesque",system-ui,sans-serif;margin:.2rem 0;color:var(--g)}
+#gameApp .ws{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:.6rem 0}
+#gameApp .ws span{background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:.15rem .6rem}
+#gameApp .cf span{position:absolute;top:-30px;font-size:1.4rem;animation:cf 3s linear infinite}
+@keyframes cf{to{transform:translateY(520px) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#gameApp .cf span{animation:none;display:none}}
+main.wide{max-width:1280px}
+.nuc{position:relative;height:clamp(340px,62vw,480px);border-radius:18px;overflow:hidden;margin-top:1.5rem;background:radial-gradient(circle at 50% 45%,#1f5a35,#07130c 72%)}
+#nuc{width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.nuc .cap{position:absolute;left:12px;top:10px;color:#cfe8d3;font-size:.8rem;max-width:60%;pointer-events:none}
+#nfo{position:absolute;left:10px;right:10px;bottom:10px;max-width:540px}
+#nfo[hidden]{display:none}#nfo button{float:right}
+
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0 1rem}
+.chips button{background:var(--surf);border:1px solid var(--line);border-radius:99px;padding:.4rem .9rem}
+.chips button[aria-pressed="true"]{background:var(--g);color:#fff;border-color:var(--g)}
+.tl{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.tc{background:var(--surf);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.tc .ill{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;background:linear-gradient(120deg,var(--g2),var(--g));color:#fff}
+.tc .ill span{font-size:2.4rem;line-height:1}.tc .ill b{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1.6rem}
+.tc .bd{padding:.8rem 1rem;font-size:.92rem}.tc .bd p{margin:.45rem 0;color:var(--mute)}.tc .bd p b{color:var(--ink)}
+.tc h3{font-size:1.05rem;margin:0 0 .3rem}.tc small a{color:var(--g)}
+.dg{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;background:var(--surf);border:1px dashed var(--line);border-radius:12px;padding:.7rem;margin:.6rem 0}
+.dg i{font-style:normal;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.25rem .6rem;font-size:.9rem}
+.mb{height:14px;border-radius:7px;background:var(--line);margin:.2rem 0 .5rem;overflow:hidden}.mb i{display:block;height:100%;background:var(--g)}
+.pg i{background:var(--g)!important}
+.pop{display:inline-block;font-size:1.8rem;animation:pop .6s ease}
+@keyframes pop{0%{transform:scale(0) rotate(-20deg)}60%{transform:scale(1.5) rotate(10deg)}100%{transform:scale(1)}}
+.fin{text-align:center;position:relative;overflow:hidden}
+.ring{width:120px;height:120px;border-radius:50%;background:conic-gradient(var(--g) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;margin:.5rem auto}
+.ring b{background:var(--surf);width:92px;height:92px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem}
+.stk{font-size:4.5rem;animation:bn 1.2s ease infinite}
+@keyframes bn{50%{transform:translateY(-10px) rotate(6deg)}}
+.cfx span{position:absolute;top:-30px;font-size:1.4rem;animation:cfa 3s linear infinite}
+@keyframes cfa{to{transform:translateY(420px) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.pop,.stk,.cfx span{animation:none}.cfx{display:none}}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;align-items:center;margin:.8rem 0}
+.mt select{font:inherit;padding:.4rem;border-radius:8px;border:1px solid var(--line);background:var(--surf);color:var(--ink);max-width:100%}
+details details{margin:.6rem 0 0;background:var(--bg)}
+
+.lablogo{border-radius:18px;padding:1.4rem;color:#e6f6ea;background:radial-gradient(circle at 85% 20%,#2f9e5a55,transparent 45%),linear-gradient(135deg,#07130c,#1c4a2d);border:1px solid #2f7a4a}
+.lablogo small{letter-spacing:.14em;opacity:.8}.lablogo h2{color:#fff;font-size:clamp(2rem,7vw,3.4rem)}.lablogo p{margin:.4rem 0 0;max-width:60ch;opacity:.9}
+.cat{text-align:left;cursor:pointer;display:block;width:100%;transition:transform .2s}.cat:hover{transform:translateY(-3px)}
+.cat .e{font-size:2rem}.cat b{display:block;font-family:"Bricolage Grotesque",system-ui,sans-serif}.cat small{color:var(--mute)}
+.vz{width:100%;height:280px;display:block;border-radius:12px;background:radial-gradient(circle,#1f5a35,#07130c 75%);touch-action:pan-y;cursor:grab}
+.tag{display:inline-block;font-size:.75rem;border:1px solid var(--acc);color:var(--ink);border-radius:99px;padding:.05rem .6rem;margin-left:.4rem}
+.bdg{display:inline-block;margin:.2rem;padding:.2rem .6rem;border-radius:99px;border:1px solid var(--line);font-size:.85rem}.bdg.on{background:var(--acc);color:var(--onacc);border-color:var(--acc)}.bdg:not(.on){opacity:.5}
+.steps{display:flex;gap:.4rem;flex-wrap:wrap;margin:.8rem 0}.steps button{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:.3rem .6rem;font-size:.85rem}.steps button[aria-current="step"]{background:var(--g);color:#fff;border-color:var(--g)}.steps button.v::after{content:" ✓"}
+.fade{animation:fd .35s ease}@keyframes fd{from{opacity:0;transform:translateY(8px)}}
+
+#lab .flh{position:relative;overflow:hidden;border-radius:18px;padding:1.6rem;color:#dff8ff;border:1px solid #22d3ee66;background:radial-gradient(circle at 80% 10%,#8b5cf655,transparent 45%),radial-gradient(circle at 10% 90%,#22d3ee44,transparent 40%),linear-gradient(135deg,#050b1c,#0b1f3f)}
+#lab .flh::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#22d3ee12 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,#22d3ee12 0 1px,transparent 1px 28px);pointer-events:none}
+#lab .flh>*{position:relative}#lab .flh small{letter-spacing:.18em;color:#67e8f9}#lab .flh h2{color:#fff;font-size:clamp(2.2rem,8vw,4rem);text-shadow:0 0 24px #22d3ee}#lab .flh p{max-width:62ch;margin:.4rem 0}
+#lxp{margin-top:.6rem;display:inline-block;border:1px solid #22d3ee88;border-radius:99px;padding:.2rem .8rem;color:#a5f3fc;background:#0b1f3f}
+#lab .lt{margin-top:1rem}#lab .lt button{background:#0b1f3f;color:#cffafe;border:1px solid #22d3ee55}#lab .lt button[aria-pressed="true"]{background:linear-gradient(90deg,#0891b2,#7c3aed);border-color:#a78bfa;box-shadow:0 0 14px #22d3ee88}
+#lab .lp{background:linear-gradient(160deg,#050b1c,#0c1a38);color:#dff8ff;border:1px solid #22d3ee44;border-radius:16px;padding:1rem;animation:fd .4s ease}
+#lab .lp h3{color:#67e8f9}#lab .lp p,#lab .lp small{color:#b6d4e6}#lab .lp label{color:#dff8ff}#lab .lp select{background:#0b1f3f;color:#dff8ff;border:1px solid #22d3ee66;border-radius:8px;padding:.35rem;max-width:100%;font:inherit}
+#lab .lp input[type=range]{accent-color:#22d3ee}#lab .lp .btn{background:linear-gradient(90deg,#0891b2,#7c3aed)}#lab .lp .chips button{background:#0b1f3f;color:#cffafe;border:1px solid #22d3ee55}#lab .lp .chips button[aria-pressed="true"]{background:#0891b2;color:#fff}
+#lab .kc{width:100%;height:clamp(280px,56vw,420px);display:block;border-radius:12px;background:radial-gradient(circle at 50% 45%,#16305f,#040814 75%);touch-action:pan-y;cursor:grab}
+#lab .lg{display:grid;gap:1rem;grid-template-columns:minmax(0,290px) minmax(0,1fr)}@media(max-width:760px){#lab .lg{grid-template-columns:1fr}}
+#lab .hol{border:1px solid #22d3ee55;border-radius:12px;padding:.7rem;background:#08142c;box-shadow:inset 0 0 20px #22d3ee18}
+#lab .sim{display:inline-block;background:#7c3aed;color:#fff;border-radius:6px;padding:.05rem .5rem;font-size:.75rem;font-weight:700}
+#lab .mk{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}#lab .bw2{height:10px;border-radius:5px;background:#16305f;overflow:hidden}#lab .bw2 i{display:block;height:100%;background:linear-gradient(90deg,#22d3ee,#8b5cf6)}
+#lab .nbc{border:1px solid #22d3ee44;border-radius:10px;padding:.6rem;margin:.6rem 0;background:#08142c}
+.ltoast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:linear-gradient(90deg,#0891b2,#7c3aed);color:#fff;padding:.7rem 1.2rem;border-radius:14px;z-index:40;box-shadow:0 0 24px #22d3ee;animation:pop .6s}
+/* === Scanare deșeu + Despre proiect === */
+.scanbox{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:1.2rem;border-color:var(--g);background:linear-gradient(135deg,var(--surf),color-mix(in srgb,var(--g) 10%,var(--surf)))}
+.scanbox h3{margin-bottom:.3rem}.scanbox p{max-width:58ch}.scanbox .btn{font-size:1.05rem;padding:.8rem 1.4rem;border:0}
+.scm{position:fixed;inset:0;z-index:45;background:rgba(5,15,9,.72);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + .6rem) .6rem calc(env(safe-area-inset-bottom,0px) + .6rem)}
+.scm[hidden]{display:none}
+.scp{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:18px;width:100%;max-width:780px;padding:1rem;animation:scin .3s ease}
+@keyframes scin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.sch{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.sch h3{color:var(--g2);font-size:1.3rem}
+#scX{border:1px solid var(--line);background:var(--surf);border-radius:99px;width:2.4rem;height:2.4rem}
+.scv{position:relative;background:#07130c;border-radius:14px;overflow:hidden;aspect-ratio:4/3;display:grid;place-items:center}
+.scv video,.scv canvas{width:100%;height:100%;object-fit:cover;display:block}
+.scv video[hidden],.scv canvas[hidden]{display:none}
+.scv .frm{position:absolute;inset:14%;border:2px dashed #ffffffaa;border-radius:16px;pointer-events:none}
+.scv .frm[hidden]{display:none}
+#scMsg{position:absolute;inset:auto 0 0 0;padding:.6rem .9rem;background:rgba(7,19,12,.82);color:#eaf5e6;font-size:.92rem}
+#scMsg:empty{display:none}
+#scMsg.err{background:rgba(160,40,25,.92)}
+.scm .row .btn{border:0;font-size:.95rem}.scm .row .btn.o{border:1px solid var(--line)}
+.scm .btn[hidden]{display:none}
+.scr{margin-top:1rem;animation:scin .4s ease}
+.scrh{display:flex;gap:1rem;align-items:center;background:linear-gradient(135deg,#1c4a2d,#2f7a4a);color:#fff;border-radius:16px;padding:1rem}
+.scrh .em{font-size:3rem;line-height:1}.scrh small{opacity:.85;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem}
+.scrh h3{color:#fff;font-size:1.5rem;margin:.1rem 0 .4rem}
+.scbar{height:10px;border-radius:5px;background:#ffffff33;overflow:hidden;max-width:260px}.scbar i{display:block;height:100%;background:var(--acc);transition:width .8s}
+.scbd{display:inline-block;background:#ffffff22;border-radius:99px;padding:.1rem .6rem;font-size:.75rem;margin:.35rem .3rem 0 0}
+.scg{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:.8rem}
+.scg .card{padding:.8rem 1rem}.scg .card b{display:block;color:var(--g);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem}
+.scg .card p{color:var(--ink);margin:0}
+.scalt{margin:.7rem 0 0;color:var(--mute);font-size:.9rem}
+.scfix .btn{font-size:.82rem;padding:.35rem .7rem;margin:.2rem .25rem 0 0}
+.scnote{font-size:.82rem;color:var(--mute);margin-top:.8rem}
+.abt{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:1rem}
+.abt .card h3{color:var(--g2)}.abt .card ul{margin:.4rem 0 0;padding-left:1.1rem;color:var(--mute);font-size:.95rem}.abt .card li{margin:.25rem 0}
+.team{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:1rem 0}
+.team .card{text-align:center;border-color:var(--g)}.team .card .av{font-size:2.2rem}.team .card h3{margin:.2rem 0 0;color:var(--g2)}.team .card p{margin:0}
+@media(prefers-reduced-motion:reduce){.scp,.scr{animation:none}.scbar i{transition:none}}
+</style>
+</head>
+<body>
+<div id="load" role="status"><div><div class="brand">REVALIS</div><p>De la deșeu la valoare</p><i></i></div></div>
+
+<nav aria-label="Navigare principală">
+<a class="logo" href="#acasa"><b>REVALIS</b><small>De la deșeu la valoare</small></a>
+<a class="l" href="#acasa">Acasă</a>
+<a class="l" href="#invata">Centrul de învățare</a>
+<a class="l" href="#lab">Laborator</a>
+<a class="l" href="#oras">Orașul ecologic</a>
+<a class="l" href="#despre">Despre proiect</a>
+<button id="th" aria-label="Schimbă tema">◐</button>
+</nav>
+
+<main>
+<section id="acasa">
+<div class="hero">
+<h1>REVALIS</h1>
+<div class="tag">De la deșeu la valoare</div>
+<p>REVALIS – Transformăm deșeurile vegetale în resurse sustenabile. O platformă științifică, educațională și interactivă despre cum deșeurile vegetale devin compost, biocarbon, bioplastic și energie.</p>
+<div class="row"><a class="btn" href="#invata">Începe să înveți</a><a class="btn a" href="#lab">Deschide laboratorul</a><a class="btn o" href="#oras">Construiește orașul ecologic</a></div>
+</div>
+<div class="nuc"><canvas id="nuc" aria-label="Nucleul 3D al economiei circulare REVALIS"></canvas><div class="cap">Nucleul economiei circulare: resursele organice vegetale (verde) se transformă în materiale utile. Trage pentru a roti, atinge o sferă pentru o descoperire.</div><div id="nfo" class="card" hidden></div></div>
+<div class="grid">
+<div class="card"><div class="stat">1,3 mld. t</div><p>de alimente se pierd sau se risipesc anual la nivel global (FAO).</p></div>
+<div class="card"><div class="stat">8–10%</div><p>din emisiile globale de gaze cu efect de seră sunt legate de risipa alimentară.</p></div>
+<div class="card"><div class="stat">4 căi</div><p>de valorificare: compost, biogaz, biocarbon și bioplastic.</p></div>
+</div>
+
+<h2 style="margin-top:3rem">Cum construiește lumea un viitor mai verde?</h2>
+<p class="sub">Șapte momente reale, din Europa, Africa, Asia și de la nivel global. Fiecare card separă trei lucruri: ce s-a adoptat, ce s-a implementat și ce rezultate s-au observat. O lege adoptată nu este automat o lege de succes.</p>
+<div class="chips" id="tlf" role="group" aria-label="Filtrează după regiune"></div>
+<div class="tl" id="tl"></div>
+</section>
+
+<section id="invata" hidden>
+<div class="lablogo"><small>REVALIS · LABORATORUL INTERACTIV DE ÎNVĂȚARE</small><h2>De la deșeu la descoperire</h2><p>Explorează cum deșeurile vegetale devin resurse: lecții vizuale, modele 3D, quiz-uri și progres salvat.</p></div>
+<div id="ldash"></div>
+<div class="card scanbox"><div><h3>📷 Scanează un deșeu · Recunoaște-l cu camera</h3><p>Fotografiază un deșeu vegetal cu camera sau încarcă o poză din galerie. Aplicația analizează imaginea și îți arată o fișă despre materia primă și transformarea ei.</p></div><button class="btn a" id="scanOpen" type="button">📷 Scanează un deșeu</button></div>
+<h3 style="margin-top:1.5rem">✨ De la deșeu la descoperire: alege un deșeu</h3>
+<p class="sub">Parcurge transformarea pas cu pas. Fiecare etapă este marcată: industrial, cercetare sau teoretic.</p>
+<div class="chips" id="wm"></div><div id="wv"></div>
+<h3 style="margin-top:1.8rem">Cele 6 categorii</h3>
+<div class="grid" id="cgrid"></div><div id="lcv"></div>
+</section>
+
+<section id="lab" hidden>
+<div class="flh"><small>REVALIS · LABORATORUL ȘTIINȚEI VIITORULUI</small><h2>De la deșeu la valoare</h2><p>Un laborator digital: transformă resursele organice în nucleul 3D, intră în lumea moleculară, rulează simulări de purificare a apei și devino cercetător. Rezultatele sunt <b>simulări educaționale</b>, nu date experimentale.</p><div id="lxp"></div></div>
+<div class="chips lt" id="ltabs" role="tablist"></div>
+<div id="lpan"></div>
+<div id="lcalc" hidden>
+<h2>Laboratorul de transformare</h2>
+<p class="sub">Alege deșeul, procesul și cantitatea. Laboratorul estimează produsul obținut și CO₂ evitat.</p>
+<b>1. Deșeu vegetal</b><div class="opt" id="ws"></div>
+<b>2. Proces</b><div class="opt" id="ps"></div>
+<label for="kg">3. Cantitate: <span id="kgv">10</span> kg</label>
+<input id="kg" type="range" min="1" max="100" value="10">
+<div class="res" aria-live="polite" id="out"></div>
+</div>
+</section>
+
+<section id="oras" hidden>
+<h2>Orașul ecologic</h2>
+<p class="sub">Transformă deșeurile vegetale în resurse și construiește un oraș ecologic.</p>
+<details open><summary>Cum se joacă și care este scopul</summary>
+<p><b>Obiectiv principal:</b> construiește un <b>oraș ecologic complet funcțional</b>: poluare sub 30%, sustenabilitate de minimum 80%, calitatea apei de minimum 70%, 50 de resturi vegetale valorificate și cel puțin 12 clădiri. Progresul tău apare permanent în colțul hărții, iar butonul „Misiuni” arată misiunile secundare și recompensele.</p>
+<p><b>Cum construiești:</b> alege o clădire din listă (pe telefon, lista este sub hartă), apoi atinge o parcelă liberă. Pe apă și pe drum nu se poate construi. Sub hartă ai modurile Construiește, Înlocuiește și Șterge (ștergerea returnează 50% din preț). Trage harta pentru a o muta; pentru zoom folosește ＋/－ sau două degete. Jocul se salvează automat.</p>
+<p><b>Resursele:</b> 💰 monedele cumpără clădiri; ⭐ punctele cresc nivelul și deblochează clădiri noi; 🌿 resturile vegetale sunt produse de reciclare, fermă, seră și pădure; Fabrica de valorificare le transformă în 🧱 materiale, iar Centrul de biomateriale transformă materialele în monede și puncte. ☁️ Poluarea trebuie scăzută, 🌍 sustenabilitatea și 💧 apa trebuie crescute.</p>
+<p><b>Ce reprezintă clădirile:</b> ♻️ Centrul de reciclare colectează resturile vegetale și reduce poluarea. 🌳 Parcul și 🌲 pădurea urbană curăță aerul și scad poluarea. 🌾 Ferma sustenabilă produce resurse vegetale. 🏭 Fabrica de valorificare transformă resturile în materiale, dar poluează ușor, așa că o echilibrezi cu spații verzi. 💧 Stația de tratare ridică calitatea apei. 🔬 Laboratorul crește cu 25% cantitatea de materiale (până la 3 laboratoare). 🪴 Sera produce plante și venit. 🧪 Centrul de biomateriale creează produse valoroase din materiale.</p>
+<p><b>Legătura cu mediul:</b> în joc, ca în realitate, resturile vegetale nu sunt gunoi, ci materie primă: pot deveni compost, biogaz, biocarbon sau bioplastic. Sfat: începe cu reciclare și parc, adaugă o fermă, apoi echilibrează fabricile cu pădure și stații de apă.</p></details>
+<div id="gameApp">
+<header>
+<div class="logo"><b>REVALIS</b><small>De la deșeu la valoare</small></div>
+<h1>ORAȘUL ECOLOGIC</h1>
+<div id="hud"></div>
+<div class="act"><button id="mb">🎯 Misiuni</button><button id="rs">Resetează</button></div>
+</header>
+<aside id="side" aria-label="Clădiri"></aside>
+<div id="stage">
+<canvas id="cv" aria-label="Harta orașului"></canvas>
+<div id="tools">
+<button data-m="build" aria-pressed="true">Construiește</button>
+<button data-m="replace" aria-pressed="false">Înlocuiește</button>
+<button data-m="delete" aria-pressed="false">Șterge</button>
+<button id="zi" aria-label="Mărește">＋</button><button id="zo" aria-label="Micșorează">－</button>
+</div>
+<div id="obj"></div><div id="win" hidden></div><div id="toast" role="status"></div>
+<div id="mp" hidden></div>
+</div>
+</div>
+
+</section>
+<section id="despre" hidden>
+<div class="lablogo"><small>REVALIS · DESPRE PROIECT</small><h2>Despre proiect</h2><p>Cum a fost gândită și realizată aplicația REVALIS – De la deșeu la valoare, o platformă educațională despre transformarea deșeurilor vegetale în resurse.</p></div>
+<h3 style="margin-top:1.5rem">Realizatoarele proiectului</h3>
+<div class="team"><div class="card"><div class="av">🌱</div><h3>Melnychenko Veronika</h3><p>Realizatoare a proiectului</p></div><div class="card"><div class="av">🌿</div><h3>Tudorache Sara</h3><p>Realizatoare a proiectului</p></div></div>
+<div class="abt">
+<div class="card"><h3>🎯 Conceptul și scopul</h3><p>REVALIS pornește de la ideea că resturile vegetale (coji de citrice, zaț de cafea, coji de orez, paie) nu sunt gunoi, ci materie primă. Aplicația explică, vizual și interactiv, cum pot deveni pectină, compost, biogaz, biocarbon, carbon activ sau materiale de construcție și ce limite au aceste procese. Informațiile marchează ce este industrial, ce este în cercetare și ce este teoretic.</p></div>
+<div class="card"><h3>🧭 Structura aplicației</h3><p>Aplicația este un singur fișier web (HTML, CSS și JavaScript), cu navigare între secțiuni prin meniul principal, temă deschisă sau închisă și design adaptat pentru telefon și desktop. Secțiunile sunt:</p><ul><li><b>Acasă:</b> prezentarea proiectului, nucleul animat al economiei circulare, statistici și o cronologie cu șapte momente reale de politică de mediu.</li><li><b>Centrul de învățare:</b> șase categorii cu lecții, modele vizuale, quiz-uri, surse bibliografice și progres salvat în browser, plus parcursul „De la deșeu la descoperire” pe materii prime și scanarea deșeurilor cu camera.</li><li><b>Laborator:</b> Nucleul de transformare, Universul molecular, Camera de purificare și Sala de control, Confruntarea materialelor, misiuni și caiet de laborator, plus un calculator de transformare.</li><li><b>Orașul ecologic:</b> joc de construit un oraș ecologic, în care resturile vegetale sunt valorificate ca resurse.</li><li><b>Despre proiect:</b> această secțiune.</li></ul></div>
+<div class="card"><h3>🛠️ Tehnologii și instrumente</h3><ul><li>HTML5, CSS3 (variabile CSS, grid și flexbox, mod întunecat, respectarea preferinței de animații reduse) și JavaScript, fără biblioteci sau framework-uri pentru interfață.</li><li>Elementul <b>Canvas 2D</b> pentru nucleul animat, modelele moleculare și poroase, laboratorul și harta jocului; efectele 3D sunt desenate de cod propriu, nu cu o bibliotecă 3D.</li><li><b>localStorage</b> pentru salvarea progresului, a caietului de laborator și a stării jocului.</li><li><b>MediaDevices API (getUserMedia)</b> și Canvas pentru cameră și analiza imaginilor.</li><li>Fontul Bricolage Grotesque, încărcat din Google Fonts.</li><li>Pentru recunoaștere: modelul CLIP (zero-shot) rulat în browser prin Transformers.js, încărcat de pe internet la prima scanare.</li></ul></div>
+<div class="card"><h3>📷 Recunoașterea deșeurilor</h3><p>În Centrul de învățare, butonul „Scanează un deșeu” deschide camera dispozitivului (sau permite încărcarea unei poze din galerie). Imaginea este analizată local, în browser, de modelul CLIP, care compară imaginea cu descrieri text pentru peste 130 de clase de deșeuri (întregi, coji, resturi, hârtie, plastic, sticlă, metal, textile, electronice, construcții). Modelul nu a fost antrenat de noi pe un set propriu de date: este un model general, folosit fără antrenare suplimentară („zero-shot”). Aplicația arată un scor relativ al modelului (nu o probabilitate calibrată) și trei trepte: încredere ridicată, medie (posibil, cu confirmare) sau scăzută (cere o poză mai clară); dacă nu se potrivește nicio clasă, afișează „Deșeu neidentificat”. Pentru mai multe obiecte, imaginea este analizată pe zone. Fotografia nu este trimisă către niciun server de către aplicație. Recunoașterea este orientativă și funcționează cel mai bine pe fundal simplu, cu lumină bună.</p></div>
+<div class="card"><h3>📚 Partea educațională</h3><p>Conținutul este organizat în lecții scurte, fiecare cu un model vizual, un quiz (alegere multiplă, adevărat/fals, asociere), o secțiune despre aplicații reale și referințe științifice. Simulările din laborator folosesc parametri ilustrativi și sunt marcate „SIMULARE”, iar rezultatele nu înlocuiesc măsurători reale.</p></div>
+<div class="card"><h3>♻️ Rolul în economia circulară</h3><p>REVALIS arată că valorificarea resturilor vegetale reduce risipa, evită arderea în câmp și poate stoca carbon sau curăța apa. Prin cronologia politicilor de mediu, prin laborator și prin jocul „Orașul ecologic”, aplicația încurajează înțelegerea științifică a protecției mediului și alegeri responsabile.</p></div>
+</div>
+</section>
+</main>
+<div id="scanM" class="scm" hidden role="dialog" aria-modal="true" aria-labelledby="scT"><div class="scp">
+<div class="sch"><h3 id="scT">📷 Scanează un deșeu · Recunoaște-l cu camera</h3><button id="scX" type="button" aria-label="Închide">✕</button></div>
+<div class="scv"><video id="scVid" playsinline muted hidden></video><canvas id="scCv" hidden></canvas><div class="frm" id="scFrm" hidden></div><div id="scMsg" role="status"></div></div>
+<div class="row" id="scBtns"><button class="btn" id="scCam" type="button" hidden>📷 Deschide camera</button><button class="btn" id="scShot" type="button" hidden>📸 Fotografiază</button><button class="btn" id="scGo" type="button" hidden>🔍 Analizează fotografia</button><button class="btn o" id="scFlip" type="button" hidden>🔄 Schimbă camera</button><button class="btn a" id="scGal" type="button">🖼️ Din galerie</button><button class="btn o" id="scNat" type="button">📱 Aplicația camerei</button><button class="btn o" id="scDel" type="button" hidden>🗑️ Șterge fotografia</button><button class="btn" id="scAgain" type="button" hidden>↻ Altă fotografie</button></div>
+<input type="file" id="scF1" accept="image/*" hidden><input type="file" id="scF2" accept="image/*" capture="environment" hidden>
+<div id="scRes" aria-live="polite"></div>
+</div></div>
+<footer>REVALIS · De la deșeu la valoare</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+// Navigare
+const secs=['acasa','invata','lab','oras','despre'];
+let cur=null;function route(forced){const h=(typeof forced==='string'?forced:(location.hash||'#acasa').slice(1));const id=secs.includes(h)?h:'acasa';cur=id;
+secs.forEach(s=>$('#'+s).hidden=s!==id);
+document.querySelectorAll('nav a.l').forEach(a=>a.getAttribute('href')==='#'+id?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+document.title='REVALIS – '+({acasa:'De la deșeu la valoare',invata:'Centrul de învățare',lab:'Laborator',oras:'Orașul ecologic',despre:'Despre proiect'})[id];
+$('main').classList.toggle('wide',id==='oras');nucOn(id==='acasa');}
+addEventListener('hashchange',()=>route());
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;const t=a.getAttribute('href').slice(1);if(!secs.includes(t))return;e.preventDefault();route(t);try{history.replaceState(null,'','#'+t)}catch(x){try{location.hash=t}catch(y){}}window.scrollTo(0,0);});
+setTimeout(()=>{$('#load').style.opacity=0;setTimeout(()=>$('#load').remove(),500)},1200);
+$('#th').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
+
+
+// Centrul de învățare
+const CH=[
+{e:"🌾",t:"Resurse organice și deșeuri vegetale",
+dg:'<div class="dg"><b>Compoziția tipică a resurselor organice lignocelulozice</b></div><div>Celuloză ~35–50%<div class="mb"><i style="width:50%"></i></div>Hemiceluloză ~20–35%<div class="mb"><i style="width:35%"></i></div>Lignină ~10–25%<div class="mb"><i style="width:25%"></i></div><small>Intervale orientative; variază după specie și parte a plantei.</small></div>',
+L:[["Ce sunt resursele organice?","Resursele organice sunt materia de origine biologică folosită ca resursă. Tipuri: lemnoasă (rumeguș, crengi), agricolă (paie, tulei de porumb, coji de orez), reziduuri alimentare (coji de fructe, zaț de cafea), culturi energetice și alge.","Deșeurile vegetale sunt de obicei lignocelulozice: pereții celulari combină fibre de celuloză, hemiceluloză și lignină, iar proporțiile stabilesc dacă materialul merge spre compost, biogaz, biocarbon sau bioplastic."],
+["Din ce sunt făcute plantele?","Celuloza dă rezistență fibrelor, hemiceluloza leagă fibrele, lignina rigidizează și apără peretele celular, iar pectina ține celulele lipite între ele. Cojile conțin și compuși fenolici, antioxidanți naturali.","Lignina este cea mai greu de degradat dintre componente. Pectina este abundentă în cojile de citrice și în tescovina de mere, iar zațul de cafea conține acizi fenolici, de exemplu acizi clorogenici."],
+["Cum valorificăm reziduurile?","Coji de citrice: pectină și uleiuri esențiale. Zaț de cafea: compost, cultivarea ciupercilor, biocarbon. Coji de orez: bogate în silice, folosite pentru biocarbon și materiale de construcție. Paie: bioetanol, compost, materiale. Mai bine valorificate decât arse pe câmp.","Alegerea căii depinde de umiditate, conținutul de zaharuri și de lignină și de costul colectării. Resursele organice umede merg la digestie anaerobă sau compost, iar cele uscate la piroliză."]],
+f:"Pectina comercială se extrage în principal din cojile de citrice și din tescovina de mere, iar cenușa cojilor de orez conține în mare parte silice.",
+Q:[
+{t:"mc",q:"Care este cel mai răspândit polimer natural?",o:["Celuloza","Silicona","Polietilena"],x:"Celuloza formează fibrele pereților celulari și este cel mai răspândit polimer natural."},
+{t:"tf",q:"Lignina contribuie la rigiditatea pereților celulari ai plantelor.",a:true,x:"Lignina rigidizează peretele celular și îl protejează de degradare."},
+{t:"mc",q:"Din ce se extrage comercial pectina?",o:["Coji de citrice și tescovină de mere","Nisip și argilă","Petrol brut"],x:"Cojile de citrice și tescovina de mere sunt principalele surse comerciale."},
+{t:"mt",q:"Asociază reziduul cu o valorificare posibilă:",P:[["Coji de citrice","Pectină"],["Zaț de cafea","Cultivarea ciupercilor"],["Coji de orez","Silice și biocarbon"],["Paie","Bioetanol celulozic"]],x:"Fiecare reziduu are o compoziție care îl face potrivit pentru anumite procese."},
+{t:"mc",img:"🌾",q:"Paiele din imagine sunt un exemplu de resursă organică…",o:["agricolă","fosilă","minerală"],x:"Paiele sunt reziduu agricol, deci resursă organică agricolă."},
+{t:"tf",q:"Resursele organice lignocelulozice conțin doar zaharuri simple.",a:false,x:"Conțin polimeri complecși (celuloză, hemiceluloză, lignină), nu doar zaharuri simple."},
+{t:"mc",q:"Care componentă a resurselor organice se degradează cel mai greu?",o:["Lignina","Apa","Zaharurile simple"],x:"Lignina este cea mai rezistentă la degradare."},
+{t:"mc",q:"De ce nu este ideal să arzi paiele pe câmp?",o:["Se pierde o resursă și se emit poluanți","Paiele nu ard niciodată","Crește pectina din sol"],x:"Arderea liberă emite particule și CO₂ și irosește un material valoros."}]},
+{e:"🔥",t:"Biocarbon, piroliză și activare",
+dg:'<div class="dg"><i>🌾 Resurse organice</i>→<i>🔥 Piroliză, fără O₂, ~350–700 °C</i>→<i>⚫ Biocarbon</i><i>🛢️ Bio-ulei</i><i>💨 Gaz de sinteză</i></div>',
+L:[["Ce este piroliza?","Piroliza încălzește resursele organice la temperaturi de aproximativ 350–700 °C cu oxigen foarte puțin sau deloc. În loc să ardă, materialul se descompune în trei produse: biocarbon (solid), bio-ulei (lichid) și gaz de sinteză.","Temperatura mai mare dă în general mai mult carbon, pori mai dezvoltați și pH mai alcalin, dar un randament mai mic de biocarbon. Contează și viteza de încălzire și timpul de staționare."],
+["Activarea","Activarea mărește porii și suprafața biocarbonului, ca el să poată reține mai mult. Poate fi fizică (abur sau CO₂ la temperaturi mari) sau chimică (agenți precum KOH sau H₃PO₄).","Cărbunii activați pot avea suprafețe specifice de sute de m²/g, uneori peste 1000 m²/g. Alegerea agentului schimbă distribuția porilor."],
+["La ce folosește biocarbonul?","Ameliorarea solului, stocarea carbonului pe termen lung, filtre pentru apă și adsorbant pentru poluanți.","În bazinul Amazonului, solurile Terra Preta, create de populații precolumbiene, conțin mult cărbune vegetal și sunt astăzi mai fertile decât solurile din jur (Lehmann & Joseph, 2009)."]],
+f:"Un gram de cărbune activ poate avea o suprafață de peste 1000 m², de câteva ori cât un teren de tenis.",
+Q:[
+{t:"mc",q:"Piroliza se desfășoară…",o:["fără oxigen sau cu foarte puțin","în aer liber, cu flacără","sub apă"],x:"Lipsa oxigenului împiedică arderea și duce la biocarbon, bio-ulei și gaz."},
+{t:"tf",q:"Temperatura mai mare de piroliză scade, în general, randamentul de biocarbon.",a:true,x:"Se pierd mai mulți volatili, deci rămâne mai puțin solid."},
+{t:"mc",q:"Care sunt cele trei produse ale pirolizei?",o:["Biocarbon, bio-ulei, gaz de sinteză","Sticlă, metal, hârtie","Compost, apă, sare"],x:"Sunt un solid, un lichid și un gaz."},
+{t:"mc",q:"Ce urmărește activarea?",o:["Mărirea porozității și a suprafeței","Scăderea porozității","Colorarea biocarbonului"],x:"Mai mulți pori înseamnă mai multe locuri de legare pentru poluanți."},
+{t:"mt",q:"Asociază termenul cu descrierea:",P:[["Piroliză","Descompunere termică fără oxigen"],["Activare fizică","Abur sau CO₂ la temperatură mare"],["Activare chimică","Agenți precum KOH sau H₃PO₄"]],x:"Sunt etape și metode diferite în obținerea cărbunilor activați."},
+{t:"tf",q:"Arderea liberă a resurselor organice produce biocarbon de calitate.",a:false,x:"Arderea cu oxigen lasă mai ales cenușă și emite poluanți."},
+{t:"mc",q:"Ce conțin solurile Terra Preta din Amazon?",o:["Cărbune vegetal","Doar nisip","Plastic"],x:"Cărbunele vegetal ține nutrienții și carbonul în sol pe termen lung."},
+{t:"mc",img:"🧑‍🌾",q:"Un fermier vrea să stocheze carbon în sol și să îl îmbunătățească. Ce îi recomanzi?",o:["Biocarbon","Ardere pe câmp","Îngrășăminte lichide"],x:"Biocarbonul este o formă stabilă de carbon și îmbunătățește structura solului."}]},
+{e:"💧",t:"Adsorbție și apa curată",
+dg:'<div class="dg"><i>Adsorbție: molecule ● ● ● pe suprafață</i><i>Absorbție: molecule în volum, ca într-un burete</i></div>',
+L:[["Adsorbție sau absorbție?","Adsorbția înseamnă că moleculele se lipesc pe suprafața unui solid (adsorbantul). Absorbția înseamnă că pătrund în volumul materialului, ca apa într-un burete.","Fizisorbția folosește forțe slabe, iar chemisorbția leagă adsorbatul prin legături chimice. Procesul depinde de pH, temperatură, doză, timp de contact și concentrație."],
+["Ce poluanți se îndepărtează?","Metale grele (plumb, cadmiu, crom), coloranți industriali, pesticide și unele medicamente. Metalele grele sunt toxice și nu se biodegradează.","Biocarbonul reține poluanții prin schimb ionic, complexare cu grupări –COOH și –OH, precipitare și interacții π–π cu coloranții (Ahmad et al., Chemosphere, 2014)."],
+["Cum se măsoară?","În laborator se amestecă adsorbantul cu apa poluată și se măsoară cât scade concentrația în timp.","Datele se modelează cu izoterme Langmuir (monostrat) sau Freundlich (suprafețe eterogene). Albastrul de metilen este un colorant-model frecvent."]],
+f:"Albastrul de metilen este folosit foarte des ca poluant-model în experimentele de adsorbție.",
+Q:[
+{t:"mc",q:"Care este diferența dintre adsorbție și absorbție?",o:["Adsorbția are loc la suprafață, absorbția în volum","Sunt același lucru","Adsorbția are loc doar în gaze"],x:"Adsorbția este un fenomen de suprafață, absorbția unul de volum."},
+{t:"tf",q:"Un burete care îmbibă apa este un exemplu de absorbție.",a:true,x:"Apa pătrunde în volumul buretelui."},
+{t:"mc",q:"Care dintre acestea NU influențează de obicei eficiența adsorbției?",o:["Culoarea paharului de laborator","pH-ul soluției","Timpul de contact"],x:"pH, timpul de contact și doza influențează procesul, nu culoarea paharului."},
+{t:"mt",q:"Asociază:",P:[["Metal greu","Plumb"],["Colorant-model","Albastru de metilen"],["Model de adsorbție în monostrat","Langmuir"]],x:"Sunt exemple uzuale din studiile de adsorbție."},
+{t:"tf",q:"Metalele grele se biodegradează rapid în apă.",a:false,x:"Nu se biodegradează, ci se acumulează, de aceea sunt periculoase."},
+{t:"mc",img:"🧪",q:"După adăugarea biocarbonului, un colorant dispare treptat din apă. Ce s-a întâmplat?",o:["Colorantul s-a adsorbit pe suprafața biocarbonului","Colorantul s-a transformat în apă","Biocarbonul a evaporat apa"],x:"Moleculele de colorant s-au fixat pe suprafața și în porii biocarbonului."},
+{t:"mc",q:"Ce înseamnă o porozitate mare pentru un adsorbant?",o:["Mai multe locuri de legare","Mai puține locuri de legare","Nimic"],x:"Pori mai mulți înseamnă suprafață mai mare disponibilă."},
+{t:"mc",q:"Prin ce se deosebește chemisorbția de fizisorbție?",o:["Se formează legături chimice","Folosește doar forțe gravitaționale","Se întâmplă doar la gheață"],x:"Chemisorbția implică legături chimice, mai puternice decât forțele slabe din fizisorbție."}]},
+{e:"♻️",t:"Bioplastice și economie circulară",
+dg:'<div class="dg"><i>🌱 Plante</i>→<i>🏭 Material</i>→<i>🛍️ Utilizare</i>→<i>♻️ Compost / reciclare</i>→<i>🌱 Sol și noi plante</i></div>',
+L:[["Ce sunt bioplasticele?","Termenul acoperă plastice din surse regenerabile și/sau plastice biodegradabile. Cele două lucruri nu sunt același: un plastic poate fi din plante și totuși nebiodegradabil.","PLA se obține din acid lactic rezultat din fermentarea zaharurilor sau amidonului și de regulă cere compostare industrială. PHA sunt produși de microorganisme."],
+["Din deșeuri vegetale","Amidonul din coji de cartofi, celuloza din paie și pectina din coji pot deveni filme, ambalaje și geluri biodegradabile.","Proprietățile (rezistență, barieră la apă) sunt adesea mai slabe decât la plasticele convenționale, de aceea se folosesc plastifianți și amestecuri."],
+["Economia circulară","Ideea: eliminăm deșeurile din proiectare, menținem materialele în uz cât mai mult și regenerăm natura. Un deșeu vegetal devine materie primă.","Ierarhia deșeurilor din Directiva 2008/98/CE: prevenire, pregătire pentru reutilizare, reciclare, alte tipuri de valorificare, eliminare."]],
+f:"PLA este compostabil în instalații industriale, la temperaturi de regulă peste 50–60 °C, iar în natură se degradează mult mai lent.",
+Q:[
+{t:"tf",q:"Orice bioplastic este biodegradabil.",a:false,x:"Există bioplastice din surse regenerabile care nu sunt biodegradabile."},
+{t:"mc",q:"PLA se obține din…",o:["acid lactic rezultat din fermentarea zaharurilor","petrol brut doar","sticlă"],x:"Acidul lactic este polimerizat în PLA."},
+{t:"mc",q:"Cine produce PHA?",o:["Microorganisme","Cutremure","Pietrele"],x:"Unele bacterii acumulează PHA ca rezervă de energie."},
+{t:"mt",q:"Asociază materia primă cu utilizarea:",P:[["Amidon","Filme biodegradabile"],["Celuloză","Hârtie și nanofibre"],["Pectină","Agent de gelificare"]],x:"Fiecare polimer vegetal are aplicații specifice."},
+{t:"mc",q:"Care NU este un principiu al economiei circulare?",o:["Extragerea cât mai multor resurse noi","Eliminarea deșeurilor din proiectare","Menținerea materialelor în uz"],x:"Economia circulară reduce dependența de resurse noi."},
+{t:"tf",q:"În ierarhia deșeurilor, eliminarea (depozitarea) este ultima opțiune.",a:true,x:"Prevenirea este prima, eliminarea ultima."},
+{t:"mc",img:"🥔",q:"Coaja de cartof conține amidon. Ce poate deveni?",o:["Un film biodegradabil","Sticlă","Metal"],x:"Amidonul poate fi prelucrat în filme și ambalaje biodegradabile."},
+{t:"mc",q:"În economia circulară, un deșeu vegetal este…",o:["materie primă pentru alt proces","doar gunoi","un produs finit"],x:"Ieșirea unui proces devine intrarea altuia."}]}];
+
+
+// ===== FROM WASTE TO WONDER · Learning Lab =====
+const ST7=["Descoperă","Înțelege","Mod științific","Explorare vizuală","Aplicații reale","Știai că?","Verifică-ți cunoștințele"];
+const CATS=[
+{e:"🌿",n:"Bazele resurselor organice",h:"Descoperă din ce sunt făcute plantele și de ce deșeul unuia poate fi resursa altuia.",S:CH[0],v:"cell",
+A:"Industrie: pectina din coji de citrice și din tescovină de mere se produce comercial; reziduurile agricole se folosesc la compost, biogaz și bioenergie. Cercetare: fracționarea resurselor organice lignocelulozice în biorafinării este încă în dezvoltare.",
+R:["McKendry P. (2002), Bioresource Technology 83, 37–46","Klemm D. et al. (2005), Angewandte Chemie Int. Ed. 44, 3358–3393","May C.D. (1990), Carbohydrate Polymers 12, 79–99"]},
+{e:"🍊",n:"Valorificarea deșeurilor vegetale",h:"De la coajă de portocală la pectină: ce se poate face cu fiecare tip de deșeu vegetal și ce este deja practicat.",v:"ring",
+S:{dg:'<div class="dg"><i>🍊 Citrice → pectină</i><i>☕ Zaț → compost, biocarbon</i><i>🍚 Coji de orez → silice, biocarbon</i><i>🌾 Paie → biocarbon, etanol</i></div>',
+L:[["Ce deșeu, ce produs?","Cojile de citrice dau pectină. Zațul de cafea poate deveni compost, substrat pentru ciuperci sau biocarbon. Cojile de orez conțin multă silice. Paiele pot deveni biocarbon, biogaz sau bioetanol. Cojile de banane și de nuci sunt studiate ca materii prime pentru adsorbanți.","Fiecare reziduu are o compoziție diferită, deci procesul trebuie adaptat: uscare și piroliză pentru resurse organice uscate, compostare sau digestie anaerobă pentru resurse organice umede."],
+["Metode de valorificare","Extracție (pectină), compostare, digestie anaerobă (biogaz), piroliză (biocarbon), fermentație și hidroliză (etanol).","Alegerea depinde de umiditate, conținutul de zaharuri și lignină și de costul colectării. Multe rezultate cu coji de banane sau nuci sunt de laborator, nu aplicații industriale consacrate."]],
+f:"Cojile reprezintă în jur de 20% din masa orezului nedecorticat, deci țările mari producătoare de orez generează cantități uriașe de reziduu.",
+Q:[
+{t:"mc",q:"Ce se obține industrial din coji de citrice?",o:["Pectină","Cauciuc sintetic","Sticlă"],x:"Pectina din citrice este un produs comercial consacrat."},
+{t:"tf",q:"Cojile de orez ard complet, fără să rămână cenușă.",a:false,x:"Lasă cenușă, în mare parte silice."},
+{t:"mc",q:"Care proces este potrivit pentru resurse organice foarte umede?",o:["Compostare sau digestie anaerobă","Piroliză fără uscare prealabilă","Topire"],x:"Procesele biologice tolerează umiditatea mare, piroliza cere de obicei material uscat."},
+{t:"mt",q:"Asociază reziduul cu un produs posibil:",P:[["Coji de nuci","Biocarbon sau carbon activ"],["Coji de banane","Adsorbant testat în laborator"],["Zaț de cafea","Biocarbon sau compost"],["Paie","Bioetanol celulozic"]],x:"Sunt direcții documentate, dar maturitatea diferă."},
+{t:"mc",q:"De ce este importantă variabilitatea reziduurilor?",o:["Compoziția diferă, deci procesul trebuie adaptat","Nu contează deloc","Toate dau același produs"],x:"Specia, recolta și umiditatea schimbă rezultatul."},
+{t:"tf",q:"Orice rezultat obținut în laborator cu coji de banane este deja aplicat industrial.",a:false,x:"Rezultatele de laborator nu garantează aplicarea industrială."}]},
+A:"Industrie: pectină din citrice; cenușă de coji de orez ca adaos în materiale de construcție în unele regiuni; compost și biogaz din reziduuri. Laborator: adsorbanți din coji de banane, zaț de cafea sau coji de nuci, testați cu coloranți și metale, mai puțin maturi industrial.",
+R:["May C.D. (1990), Carbohydrate Polymers 12, 79–99","Ahmad M. et al. (2014), Chemosphere 99, 19–33"]},
+{e:"⚫",n:"Materiale adsorbante pe bază de carbon activ",h:"Intră în porii unui grăunte de biocarbon și vezi cum lucrează un adsorbant.",S:CH[1],v:"pore",
+A:"Biocarbonul se folosește comercial ca amendament de sol, iar cărbunele activ este folosit pe scară largă la tratarea apei. Biocarbonul activat din resurse organice pentru adsorbție este încă mai ales în cercetare și proiecte pilot.",
+R:["Lehmann J., Joseph S. (ed.) (2009), Biochar for Environmental Management, Earthscan","Ahmad M. et al. (2014), Chemosphere 99, 19–33"]},
+{e:"💧",n:"Poluarea și tratarea apei",h:"Cum acționează un adsorbant asupra metalelor grele și a coloranților, și unde sunt limitele.",S:CH[2],v:"pore",
+A:"Cărbunele activ granular este folosit la scară largă în stații de tratare. Studiile cu biocarbon și adsorbanți din resurse organice sunt în mare parte experimente de laborator sau pilot, iar rezultatele depind de apă (pH, alți ioni) și nu sunt automat valabile în apa reală. Avantaje: costuri mici ale materiei prime. Limite: regenerare, eliminarea adsorbantului uzat.",
+R:["Ahmad M. et al. (2014), Chemosphere 99, 19–33"]},
+{e:"♻️",n:"Materiale sustenabile și biotehnologie",h:"De la amidon la bioplastic: ce înseamnă biodegradabil, compostabil și din surse regenerabile.",S:CH[3],v:"ring",
+A:"PLA și amidonul termoplastic se produc industrial pentru ambalaje, iar PHA la scară mai mică. Filmele din coji de legume sunt, în mare parte, la nivel de cercetare.",
+R:["Rosenboom J.-G., Langer R., Traverso G. (2022), Nature Reviews Materials 7, 117–137","Ellen MacArthur Foundation, materiale despre economia circulară"]},
+{e:"🔬",n:"Cercetare științifică și experimente",h:"Învață să citești un grafic de adsorbție și să compari materiale ca într-un studiu real.",v:"pore",
+S:{dg:'<div class="dg"><i>q<sub>e</sub> = (C₀ − C<sub>e</sub>)·V / m</i><i>Eficiență (%) = (C₀ − C<sub>e</sub>) / C₀ · 100</i></div>',
+L:[["Experimentul de adsorbție","Se amestecă o masă de adsorbant (m) cu un volum de soluție poluată (V), se agită un timp, apoi se măsoară concentrația rămasă. Capacitatea q_e (mg/g) arată cât poluant reține un gram de material, iar eficiența (%) cât din poluant a fost îndepărtat.","C₀ este concentrația inițială, C_e cea de echilibru. Exemplu: C₀ = 100 mg/L, C_e = 20 mg/L, V = 0,1 L, m = 0,1 g dau o eficiență de 80% și q_e = 80 mg/g."],
+["Izoterme și cinetică","Izotermele descriu cât se adsorbe la echilibru în funcție de concentrație (Langmuir: monostrat; Freundlich: suprafețe eterogene). Cinetica descrie cât de repede (modelul pseudo-ordin doi este frecvent folosit).","Un model se potrivește bine datelor nu înseamnă că dovedește mecanismul. Compară materialele doar în condiții similare (pH, doză, temperatură). Diferă rezultatele experimentale (măsurate), simulările (calcul), modelele teoretice (ecuații) și aplicațiile industriale (scară și costuri reale)."]],
+f:"Două studii pot raporta valori de q_e foarte diferite pentru același material dacă pH-ul, doza sau concentrația inițială sunt diferite.",
+Q:[
+{t:"mc",q:"Cum se calculează eficiența îndepărtării (%)?",o:["(C₀ − Cₑ) / C₀ · 100","C₀ · Cₑ","V / m"],x:"Se raportează cantitatea îndepărtată la cea inițială."},
+{t:"mc",q:"C₀ = 100 mg/L, Cₑ = 20 mg/L. Care este eficiența?",o:["80%","20%","120%"],x:"(100 − 20) / 100 · 100 = 80%."},
+{t:"mc",q:"C₀ = 100 mg/L, Cₑ = 20 mg/L, V = 0,1 L, m = 0,1 g. Cât este qₑ?",o:["80 mg/g","8 mg/g","20 mg/g"],x:"qₑ = (100 − 20) · 0,1 / 0,1 = 80 mg/g."},
+{t:"tf",q:"Modelul Langmuir presupune adsorbție în monostrat.",a:true,x:"Presupune locuri de legare identice și un singur strat."},
+{t:"mt",q:"Asociază modelul cu ideea:",P:[["Langmuir","Monostrat pe suprafață omogenă"],["Freundlich","Suprafețe eterogene"],["Pseudo-ordin doi","Model cinetic frecvent folosit"]],x:"Primele două sunt izoterme, al treilea este un model cinetic."},
+{t:"mc",img:"📈",q:"Un grafic arată qₜ crescând rapid, apoi aplatizându-se în timp. Ce indică?",o:["Apropierea de echilibru","Că adsorbantul a dispărut","Că nu are loc adsorbție"],x:"Platoul arată că locurile disponibile se ocupă și se atinge echilibrul."}]},
+A:"Studiile de adsorbție publicate raportează de obicei qₑ, eficiența, izoterme și cinetică. Compară rezultatele doar în condiții similare.",
+R:["Foo K.Y., Hameed B.H. (2010), Chemical Engineering Journal 156, 2–10","Ho Y.S., McKay G. (1999), Process Biochemistry 34, 451–465"]}];
+
+const W2=[
+{e:"🍊",t:"Coji de portocală",S:[["Materia primă","Cojile rămase după procesarea citricelor în industria sucurilor.",""],["Compoziție","Pectină, celuloză, hemiceluloză, flavonoide (de exemplu hesperidină) și uleiuri esențiale bogate în limonen.",""],["Proprietăți","Pectina poate forma geluri în condiții potrivite de pH și zahăr.",""],["Transformare","Extracție acidă la cald, filtrare, precipitare cu alcool, spălare și uscare.","Industrial"],["Material obținut","Pectină, plus coproduse precum uleiuri esențiale.","Industrial"],["Aplicații","Pectina: dulcețuri și produse alimentare. Filme comestibile și adsorbanți din coji modificate: rezultate de laborator.","Industrial + cercetare"],["Avantaje și limitări","Resursă abundentă, deja valorificată. Randamentul depinde de materie primă și metodă, iar extracția consumă acid, apă și energie.",""]]},
+{e:"☕",t:"Zaț de cafea",S:[["Materia primă","Zațul rămas după prepararea cafelei, colectat din cafenele și gospodării.",""],["Compoziție","Celuloză, hemiceluloză, lignină, lipide, proteine și compuși fenolici.",""],["Proprietăți","Bogat în carbon și materie organică; uleiurile și umiditatea trebuie gestionate.",""],["Transformare","Uscare, piroliză fără oxigen, opțional activare fizică sau chimică pentru mai mulți pori.","Cercetare"],["Material obținut","Biocarbon sau carbon activ derivat din zaț, testat ca adsorbant.","Cercetare"],["Aplicații","Compost și substrat pentru ciuperci (practicate). Adsorbția coloranților sau a metalelor: rezultate de laborator, nu proces industrial consacrat.","Practică + cercetare"],["Avantaje și limitări","Materie primă ieftină și disponibilă în orașe. Compoziție variabilă, activare necesară, performanță dependentă de poluant și de apă.",""]]},
+{e:"🍚",t:"Coji de orez",S:[["Materia primă","Cojile rămase la decorticarea orezului, în jur de 20% din masa orezului nedecorticat.",""],["Compoziție","Celuloză, hemiceluloză, lignină și mult SiO₂ (silice), care rămâne în cenușă.",""],["Proprietăți","Abrazive, cu densitate mică, greu de degradat; silicea le dă rezistență.",""],["Transformare","Ardere controlată pentru cenușă bogată în silice sau piroliză pentru biocarbon.","Industrial + cercetare"],["Material obținut","Cenușă de coji de orez (silice) și biocarbon.",""],["Aplicații","Cenușa ca adaos în ciment și beton: aplicată în unele regiuni, încă studiată. Alte materiale pe bază de silice: cercetare.","Parțial industrial"],["Avantaje și limitări","Resursă mare în țările cu orez. Calitatea cenușii depinde de controlul arderii; colectarea și transportul costă.",""]]},
+{e:"🌾",t:"Reziduuri agricole",S:[["Materia primă","Paie, tulei de porumb, tulpini și alte reziduuri rămase după recoltare.",""],["Compoziție","Material lignocelulozic: celuloză, hemiceluloză, lignină și puțină cenușă minerală.",""],["Proprietăți","Mult carbon, dar densitate mică și umiditate variabilă.",""],["Transformare","Piroliză (biocarbon, bio-ulei, gaz), compostare, digestie anaerobă sau pretratare și hidroliză pentru etanol.","Industrial + pilot"],["Material obținut","Biocarbon, compost, biogaz, bioetanol celulozic.",""],["Aplicații","Biocarbon pentru sol și stocarea carbonului (efectul depinde de sol și de tipul de biocarbon); bioenergie. Bioetanolul celulozic există la scară comercială limitată, cu costuri mari.","Pilot / comercial limitat"],["Avantaje și limitări","Resursă abundentă. Nu se colectează totul, pentru că o parte lăsată pe câmp hrănește solul; transportul crește costul.",""]]}];
+
+let LS={les:{},sc:{},w2:{}};try{LS=Object.assign(LS,JSON.parse(localStorage.getItem('rv-lab')||'{}'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('rv-lab',JSON.stringify(LS))}catch(e){}};
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const vis=c=>(LS.les[c]||[]).length,best=c=>(LS.sc[c]&&LS.sc[c].best)||0;
+const prog=c=>Math.round(vis(c)/7*50+best(c)*.5);
+const ov=()=>Math.round(CATS.reduce((a,_,c)=>a+prog(c),0)/CATS.length);
+const LV=[[0,"🌱 Începător"],[10,"🔎 Curios"],[30,"🧭 Explorator"],[55,"🔬 Cercetător"],[80,"🏆 Maestru Verde"]];
+const BD=[["🎯 Primul quiz",()=>Object.keys(LS.sc).length>0],["🥳 Peste 60%",()=>CATS.some((_,c)=>best(c)>60)],["💯 Scor perfect",()=>CATS.some((_,c)=>best(c)===100)],["📖 Lecție completă",()=>CATS.some((_,c)=>vis(c)===7)],["✨ Explorator al descoperirii",()=>Object.keys(LS.w2).length>=4],["🏅 Cercetător (nivel 4)",()=>ov()>=55]];
+function dash(){const o=ov(),lv=LV.filter(l=>o>=l[0]).pop()[1];let low=0;CATS.forEach((_,c)=>{if(prog(c)<prog(low))low=c});const cat=CATS[low],rec=vis(low)<7?`Continuă lecția „${cat.n}”`:best(low)===0?`Încearcă quiz-ul „${cat.n}”`:best(low)*100<=6000?`Recapitulează „${cat.n}” (Mod științific)`:`Alege orice categorie nouă`;
+$('#ldash').innerHTML=`<div class="card" style="margin-top:1rem"><b>${lv}</b> · progres general ${o}%<div class="mb"><i style="width:${o}%"></i></div>${CATS.map((c,i)=>`<small>${c.e} ${c.n}: ${prog(i)}% · lecție ${vis(i)}/7 · quiz ${LS.sc[i]?LS.sc[i].best+'% (cel mai bun), încercări: '+LS.sc[i].tries:'necompletat'}</small><div class="mb"><i style="width:${prog(i)}%"></i></div>`).join('')}
+<div>${BD.map(b=>`<span class="bdg ${b[1]()?'on':''}">${b[0]}</span>`).join('')}</div><p><b>Următoarea recomandare:</b> ${rec}</p>
+<details><summary>Cum diferențiem rezultatele științifice?</summary><p><b>Rezultat experimental:</b> măsurat în laborator sau pe teren. <b>Simulare:</b> calcul pe calculator. <b>Model teoretic:</b> ecuație sau concept explicativ. <b>Aplicație industrială:</b> folosită la scară comercială, cu costuri reale. În REVALIS, etichetăm acolo unde contează.</p></details></div>`}
+function cgrid(){$('#cgrid').innerHTML=CATS.map((c,i)=>`<button class="card cat" data-i="${i}"><span class="e">${c.e}</span><b>${c.n}</b><small>${prog(i)}% · ${c.S.Q.length} întrebări în quiz</small><div class="mb"><i style="width:${prog(i)}%"></i></div></button>`).join('');
+$('#cgrid').querySelectorAll('button').forEach(b=>b.onclick=()=>{openCat(+b.dataset.i,0);$('#lcv').scrollIntoView({behavior:RM?'auto':'smooth'})})}
+function wm(){$('#wm').innerHTML=W2.map((m,i)=>`<button aria-pressed="${i===w2i}" data-i="${i}">${m.e} ${m.t}</button>`).join('');$('#wm').querySelectorAll('button').forEach(b=>b.onclick=()=>{w2i=+b.dataset.i;w2s=0;wm();wvw()})}
+let w2i=0,w2s=0;
+function wvw(){const m=W2[w2i];LS.w2[w2i]=1;sv();dash();const s=m.S[w2s];
+$('#wv').innerHTML=`<div class="card fade"><div class="steps">${m.S.map((x,i)=>`<button data-i="${i}" ${i===w2s?'aria-current="step"':''}>${i+1}. ${x[0]}</button>`).join('')}</div><h3>${m.e} ${s[0]}${s[2]?`<span class="tag">${s[2]}</span>`:''}</h3><p>${s[1]}</p><div class="dg"><i>${m.e}</i>${m.S.slice(0,6).map((x,i)=>`<i style="${i<=w2s?'background:var(--g);color:#fff':''}">→ ${x[0]}</i>`).join('')}</div><small>Aplicațiile marcate „cercetare” sau „pilot” nu sunt rezultate industriale consacrate.</small></div>`;
+$('#wv').querySelectorAll('.steps button').forEach(b=>b.onclick=()=>{w2s=+b.dataset.i;wvw()})}
+function viewer(cv,type){const x=cv.getContext('2d'),R=Math.random,pts=[],P=[];let a=0,b=.4,W=0,H=0,d=null;
+if(type==='cell'){for(let s=0;s<4;s++)for(let t=0;t<90;t++){const th=s*1.571+t*.14;pts.push([.55*Math.cos(th),(t-45)/30,.55*Math.sin(th),s/4])}for(let t=0;t<90;t++)pts.push([0,(t-45)/30,0,.9])}
+else if(type==='ring'){for(let i=0;i<420;i++){const u=R()*6.283,v=R()*6.283;pts.push([(1+.4*Math.cos(v))*Math.cos(u),.4*Math.sin(v),(1+.4*Math.cos(v))*Math.sin(u),u/6.283])}}
+else{const C=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];for(let i=0;i<520;i++){const u=R()*2-1,t=R()*6.283,r=Math.sqrt(1-u*u),q=[r*Math.cos(t),u,r*Math.sin(t)];if(C.some(c=>Math.hypot(q[0]-c[0],q[1]-c[1],q[2]-c[2])<.75))continue;pts.push([q[0]*1.2,q[1]*1.2,q[2]*1.2,R()])}
+for(let i=0;i<30;i++){const u=R()*2-1,t=R()*6.283,r=Math.sqrt(1-u*u);P.push([r*Math.cos(t),u,r*Math.sin(t),R()])}}
+const pr=(X,Y,Z)=>{const c=Math.cos(a),s=Math.sin(a),x1=X*c+Z*s,z1=-X*s+Z*c,c2=Math.cos(b),s2=Math.sin(b),y1=Y*c2-z1*s2,z2=Y*s2+z1*c2,f=3.6/(3.6-z2),k=Math.min(W,H)*.27;return[W/2+x1*f*k,H/2+y1*f*k,z2,f]};
+const dpr=devicePixelRatio||1;function loop(){if(!cv.isConnected)return;requestAnimationFrame(loop);if(!W){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+if(!d&&!RM)a+=.006;x.clearRect(0,0,W,H);const t=performance.now();
+const all=pts.map(p=>[pr(p[0],p[1],p[2]),`hsl(${130-p[3]*90} 70% 60%)`,2]).concat(P.map(p=>{const ph=(t/3000+p[3])%1,r=1.25+1.3*(1-ph);return[pr(p[0]*r,p[1]*r,p[2]*r),'#f0b73a',3.2]}));
+all.sort((m,n)=>m[0][2]-n[0][2]).forEach(([q,c,r])=>{x.globalAlpha=.4+.5*(q[2]+1.5)/3;x.fillStyle=c;x.beginPath();x.arc(q[0],q[1],r*q[3],0,7);x.fill()});x.globalAlpha=1}
+let l=null;cv.onpointerdown=e=>{cv.setPointerCapture(e.pointerId);d=1;l=[e.clientX,e.clientY]};cv.onpointermove=e=>{if(!d)return;a+=(e.clientX-l[0])*.01;b=Math.max(-1.2,Math.min(1.2,b+(e.clientY-l[1])*.005));l=[e.clientX,e.clientY]};cv.onpointerup=cv.onpointercancel=()=>{d=null};loop()}
+function openCat(ci,st){const c=CATS[ci],S=c.S;const v=new Set(LS.les[ci]||[]);v.add(st);LS.les[ci]=[...v];sv();dash();cgrid();
+let h=`<div class="card fade" style="margin-top:1rem"><h3>${c.e} ${c.n}</h3><div class="steps">${ST7.map((n,i)=>`<button data-i="${i}" class="${v.has(i)?'v':''}" ${i===st?'aria-current="step"':''}>${n}</button>`).join('')}</div>`;
+if(st===0)h+=`<div style="font-size:3.5rem" aria-hidden="true">${c.e}</div><p>${c.h}</p>`;
+else if(st===1)h+=S.L.map(l=>`<h4>${l[0]}</h4><p>${l[1]}</p>`).join('');
+else if(st===2)h+=S.L.map(l=>`<h4>${l[0]}</h4><p>${l[2]}</p>`).join('');
+else if(st===3)h+=S.dg+`<canvas class="vz" id="vz" aria-label="Model 3D schematic ilustrativ"></canvas><small>Model schematic ilustrativ, nu la scară. Trage pentru a roti.</small>`;
+else if(st===4)h+=`<p>${c.A}</p><small><b>Surse:</b><br>${c.R.join('<br>')}</small>`;
+else if(st===5)h+=`<div class="res">💡 ${S.f}</div>`;
+else h+=`<p>Verifică ce ai învățat. Pragul de succes este peste 60%.</p><p>Cel mai bun scor: ${best(ci)}%.</p><div class="row"><button class="btn a" id="qs">🎮 Începe quiz-ul (${S.Q.length} întrebări)</button></div>`;
+h+=`<div class="row">${st>0?'<button class="btn o" id="pv">← Înapoi</button>':''}${st<6?'<button class="btn" id="nx0">Continuă →</button>':''}</div></div>`;
+$('#lcv').innerHTML=h;$('#lcv').querySelectorAll('.steps button').forEach(b=>b.onclick=()=>openCat(ci,+b.dataset.i));
+if($('#pv'))$('#pv').onclick=()=>openCat(ci,st-1);if($('#nx0'))$('#nx0').onclick=()=>openCat(ci,st+1);if($('#qs'))$('#qs').onclick=()=>run(ci,S.Q.slice(),false);if(st===3)viewer($('#vz'),c.v)}
+function run(ci,list,retry){let i=0,ok=0,bad=[];const v=$('#lcv');
+function fb(good,q){const f=document.createElement('div');f.className='res';f.innerHTML=(good?'<span class="pop">👍</span> <b>Corect!</b> ':'<b>Nu chiar.</b> ')+q.x+'<div class="row"><button class="btn" id="nx">'+(i+1>=list.length?'Vezi rezultatul':'Următoarea')+'</button></div>';v.querySelector('.q').append(f);if(good)ok++;else bad.push(q);f.querySelector('#nx').onclick=()=>{i++;ask()};f.querySelector('#nx').focus()}
+function ask(){if(i>=list.length)return end();const q=list[i];let h=`<div class="card q"><div class="bar pg"><i style="width:${i/list.length*100}%"></i></div><small>Întrebarea ${i+1} din ${list.length}</small><h3>${q.q}</h3>${q.img?`<div style="font-size:3.5rem" aria-hidden="true">${q.img}</div>`:''}`;
+if(q.t==='mc')h+='<div class="opt">'+shuf(q.o.map((t,k)=>[t,k])).map(a=>`<button data-k="${a[1]}">${a[0]}</button>`).join('')+'</div>';
+else if(q.t==='tf')h+='<div class="opt"><button data-k="1">Adevărat</button><button data-k="0">Fals</button></div>';
+else{const Rr=shuf(q.P.map(x=>x[1]));h+='<div class="mt">'+q.P.map((x,k)=>`<span>${x[0]}</span><select data-k="${k}" aria-label="${x[0]}"><option value="">Alege…</option>${Rr.map(r=>`<option>${r}</option>`).join('')}</select>`).join('')+'</div><button class="btn" id="vf">Verifică</button>'}
+v.innerHTML=h+'</div>';
+if(q.t==='mt')$('#vf').onclick=()=>{const s=[...v.querySelectorAll('select')];if(s.some(x=>!x.value))return;$('#vf').remove();let g=true;s.forEach(x=>{const r=x.value===q.P[+x.dataset.k][1];if(!r)g=false;x.disabled=true;x.style.outline='2px solid '+(r?'var(--g)':'var(--bad)')});fb(g,q)};
+else v.querySelectorAll('.opt button').forEach(b=>b.onclick=()=>{const k=+b.dataset.k,g=q.t==='mc'?k===0:(k===1)===q.a;v.querySelectorAll('.opt button').forEach(x=>{x.disabled=true;const xk=+x.dataset.k,c=q.t==='mc'?xk===0:(xk===1)===q.a;x.classList.add(c?'ok':'no')});fb(g,q)})}
+function end(){const n=list.length,pct=Math.round(ok*100/n),good=ok*100>n*60;
+if(!retry){const o=LS.sc[ci]||{best:0,tries:0};o.best=Math.max(o.best,pct);o.last=pct;o.tries++;LS.sc[ci]=o;sv();dash();cgrid()}
+v.innerHTML=`<div class="card q fin">${good?'<div class="cfx" aria-hidden="true">'+['🎉','🌿','⭐','🌍','🏆','💚'].map((c,k)=>`<span style="left:${8+k*16}%;animation-delay:${k*.3}s">${c}</span>`).join('')+'</div>':''}
+<div class="stk" aria-hidden="true">${good?'🥳':'😿'}</div><div class="ring" style="--p:${pct}"><b>${pct}%</b></div>
+<h3>${good?'Felicitări! Ai stăpânit tema!':'Nu-i nimic, mai încearcă!'}</h3>
+<p>${good?'Ești un adevărat explorator al economiei circulare. Continuă tot așa!':'Fiecare greșeală te ajută să înveți. Poți reciti lecția și încerca din nou. 💚'}</p>
+<p>✅ ${ok} corecte · ❌ ${n-ok} greșite din ${n} · prag de succes: peste 60%</p>
+${good?'':`<p>Recapitulează: <b>${CATS[ci].n}</b>, pașii Înțelege și Mod științific.</p>`}
+${bad.length?'<details style="text-align:left"><summary>Greșelile tale, cu explicații</summary>'+bad.map(q=>`<p><b>${q.q}</b><br>${q.x}</p>`).join('')+'</details>':''}
+<div class="row" style="justify-content:center"><button class="btn a" id="ra">Reia quiz-ul</button>${bad.length?'<button class="btn" id="rb">Învață din greșeli</button>':''}<button class="btn o" id="rl">Înapoi la lecție</button></div></div>`;
+$('#ra').onclick=()=>run(ci,CATS[ci].S.Q.slice(),false);if(bad.length)$('#rb').onclick=()=>run(ci,bad.slice(),true);$('#rl').onclick=()=>openCat(ci,2)}
+ask()}
+dash();cgrid();wm();wvw();
+
+// Cronologie mediu (HOME)
+const TL=[
+{y:1991,c:"Germania",r:"Europa",e:"📦",n:"Verpackungsverordnung (Ordonanța privind ambalajele)",p:"Volum tot mai mare de ambalaje și deșeuri.",a:"Adoptată în 1991, prima lege care a pus răspunderea gestionării ambalajelor pe producători.",m:"Producătorii și distribuitorii trebuie să preia și să recicleze ambalajele; industria a creat sistemul dual (Grüner Punkt), cu flux separat față de deșeurile menajere.",o:"Ratele de valorificare au crescut mult, dar reducerea cantității de ambalaje a fost modestă la început (în jur de 4% până în 1993, conform ministerului federal). Ordonanța a fost modificată de mai multe ori și înlocuită în 2019 de Verpackungsgesetz.",s:"Umweltbundesamt",u:"https://www.umweltbundesamt.de/en/topics/waste-resources/product-stewardship-waste-management/packaging"},
+{y:1991,c:"Suedia",r:"Europa",e:"💨",n:"Taxa pe dioxid de carbon",p:"Emisiile de CO₂ din combustibilii fosili.",a:"Introdusă în 1991 în cadrul unei reforme fiscale ample.",m:"Preț inițial de 250 SEK pe tonă de CO₂, crescut treptat (circa 1.190 SEK în 2020). Unele sectoare au avut rate reduse sau exceptări.",o:"Un studiu (Andersson, 2019) estimează o reducere de circa 6,3% a emisiilor din transport datorată taxei. Emisiile totale au scăzut cu circa 26–27% în deceniile următoare, dar și alte politici au contribuit.",s:"Tax Foundation; Andersson, AEJ: Economic Policy, 2019",u:"https://taxfoundation.org/sweden-carbon-tax-revenue-greenhouse-gas-emissions/"},
+{y:2000,c:"Japonia",r:"Asia",e:"🔄",n:"Legea-cadru pentru stabilirea unei societăți cu ciclu sănătos al materialelor (Legea nr. 110/2000)",p:"Lipsa locului pentru depozite și presiunea asupra resurselor.",a:"Legea a fost promulgată la 2 iunie 2000; Planul fundamental a urmat în 2003.",m:"Ierarhia 3R, responsabilități pentru stat, autorități locale, firme și cetățeni, plus indicatori: productivitatea resurselor, rata de utilizare ciclică și cantitatea depozitată.",o:"Conform OECD, productivitatea resurselor a crescut cu 37% între 2000 și 2007, iar cantitatea eliminată final a scăzut mult după 2000. Reciclarea deșeurilor municipale a rămas totuși în jur de 20%.",s:"OECD; Ministerul Mediului din Japonia",u:"https://www.env.go.jp/en/coop/oecd2010/poll_oecd_2010_waste.html"},
+{y:2005,c:"România",r:"Europa",e:"🏛️",n:"OUG nr. 195/2005 privind protecția mediului",p:"Alinierea la cerințele europene în procesul de aderare.",a:"Adoptată la 22 decembrie 2005 (M. Of. nr. 1196/30.12.2005) și aprobată cu modificări prin Legea nr. 265/2006.",m:"Cadrul general: principii precum „poluatorul plătește”, acorduri și autorizații de mediu, atribuții ale autorităților.",o:"Este o lege-cadru, nu o schemă specifică de deșeuri. La deșeuri, implementarea a rămas în urmă: Comisia Europeană a inclus România printre statele cu risc de a rata ținta de reciclare din 2020.",s:"legislatie.just.ro (FAOLEX); Comisia Europeană, raport de avertizare timpurie",u:"https://faolex.fao.org/docs/pdf/rom197188_2005.pdf"},
+{y:2008,c:"Rwanda",r:"Africa",e:"🛍️",n:"Legea nr. 57/2008 privind interzicerea pungilor de plastic",p:"Pungi de plastic care poluau orașele și terenurile agricole.",a:"Legea din 10 septembrie 2008, după un proces început în 2004.",m:"Interzice fabricarea, importul, utilizarea și vânzarea pungilor din polietilenă; controale la frontiere și aeroporturi, amenzi și sancțiuni, stimulente pentru reconversia producătorilor.",o:"Kigali este adesea citat ca unul dintre cele mai curate orașe din Africa, dar contrabanda din țările vecine și piața neagră au rămas provocări.",s:"Banca Mondială, „Where Is the Value in the Chain?”; Governing",u:"https://governing.com/archive/gov-rwanda-plastic-bag-ban.html"},
+{y:2008,c:"Uniunea Europeană",r:"Europa",e:"🇪🇺",n:"Directiva-cadru privind deșeurile (2008/98/CE)",p:"Gestionarea unitară a deșeurilor și creșterea reciclării.",a:"Adoptată la 19 noiembrie 2008, în vigoare din 12 decembrie 2008, transpunere până la 12 decembrie 2010.",m:"Ierarhia deșeurilor în cinci trepte; țintă de 50% pregătire pentru reutilizare și reciclare a deșeurilor municipale până în 2020, ulterior 55% (2025), 60% (2030), 65% (2035).",o:"Perspectiva a fost mixtă: Agenția Europeană de Mediu a avertizat că nu toate statele vor atinge ținta din 2020, iar Comisia a identificat 14 state la risc.",s:"EUR-Lex; Agenția Europeană de Mediu",u:"https://eur-lex.europa.eu/EN/legal-content/summary/eu-waste-management-law.html"},
+{y:2015,c:"Global",r:"Global",e:"🌍",n:"Acordul de la Paris",p:"Schimbările climatice.",a:"Adoptat la 12 decembrie 2015 la COP21, intrat în vigoare la 4 noiembrie 2016.",m:"Limitarea încălzirii mult sub 2 °C și eforturi pentru 1,5 °C, prin contribuții naționale (NDC) actualizate periodic și raportare transparentă.",o:"Aproape toate țările au aderat, dar evaluările ONU (UNEP, Raportul privind decalajul emisiilor) arată că angajamentele actuale nu sunt suficiente pentru traiectoria de 1,5 °C.",s:"UNFCCC; UNEP Emissions Gap Report",u:"https://unfccc.int/process-and-meetings/the-paris-agreement"}];
+let tf='Toate';
+function tlr(){const R=['Toate',...new Set(TL.map(x=>x.r))];$('#tlf').innerHTML=R.map(r=>`<button aria-pressed="${r===tf}" data-r="${r}">${r}</button>`).join('');
+$('#tlf').querySelectorAll('button').forEach(b=>b.onclick=()=>{tf=b.dataset.r;tlr()});
+$('#tl').innerHTML=TL.filter(x=>tf==='Toate'||x.r===tf).map(x=>`<article class="tc"><div class="ill"><span aria-hidden="true">${x.e}</span><div><b>${x.y}</b><br>${x.c}</div></div><div class="bd"><h3>${x.n}</h3><p><b>Problema:</b> ${x.p}</p><p><b>📜 Adoptare:</b> ${x.a}</p><p><b>🛠️ Implementare:</b> ${x.m}</p><p><b>📊 Rezultate:</b> ${x.o}</p><small>Sursă: <a href="${x.u}" target="_blank" rel="noopener">${x.s}</a></small></div></article>`).join('')}
+tlr();
+
+// Laborator
+const W=[['🍊','Coji de portocală',.8],['🌽','Tulei de porumb',.9],['🌾','Paie',.85],['☕','Zaț de cafea',.7],['🍌','Coji de banană',.75]];
+const P=[['Compostare','compost',.35,.15],['Piroliză','biocarbon',.25,.6],['Digestie anaerobă','m³ biogaz',.12,.3],['Bioplastic','bioplastic',.08,.9]];
+let wi=0,pi=0;
+function btns(el,arr,get,sel){el.innerHTML=arr.map((a,i)=>`<button aria-pressed="${i===get()}" data-i="${i}">${a[0]} ${a[1]}</button>`).join('');
+el.querySelectorAll('button').forEach(b=>b.onclick=()=>{sel(+b.dataset.i);lab()})}
+function lab(){btns($('#ws'),W,()=>wi,i=>wi=i);btns($('#ps'),P.map(p=>['',p[0]]),()=>pi,i=>pi=i);
+const kg=+$('#kg').value;$('#kgv').textContent=kg;const w=W[wi],p=P[pi];
+const y=(kg*w[2]*p[2]).toFixed(1),co=(kg*w[2]*p[3]).toFixed(1);
+$('#out').innerHTML=`<div class="stat">${y} ${p[1]==='m³ biogaz'?p[1]:'kg '+p[1]}</div><div>din ${kg} kg ${w[1].toLowerCase()} prin ${p[0].toLowerCase()}.</div><div>CO₂ evitat estimat: <b>${co} kg</b></div>`}
+$('#kg').oninput=lab;lab();
+
+
+// Nucleu 3D (doar HOME)
+const HS=[
+['🌾','Risipa alimentară','Conform FAO, aproximativ o treime din alimentele produse pentru consum uman se pierd sau se risipesc la nivel global (circa 1,3 miliarde de tone pe an).','FAO, „Global food losses and food waste” (2011)'],
+['🔥','Biocarbon și Terra Preta','În bazinul Amazonului există soluri antropogene numite Terra Preta, îmbogățite cu cărbune vegetal de populații precolumbiene. Ele rămân mai fertile decât solurile din jur.','Lehmann & Joseph (ed.), Biochar for Environmental Management, Earthscan, 2009'],
+['💧','Adsorbția poluanților','Biocarbonul are o suprafață specifică mare și o structură poroasă, deci poate reține din apă și sol poluanți precum metalele grele sau coloranții.','Ahmad et al., Chemosphere, 2014'],
+['🧬','Celuloza','Celuloza este cel mai răspândit polimer natural. Din ea se obțin hârtie, textile, nanofibre și materiale pentru ambalaje.','Klemm et al., Angewandte Chemie, 2005'],
+['🍊','Pectina','Pectina comercială se extrage în principal din cojile de citrice și din tescovina de mere. Se folosește ca agent de gelificare, de exemplu în dulcețuri.','International Pectin Producers Association (IPPA)'],
+['⚡','Biogazul','Digestia anaerobă a resurselor organice produce biogaz, un amestec de metan (circa 50–70%) și CO₂, folosit pentru căldură și electricitate.','IEA Bioenergy, Task 37']];
+const nc=$('#nuc'),nx=nc.getContext('2d'),NP=[],RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+for(let i=0;i<380;i++){const u=Math.random()*2-1,t=Math.random()*6.283,r=Math.sqrt(1-u*u),R=1.35*Math.pow(Math.random(),.35);NP.push([R*r*Math.cos(t),R*u,R*r*Math.sin(t),Math.random(),R/1.35])}
+let na=0,nb=.35,nrun=false,nW=0,nH=0,nd=null,nm=0,hp=[];
+const hue=p=>p<.5?130-p*170:45+(p-.5)*260;
+function nsize(){const d=devicePixelRatio||1;nW=nc.clientWidth;nH=nc.clientHeight;nc.width=nW*d;nc.height=nH*d;nx.setTransform(d,0,0,d,0,0)}
+function proj(x,y,z){const c=Math.cos(na),s=Math.sin(na),x1=x*c+z*s,z1=-x*s+z*c,c2=Math.cos(nb),s2=Math.sin(nb),y1=y*c2-z1*s2,z2=y*s2+z1*c2,f=3.6/(3.6-z2),k=Math.min(nW,nH)*.2;return[nW/2+x1*f*k,nH/2+y1*f*k,z2,f]}
+function nloop(){if(!nrun)return;requestAnimationFrame(nloop);if(!nW)nsize();const t=performance.now();if(!nd&&!RM)na+=.0035;
+nx.clearRect(0,0,nW,nH);
+const ps=NP.map(p=>{const w=1+.06*Math.sin(t/700+p[3]*20),q=proj(p[0]*w,p[1]*w,p[2]*w);return[q,p]}).sort((a,b)=>a[0][2]-b[0][2]);
+for(const[q,p]of ps){const ph=(p[4]+t/7000)%1;nx.globalAlpha=.35+.5*(q[2]+1.5)/3;nx.fillStyle=`hsl(${hue(ph)} 75% ${55+20*(1-p[4])}%)`;nx.beginPath();nx.arc(q[0],q[1],(1.2+1.6*(1-p[4]))*q[3],0,7);nx.fill()}
+nx.globalAlpha=1;const g=nx.createRadialGradient(nW/2,nH/2,0,nW/2,nH/2,Math.min(nW,nH)*.18);g.addColorStop(0,'rgba(255,240,170,.9)');g.addColorStop(1,'rgba(255,240,170,0)');nx.fillStyle=g;nx.fillRect(0,0,nW,nH);
+hp=HS.map((h,i)=>{const a=i/HS.length*6.283+t/9000,q=proj(2.0*Math.cos(a),.55*Math.sin(a*2+i),2.0*Math.sin(a));return[q,h,i]});
+hp.slice().sort((a,b)=>a[0][2]-b[0][2]).forEach(([q,h])=>{const r=17*q[3];nx.strokeStyle='rgba(255,255,255,.18)';nx.beginPath();nx.moveTo(nW/2,nH/2);nx.lineTo(q[0],q[1]);nx.stroke();
+nx.fillStyle='rgba(10,30,18,.85)';nx.beginPath();nx.arc(q[0],q[1],r+4+2*Math.sin(t/400),0,7);nx.fill();nx.strokeStyle='#f0b73a';nx.lineWidth=2;nx.stroke();nx.font=r+'px system-ui';nx.textAlign='center';nx.textBaseline='middle';nx.fillText(h[0],q[0],q[1]+1)})}
+function nucOn(v){nrun=v?(nrun||(requestAnimationFrame(nloop),true)):false}
+addEventListener('resize',()=>{nW=0});
+let nl=null;
+nc.onpointerdown=e=>{nc.setPointerCapture(e.pointerId);nd={x:e.clientX,y:e.clientY};nl=[e.clientX,e.clientY];nm=0};
+nc.onpointermove=e=>{if(!nd)return;const dx=e.clientX-nl[0],dy=e.clientY-nl[1];nl=[e.clientX,e.clientY];nm+=Math.abs(dx)+Math.abs(dy);na+=dx*.01;nb=Math.max(-1.1,Math.min(1.1,nb+dy*.005))};
+nc.onpointerup=e=>{if(nd&&nm<8){const r=nc.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=null,bd=34;hp.forEach(h=>{const d=Math.hypot(h[0][0]-x,h[0][1]-y);if(d<bd){bd=d;best=h}});if(best)showH(best[1])}nd=null};
+nc.onpointercancel=()=>{nd=null};
+function showH(h){const f=$('#nfo');f.hidden=false;f.innerHTML='';const b=document.createElement('button');b.className='btn o';b.textContent='✕';b.setAttribute('aria-label','Închide');b.onclick=()=>f.hidden=true;const t=document.createElement('h3');t.textContent=h[0]+' '+h[1];const p=document.createElement('p');p.textContent=h[2];const s=document.createElement('p');s.style.fontSize='.8rem';s.textContent='Sursă: '+h[3];f.append(b,t,p,s)}
+route();
+</script>
+<script>
+(function(){
+
+const $=s=>document.querySelector(s);
+const N=12,KEY='revalis-eco-city-v1',LV=[0,80,220,450];
+const B={
+recycle:{n:'Centru de reciclare',e:'♻️',c:100,l:1,col:'#3b8fd9',h:30,inc:4,veg:2,pol:-8,sus:5,d:'+4 monede, +2 resurse vegetale, −poluare'},
+park:{n:'Parc ecologic',e:'🌳',c:60,l:1,g:1,inc:1,pol:-5,sus:4,d:'−poluare, apă mai curată'},
+farm:{n:'Fermă sustenabilă',e:'🌾',c:90,l:1,g:1,inc:3,veg:3,pol:-1,sus:4,d:'+3 resurse vegetale, +3 monede'},
+biomass:{n:'Fabrică de valorificare',e:'🏭',c:150,l:2,col:'#e8913a',h:36,pol:4,sus:4,d:'Transformă resurse vegetale în materiale'},
+forest:{n:'Pădure urbană',e:'🌲',c:70,l:2,g:1,veg:1,pol:-6,sus:5,d:'−poluare, +1 resursă vegetală'},
+water:{n:'Stație de tratare a apei',e:'💧',c:120,l:2,col:'#27b3b0',h:26,pol:-7,sus:5,d:'Calitatea apei mai mare, −poluare'},
+lab:{n:'Laborator de cercetare',e:'🔬',c:200,l:3,col:'#8a63d2',h:34,pol:-2,sus:6,d:'+3 puncte pe ciclu, +25% materiale'},
+glass:{n:'Seră',e:'🪴',c:140,l:3,col:'#9fe6d8',h:20,inc:5,veg:2,pol:-3,sus:5,d:'+5 monede, +2 resurse vegetale'},
+bio:{n:'Centru de biomateriale',e:'🧪',c:250,l:4,col:'#2f9e78',h:40,pol:3,sus:6,d:'Materiale → monede și puncte'}};
+const M=[
+['Construiește primul centru de reciclare',s=>s.cnt.recycle>0,80],
+['Valorifică 10 resturi vegetale',s=>S.proc>=10,100],
+['Construiește un laborator',s=>s.cnt.lab>0,120],
+['Îmbunătățește calitatea apei la 70%',s=>s.water>=70,120],
+['Creează un parc ecologic',s=>s.cnt.park>0,60],
+['Redu poluarea orașului sub 30%',s=>s.pol<30,150],
+['Oraș sustenabil: 80% sustenabilitate și 12 clădiri',s=>s.sus>=80&&s.n>=12,300]];
+const fresh=()=>({money:400,pts:0,veg:0,mat:0,proc:0,cells:Array(N*N).fill(null),done:[],won:false});
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.cells&&s.cells.length===N*N)return s}catch(e){}return fresh()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=load(),sel='recycle',mode='build',hov=null,born={},ST,now=0,W=0,H=0,dpr=1,ox=0,oy=0,z=1,inited=0;
+const lv=()=>LV.filter(t=>S.pts>=t).length;let lastLv=lv();
+const water=(x,y)=>Math.hypot(x-9,y-3)<=1.7||Math.hypot(x-3,y-9)<=1.2;
+const road=(x,y)=>x===0||y===0;
+const blocked=(x,y)=>water(x,y)||road(x,y);
+const hs=(x,y)=>{let h=Math.imul(x+1,374761393)^Math.imul(y+7,668265263);h=Math.imul(h^h>>>13,1274126177);return((h^h>>>16)>>>0)};
+
+function st(){const cnt={};let inc=0,pol=70,sus=0,n=0;
+S.cells.forEach(k=>{if(!k)return;const b=B[k];cnt[k]=(cnt[k]||0)+1;n++;inc+=b.inc||0;pol+=b.pol||0;sus+=b.sus||0});
+pol=Math.max(0,Math.min(100,pol));
+const w=Math.min(100,35+25*(cnt.water||0)+3*((cnt.park||0)+(cnt.forest||0)));
+sus=Math.max(0,Math.min(100,Math.round(sus*1.3-pol*.4)));
+return{cnt,inc,pol,sus,water:w,n}}
+
+function tick(){const s=st(),c=k=>s.cnt[k]||0;
+S.money+=s.inc;
+let veg=S.veg+c('recycle')*2+c('farm')*3+c('glass')*2+c('forest');
+const used=Math.min(veg,4*c('biomass'));veg-=used;S.proc+=used;S.pts+=used*.5;
+S.mat+=used*.5*(1+.25*Math.min(c('lab'),3));
+const cm=Math.min(S.mat,2*c('bio'));S.mat-=cm;S.money+=cm*8;S.pts+=cm*3+3*c('lab');
+S.veg=veg;after()}
+setInterval(()=>{if(!$('#oras').hidden)tick()},3000);
+
+function after(){const s=st();
+M.forEach((m,i)=>{if(!S.done.includes(i)&&m[1](s)){S.done.push(i);S.money+=m[2];S.pts+=m[2]/2;say('🎯 Misiune îndeplinită: '+m[0]+' (+'+m[2]+' monede)')}});
+const l=lv();if(l>lastLv)say('⬆️ Nivel '+l+'! Clădiri noi deblocate.');lastLv=l;goal(s);save();ui()}
+
+let tt;function say(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2800)}
+
+function ui(){ST=st();const l=lv(),f=Math.floor,col=v=>v>60?'#c0452f':v>30?'#e0a21b':'#2f9e5a';
+$('#hud').innerHTML=`<div class="hi">💰<b>${f(S.money)}</b></div><div class="hi">⭐<b>${f(S.pts)}</b><small>Nivel ${l}</small></div><div class="hi">🌿<b>${f(S.veg)}</b><small>vegetale</small></div><div class="hi">🧱<b>${f(S.mat)}</b><small>materiale</small></div>
+<div class="hi bw">☁️ Poluare ${ST.pol}%<i><u style="width:${ST.pol}%;background:${col(ST.pol)}"></u></i></div>
+<div class="hi bw">🌍 Sustenabilitate ${ST.sus}%<i><u style="width:${ST.sus}%;background:#2f9e5a"></u></i></div>
+<div class="hi bw">💧 Apă ${ST.water}%<i><u style="width:${ST.water}%;background:#3b8fd9"></u></i></div>`;
+const sd=$('#side'),sl=sd.scrollLeft,stp=sd.scrollTop;
+sd.innerHTML='<h2>Clădiri</h2>'+Object.keys(B).map(k=>{const b=B[k],lock=b.l>l;return`<button class="bc ${sel===k?'on':''} ${S.money<b.c?'poor':''}" data-k="${k}" ${lock?'disabled':''}><span class="e">${lock?'🔒':b.e}</span><span><b>${b.n}</b><small>${lock?'Se deblochează la nivelul '+b.l:b.d}</small></span><em>${b.c}</em></button>`}).join('');
+sd.scrollLeft=sl;sd.scrollTop=stp;
+sd.querySelectorAll('.bc').forEach(b=>b.onclick=()=>{sel=b.dataset.k;if(mode==='delete')setMode('build');ui()});
+$('#mb').textContent='🎯 Misiuni '+S.done.length+'/'+M.length;
+if(!$('#mp').hidden)mission();obj()}
+function mission(){$('#mp').innerHTML='<h2>Misiuni secundare</h2>'+M.map((m,i)=>{const d=S.done.includes(i);return`<div class="${d?'d':''}">${d?'✅':'⬜'} ${m[0]} <small>(+${m[2]})</small></div>`}).join('')+rew()}
+$('#mb').onclick=()=>{const p=$('#mp');p.hidden=!p.hidden;if(!p.hidden)mission()};
+let rt;$('#rs').onclick=e=>{const b=e.target;if(b.dataset.s){clearTimeout(rt);S=fresh();born={};lastLv=1;b.textContent='Resetează';delete b.dataset.s;after();say('Joc resetat.');return}
+b.dataset.s=1;b.textContent='Sigur? Apasă din nou';rt=setTimeout(()=>{b.textContent='Resetează';delete b.dataset.s},3000)};
+function setMode(m){mode=m;document.querySelectorAll('#tools [data-m]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m))}
+document.querySelectorAll('#tools [data-m]').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+
+function tap(px,py){const t=pick(px,py);if(!t)return;const[x,y]=t,i=y*N+x,cur=S.cells[i];
+if(mode==='delete'){if(!cur)return say('Nu există nicio clădire aici.');S.money+=Math.floor(B[cur].c/2);S.cells[i]=null;delete born[i];say('Clădire ștearsă (rambursat 50%).');return after()}
+const b=B[sel];
+if(blocked(x,y))return say('Aici nu se poate construi: apă sau drum.');
+if(lv()<b.l)return say('Clădirea este blocată.');
+if(cur){if(mode!=='replace')return say('Parcela este ocupată. Folosește Înlocuiește sau Șterge.');if(cur===sel)return say('Aceeași clădire există deja aici.')}
+const rf=cur?Math.floor(B[cur].c/2):0;
+if(S.money+rf<b.c)return say('Buget insuficient pentru '+b.n.toLowerCase()+'.');
+S.money+=rf-b.c;S.cells[i]=sel;born[i]=performance.now();S.pts+=b.c/10;after()}
+
+// Hartă: poziție, zoom, atingere
+function pick(px,py){const u=(px-ox)/z/32,v=(py-oy)/z/16,x=Math.floor((v+u)/2),y=Math.floor((v-u)/2);return x>=0&&y>=0&&x<N&&y<N?[x,y]:null}
+function zoomAt(px,py,f){const nz=Math.max(.45,Math.min(2.4,z*f));ox=px-(px-ox)*nz/z;oy=py-(py-oy)*nz/z;z=nz}
+const cv=$('#cv'),ctx=cv.getContext('2d'),P=new Map();let pd=0,moved=0;
+const dist=()=>{const a=[...P.values()];return Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1])};
+cv.onpointerdown=e=>{cv.setPointerCapture(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);moved=0;if(P.size===2)pd=dist()};
+cv.onpointermove=e=>{const r=cv.getBoundingClientRect();if(e.pointerType==='mouse')hov=pick(e.clientX-r.left,e.clientY-r.top);
+const o=P.get(e.pointerId);if(!o)return;const dx=e.clientX-o[0],dy=e.clientY-o[1];P.set(e.pointerId,[e.clientX,e.clientY]);
+if(P.size===1){moved+=Math.abs(dx)+Math.abs(dy);if(moved>8){ox+=dx;oy+=dy}}
+else if(P.size===2){moved=99;const d=dist(),a=[...P.values()];if(pd)zoomAt((a[0][0]+a[1][0])/2-r.left,(a[0][1]+a[1][1])/2-r.top,d/pd);pd=d}};
+cv.onpointerup=e=>{const r=cv.getBoundingClientRect();if(P.size===1&&moved<=8)tap(e.clientX-r.left,e.clientY-r.top);P.delete(e.pointerId);pd=0;if(e.pointerType!=='mouse')hov=null};
+cv.onpointercancel=e=>{P.delete(e.pointerId);pd=0};
+cv.onpointerleave=e=>{if(e.pointerType==='mouse')hov=null};
+cv.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.offsetX,e.offsetY,e.deltaY<0?1.1:.9)},{passive:false});
+$('#zi').onclick=()=>zoomAt(W/2,H/2,1.2);$('#zo').onclick=()=>zoomAt(W/2,H/2,.83);
+new ResizeObserver(()=>{const r=$('#stage').getBoundingClientRect();dpr=devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;
+if(!inited&&W){z=Math.min(W/(N*64+60),H/(N*32+120),1.5);ox=W/2;oy=(H-N*32*z)/2+18*z;inited=1}}).observe($('#stage'));
+
+// Desen
+const sh=(h,f)=>{const n=parseInt(h.slice(1),16),r=n>>16,g=n>>8&255,b=n&255,k=f<0?0:255,a=Math.abs(f);return`rgb(${(r+(k-r)*a)|0},${(g+(k-g)*a)|0},${(b+(k-b)*a)|0})`};
+function poly(p,fill){ctx.beginPath();p.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();ctx.fillStyle=fill;ctx.fill()}
+const dia=(cx,cy,fill,k=1)=>poly([[cx,cy-16*k],[cx+32*k,cy],[cx,cy+16*k],[cx-32*k,cy]],fill);
+const circ=(x,y,r,f)=>{ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=f;ctx.fill()};
+function wins(A,Bp,D,rows,fill){for(let i=0;i<3;i++)for(let j=0;j<rows;j++){const s=.14+i*.28,t=.14+j*.3,pt=(a,b)=>[A[0]+a*(Bp[0]-A[0])+b*(D[0]-A[0]),A[1]+a*(Bp[1]-A[1])+b*(D[1]-A[1])];poly([pt(s,t),pt(s+.16,t),pt(s+.16,t+.18),pt(s,t+.18)],fill)}}
+function box(cx,cy,h,col,k=.8,lit=1){const a=32*k,b=16*k,T=[cx,cy-b-h],R=[cx+a,cy-h],Bt=[cx,cy+b-h],L=[cx-a,cy-h],R0=[cx+a,cy],B0=[cx,cy+b],L0=[cx-a,cy];
+poly([L,Bt,B0,L0],sh(col,-.22));poly([Bt,R,R0,B0],sh(col,-.42));poly([T,R,Bt,L],sh(col,.12));
+if(lit&&h>18){const r=Math.floor(h/13),f='rgba(255,246,196,.8)';wins(L,Bt,L0,r,f);wins(Bt,R,B0,r,f)}}
+function tree(x,y,s,ph){const w=Math.sin(now/900+ph)*1.5;ctx.fillStyle='#6b4a2b';ctx.fillRect(x-1.5*s,y-7*s,3*s,7*s);circ(x+w,y-14*s,7*s,'#2f8f4a');circ(x+w-1,y-17*s,5*s,'#43b45f')}
+function smoke(x,y){for(let i=0;i<3;i++){const p=(now/1800+i/3)%1;ctx.globalAlpha=(1-p)*.55;circ(x+p*10,y-p*30,3+p*6,'#eee')}ctx.globalAlpha=1}
+
+function bld(k,cx,cy,p,x,y){const b=B[k],e=p<1?1+2.7*Math.pow(p-1,3)+1.7*Math.pow(p-1,2):1,ph=x*2+y;
+ctx.globalAlpha=Math.min(1,p*3);
+if(b.g){
+ if(k==='park'){dia(cx,cy,'#b4e68b',.96);ctx.beginPath();ctx.ellipse(cx+10,cy+5,11,5,0,0,7);ctx.fillStyle='#6cc6ee';ctx.fill();
+  tree(cx-16,cy+2,e,ph);tree(cx-3,cy-6,e,ph+1);tree(cx+16,cy-4,e,ph+2);circ(cx-4,cy+9,1.8,'#f27ba8');circ(cx+2,cy+11,1.8,'#ffd23f')}
+ else if(k==='forest'){dia(cx,cy,'#7cc558',.96);[[-16,0],[-4,-8],[10,-6],[18,2],[-2,6]].sort((a,c)=>a[1]-c[1]).forEach((q,i)=>tree(cx+q[0],cy+q[1],1.1*e,ph+i))}
+ else{dia(cx,cy,'#c49a66',.94);const P=(u,v)=>[cx+(u-v)*30,cy-15+(u+v)*15];ctx.lineWidth=3;ctx.lineCap='round';ctx.strokeStyle='#58b04a';
+  [.3,.5,.7,.9].forEach(v=>{ctx.beginPath();const a=P(.12,v),c=P(.88,v);ctx.moveTo(a[0],a[1]);ctx.lineTo(c[0],c[1]);ctx.stroke()});
+  const q=P(.8,.12);box(q[0],q[1]+4,12*e,'#d9534f',.26)}
+}else{
+ const h=b.h*e;ctx.fillStyle='rgba(0,0,0,.16)';ctx.beginPath();ctx.ellipse(cx+6,cy+4,32,15,0,0,7);ctx.fill();
+ if(k==='glass'){circ(cx-9,cy-6,6,'#3aa655');circ(cx+7,cy-2,6,'#52c36d');circ(cx-2,cy+4,5,'#3aa655');ctx.globalAlpha*=.7;box(cx,cy,h,b.col,.8,0);ctx.globalAlpha=Math.min(1,p*3);ctx.strokeStyle='rgba(255,255,255,.8)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx-26,cy-h);ctx.lineTo(cx,cy+13-h);ctx.lineTo(cx+26,cy-h);ctx.moveTo(cx,cy-13-h);ctx.lineTo(cx,cy+13-h);ctx.stroke()}
+ else{box(cx,cy,h,b.col);
+  if(k==='biomass'||k==='bio'){box(cx+14,cy-h-2,14,'#8b5a3a',.2,0);smoke(cx+14,cy-h-16)}
+  if(k==='lab'){circ(cx,cy-h-4,10,'rgba(210,190,255,.95)');circ(cx-3,cy-h-7,3,'#fff')}
+  if(k==='water'){ctx.beginPath();ctx.ellipse(cx,cy-h-1,17,8,0,0,7);ctx.fillStyle='#8fe3f2';ctx.fill();const r=(now/700)%1;ctx.strokeStyle=`rgba(255,255,255,${1-r})`;ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(cx,cy-h-1,3+r*12,1.5+r*6,0,0,7);ctx.stroke()}
+  if(k==='recycle'){ctx.strokeStyle='#6fdc8c';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(cx,cy-h-1,12,6,0,0,7);ctx.stroke()}}
+}
+ctx.globalAlpha=Math.min(1,p*3);ctx.font='17px system-ui,sans-serif';ctx.textAlign='center';
+ctx.fillText(b.e,cx,cy-(b.g?34:b.h+18)*Math.min(1,e)+Math.sin(now/600+ph)*2);ctx.globalAlpha=1}
+
+function frame(){now=performance.now();requestAnimationFrame(frame);if(!W)return;
+ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);
+for(let d=0;d<2*N-1;d++)for(let x=0;x<N;x++){const y=d-x;if(y<0||y>=N)continue;
+ const cx=(x-y)*32,cy=(x+y)*16+16,i=y*N+x,k=S.cells[i];
+ if(x===N-1)poly([[cx+32,cy],[cx,cy+16],[cx,cy+26],[cx+32,cy+10]],'#5b7a3a');
+ if(y===N-1)poly([[cx-32,cy],[cx,cy+16],[cx,cy+26],[cx-32,cy+10]],'#486b30');
+ if(water(x,y)){dia(cx,cy,'#4fb7e6');ctx.strokeStyle='rgba(255,255,255,.6)';ctx.lineWidth=1.5;const o=Math.sin(now/700+x*2+y)*6;ctx.beginPath();ctx.moveTo(cx-10+o,cy-2);ctx.lineTo(cx+4+o,cy-2);ctx.moveTo(cx-4-o,cy+5);ctx.lineTo(cx+9-o,cy+5);ctx.stroke()}
+ else if(road(x,y)){dia(cx,cy,'#6d7480');ctx.strokeStyle='#e8e2b0';ctx.lineWidth=1.5;ctx.setLineDash([5,5]);ctx.beginPath();if(x===0&&y!==0){ctx.moveTo(cx-16,cy-8);ctx.lineTo(cx+16,cy+8)}else{ctx.moveTo(cx+16,cy-8);ctx.lineTo(cx-16,cy+8)}ctx.stroke();ctx.setLineDash([])}
+ else{dia(cx,cy,['#8fd16a','#86c963','#93d46f'][hs(x,y)%3]);
+  if(k)bld(k,cx,cy,Math.min(1,(now-(born[i]||-1e4))/650),x,y);
+  else if(hs(x,y)%100<13)tree(cx,cy+2,1,x+y)}
+ if(hov&&hov[0]===x&&hov[1]===y){const b=B[sel],ok=mode==='delete'?!!k:!blocked(x,y)&&(!k||mode==='replace')&&lv()>=b.l;dia(cx,cy,ok?'rgba(255,255,255,.45)':'rgba(220,60,40,.45)')}
+}
+ctx.restore();
+ctx.fillStyle=`rgba(150,125,85,${(ST?ST.pol:50)/100*.3})`;ctx.fillRect(0,0,W,H)}
+
+const GOAL=[
+['☁️ Poluare sub 30%',s=>s.pol<30,s=>Math.max(0,Math.min(1,(70-s.pol)/41)),s=>s.pol+'%'],
+['🌍 Sustenabilitate minimum 80%',s=>s.sus>=80,s=>Math.min(1,s.sus/80),s=>s.sus+'%'],
+['💧 Calitatea apei minimum 70%',s=>s.water>=70,s=>Math.min(1,s.water/70),s=>s.water+'%'],
+['🌿 50 de resturi vegetale valorificate',s=>S.proc>=50,s=>Math.min(1,S.proc/50),s=>Math.floor(S.proc)+'/50'],
+['🏙️ Minimum 12 clădiri',s=>s.n>=12,s=>Math.min(1,s.n/12),s=>s.n+'/12']];
+let objOpen=innerWidth>720;
+const gpct=s=>Math.round(100*GOAL.reduce((a,g)=>a+(g[1](s)?1:g[2](s)),0)/GOAL.length);
+function obj(){const s=ST||st(),p=S.won?100:gpct(s);if(!S.won)$('#win').hidden=true;
+$('#obj').innerHTML=`<div data-t="1" style="cursor:pointer" role="button" tabindex="0" aria-expanded="${objOpen}"><b>🎯 Obiectiv: Oraș ecologic complet ${S.won?'✅':p+'%'}</b><div class="gb"><i style="width:${p}%"></i></div></div>`+(objOpen?GOAL.map(g=>`<div class="gl ${g[1](s)?'ok':''}">${g[1](s)?'✅':'⬜'} ${g[0]} <small>${g[3](s)}</small></div>`).join('')+'<small>Recompensă: +500 💰, +250 ⭐ și titlul „Primar Verde”</small>':'')}
+$('#obj').onclick=e=>{if(e.target.closest('[data-t]')){objOpen=!objOpen;obj()}};
+$('#obj').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();objOpen=!objOpen;obj()}};
+function goal(s){if(S.won||!GOAL.every(g=>g[1](s)))return;S.won=true;S.money+=500;S.pts+=250;showWin()}
+function showWin(){const s=st(),w=$('#win');
+w.innerHTML=`<div class="wc"><div class="cf" aria-hidden="true">${['🌿','🌳','♻️','🌍','⭐','💧','🎉','🌱','🏆'].map((c,i)=>`<span style="left:${8+i*10}%;animation-delay:${i*.25}s">${c}</span>`).join('')}</div>
+<div style="font-size:3rem">🏆</div><h2>Felicitări, Primar Verde!</h2>
+<p>Ai construit un oraș ecologic complet: poluarea e scăzută, apa e curată, iar resturile vegetale devin resurse în loc de gunoi. Acesta este principiul economiei circulare.</p>
+<div class="ws"><span>🏙️ ${s.n} clădiri</span><span>🌿 ${Math.floor(S.proc)} valorificate</span><span>☁️ ${s.pol}% poluare</span><span>🌍 ${s.sus}% sustenabilitate</span></div>
+<p><b>Recompense primite:</b> +500 💰 · +250 ⭐ · titlul „Primar Verde”</p>
+<div class="act" style="justify-content:center"><button id="wk">Continuă să construiești</button><button id="wn">Joc nou</button></div></div>`;
+w.hidden=false;$('#wk').onclick=()=>{w.hidden=true};
+$('#wn').onclick=()=>{clearTimeout(rt);S=fresh();born={};lastLv=1;w.hidden=true;after();say('Joc nou început.')}}
+const rew=()=>'<h2 style="margin-top:.7rem">Recompense</h2>'+[1,2,3,4].map(l=>`<div>⭐ Nivel ${l} (${LV[l-1]} puncte): ${Object.values(B).filter(b=>b.l===l).map(b=>b.e).join(' ')}</div>`).join('')+'<div>🎯 Fiecare misiune: monede și puncte</div><div>🏆 Obiectiv principal: +500 💰, +250 ⭐, „Primar Verde”</div>';
+ui();requestAnimationFrame(frame);
+
+})();
+</script>
+<script>
+
+(function(){
+const $=s=>document.querySelector(s),R=Math.random,rm=matchMedia('(prefers-reduced-motion:reduce)').matches,rnd=()=>R()*2-1;
+let L={core:[],mol:[],sims:[],bat:0,gq:0,done:[],nb:[]};try{L=Object.assign(L,JSON.parse(localStorage.getItem('rv-lab2')||'{}'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('rv-lab2',JSON.stringify(L))}catch(e){}};
+const MS=[["Descoperă pectina","În Nucleul de transformare alege cojile de portocală și ajunge la „Material obținut”.",()=>L.core.includes('0:4')],["Explorator de resurse organice","Explorează toate cele 4 materii prime în Nucleul de transformare.",()=>[0,1,2,3].every(i=>L.core.some(s=>s.startsWith(i+':')))],["Adsorbant potrivit","Rulează o simulare cu eficiență peste 70%.",()=>L.sims.some(s=>s[1]>70)],["Compară două materiale","Alege două materiale diferite în Confruntarea materialelor.",()=>L.bat===1],["Analizează un grafic","Răspunde corect la întrebarea din secțiunea Misiuni.",()=>L.gq===1],["Modifică parametrii","Rulează două simulări cu pH diferit.",()=>new Set(L.sims.map(s=>s[0])).size>=2],["Lumea microscopică","Explorează toate cele 6 modele din Universul molecular.",()=>L.mol.length>=6]];
+const TT=[[0,"Cercetător începător"],[2,"Explorator de resurse organice"],[4,"Specialist în adsorbție"],[6,"Om de știință în materiale"],[7,"Cercetător principal REVALIS"]];
+function xp(){const n=L.done.length;$('#lxp').textContent='🎖️ '+TT.filter(t=>n>=t[0]).pop()[1]+' · '+n+'/7 misiuni · '+n*100+' puncte'}
+function toast(t){const e=document.createElement('div');e.className='ltoast';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),3200)}
+function chk(){MS.forEach((m,i)=>{if(!L.done.includes(i)&&m[2]()){L.done.push(i);sv();toast('🎉 Misiune îndeplinită: '+m[0]+' (+100 puncte)')}});sv();xp()}
+// ---- 3D
+function pj(v,a,b,w,h,k){const c=Math.cos(a),s=Math.sin(a),x1=v[0]*c+v[2]*s,z1=-v[0]*s+v[2]*c,c2=Math.cos(b),s2=Math.sin(b),y1=v[1]*c2-z1*s2,z2=v[1]*s2+z1*c2,f=3.6/(3.6-z2);return[w/2+x1*f*k,h/2+y1*f*k,z2,f]}
+function d3(x,w,h,pts,a,b,k){const o=[];for(const p of pts){const q=pj(p,a,b,w,h,k);if(q[2]<3.2)o.push([q,p])}o.sort((m,n)=>m[0][2]-n[0][2]);for(const[q,p]of o){x.globalAlpha=Math.max(.15,Math.min(1,.45+.3*(q[2]+1.8)/3.6));x.fillStyle=`hsl(${p[3]} 85% 62%)`;x.beginPath();x.arc(q[0],q[1],(p[4]||2)*q[3],0,7);x.fill();if(p[5]){x.globalAlpha=1;x.fillStyle='#fff';x.font='12px system-ui';x.fillText(p[5],q[0]+6,q[1]-6)}}x.globalAlpha=1}
+function sz(c){const d=devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;if(c.width!==Math.round(w*d)||c.height!==Math.round(h*d)){c.width=w*d;c.height=h*d}const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return[x,w,h]}
+function drag(c,o,onclick){let l=null,mv=0;c.onpointerdown=e=>{c.setPointerCapture(e.pointerId);l=[e.clientX,e.clientY];o.d=1;mv=0};c.onpointermove=e=>{if(!l)return;const dx=e.clientX-l[0],dy=e.clientY-l[1];mv+=Math.abs(dx)+Math.abs(dy);o.a+=dx*.01;o.b=Math.max(-1.2,Math.min(1.2,o.b+dy*.005));l=[e.clientX,e.clientY]};c.onpointerup=e=>{if(l&&mv<6&&onclick){const r=c.getBoundingClientRect();onclick(e.clientX-r.left,e.clientY-r.top)}l=null;o.d=0};c.onpointercancel=()=>{l=null;o.d=0}}
+function pgen(nc,r,h,n=520){const C=Array.from({length:nc},()=>{const u=rnd(),t=R()*6.283,s=Math.sqrt(1-u*u);return[s*Math.cos(t),u,s*Math.sin(t)]}),o=[];while(o.length<n){const u=rnd(),t=R()*6.283,s=Math.sqrt(1-u*u),q=[s*Math.cos(t),u,s*Math.sin(t)];if(C.some(c=>Math.hypot(q[0]-c[0],q[1]-c[1],q[2]-c[2])<.7))continue;o.push([q[0]*r,q[1]*r,q[2]*r,h+R()*30,2.2])}return o}
+// ---- Core
+const N=512,SRC=Array.from({length:N},()=>{const u=rnd(),t=R()*6.283,s=Math.sqrt(1-u*u),r=1.4*Math.cbrt(R());return[s*Math.cos(t)*r,u*r,s*Math.sin(t)*r]});
+const SH=[Array.from({length:N},(_,i)=>{const u=i/N,t=u*18+(i%2)*3.14;return[.6*Math.cos(t),(u-.5)*3,.6*Math.sin(t)]}),pgen(6,1.25,0,N).map(q=>q.slice(0,3)),(()=>{const o=[];for(let i=0;i<8;i++)for(let j=0;j<8;j++)for(let k=0;k<8;k++)o.push([(i-3.5)*.3,(j-3.5)*.3,(k-3.5)*.3]);return o})(),(()=>{const o=[];for(let l=0;l<8;l++)for(let i=0;i<8;i++)for(let j=0;j<8;j++)o.push([(i-3.5)*.38,(l-3.5)*.2,(j-3.5)*.38]);return o})()];
+const HT=[190,270,215,170],CD=["Structură elicoidală conceptuală pentru pectină","Structură poroasă conceptuală pentru un adsorbant","Rețea cubică conceptuală pentru silice","Straturi conceptuale pentru biocarbon"];
+const C={mi:0,st:0,m:0,a:0,b:.3,hp:[]};
+function setSt(i){C.st=i;const k=C.mi+':'+i;if(!L.core.includes(k))L.core.push(k);chk();kinfo()}
+function kinfo(){const s=W2[C.mi].S[C.st];$('#ki').innerHTML=`<b>${C.st+1}. ${s[0]}</b>${s[2]?` <span class="sim">${s[2]}</span>`:''}<p>${s[1]}</p><small>Forma 3D este o reprezentare conceptuală (${CD[C.mi]}), nu o imagine reală.</small>`;$('#kst').querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',i===C.st))}
+function pCore(){$('#lpan').innerHTML=`<div class="lp"><h3>🧬 Nucleul de transformare</h3><p>Alege o materie primă și parcurge etapele. Atinge sferele numerotate sau folosește butoanele. Trage pentru a roti.</p><div class="chips" id="kmat">${W2.map((m,i)=>`<button data-i="${i}" aria-pressed="${i===C.mi}">${m.e} ${m.t}</button>`).join('')}</div><canvas class="kc" id="kc" aria-label="Nucleul 3D de transformare"></canvas><div class="chips" id="kst">${[1,2,3,4,5,6,7].map(n=>`<button>${n}</button>`).join('')}</div><div class="hol" id="ki"></div></div>`;
+$('#kmat').querySelectorAll('button').forEach(b=>b.onclick=()=>{C.mi=+b.dataset.i;C.m=0;C.st=0;pCore();setSt(0)});$('#kst').querySelectorAll('button').forEach((b,i)=>b.onclick=()=>setSt(i));
+drag($('#kc'),C,(x,y)=>{let bd=26,bi=-1;C.hp.forEach(h=>{const d=Math.hypot(h[0][0]-x,h[0][1]-y);if(d<bd){bd=d;bi=h[1]}});if(bi>=0)setSt(bi)});kinfo()}
+function dCore(t){const c=$('#kc');if(!c)return;const[x,w,h]=sz(c);x.clearRect(0,0,w,h);if(!C.d&&!rm)C.a+=.004;C.m+=(C.st/6-C.m)*.05;const m=C.m,e=m*m*(3-2*m),T=SH[C.mi],hu=120+(HT[C.mi]-120)*m,k=Math.min(w,h)*.22;
+const g=x.createRadialGradient(w/2,h/2,0,w/2,h/2,k*1.4);g.addColorStop(0,`hsla(${hu},90%,55%,.3)`);g.addColorStop(1,'transparent');x.fillStyle=g;x.fillRect(0,0,w,h);
+d3(x,w,h,SRC.map((s,i)=>{const q=T[i],j=1+.03*Math.sin(t/600+i);return[(s[0]+(q[0]-s[0])*e)*j,(s[1]+(q[1]-s[1])*e)*j,(s[2]+(q[2]-s[2])*e)*j,hu+i%40,2]}),C.a,C.b,k);
+C.hp=[];for(let i=0;i<7;i++){const an=i/7*6.283+t/14000,q=pj([2.2*Math.cos(an),-1.8+.2*Math.sin(an*2),2.2*Math.sin(an)],C.a,C.b,w,h,k),r=13*q[3];C.hp.push([q,i]);x.beginPath();x.arc(q[0],q[1],r,0,7);x.fillStyle='#050b1ccc';x.fill();x.strokeStyle=i===C.st?'#fff':'#22d3ee';x.lineWidth=2;x.stroke();x.fillStyle='#fff';x.font='bold 12px system-ui';x.textAlign='center';x.fillText(i+1,q[0],q[1]+4)}x.textAlign='left'}
+// ---- Molecular
+const GM={cell:()=>{const o=[];[[0,0],[.4,0],[-.4,0],[.2,.35],[-.2,.35],[.2,-.35],[-.2,-.35]].forEach((c,f)=>{for(let i=0;i<60;i++)o.push([c[0]+.04*rnd(),(i-30)/20,c[1]+.04*rnd(),190+f*8,2.2])});return o},
+hemi:()=>{const o=[[0,0,0,40,2.4]];for(let i=0;i<260;i++){const p=o[R()*o.length|0];o.push([p[0]+.12*rnd(),p[1]+.2*rnd(),p[2]+.12*rnd(),40+R()*20,2.2])}return o},
+lig:()=>{const o=[[0,0,0,25,2.6]];for(let i=0;i<320;i++){const p=o[Math.max(0,o.length-1-(R()*6|0))];o.push([p[0]+.16*rnd(),p[1]+.16*rnd(),p[2]+.16*rnd(),20+R()*15,2.6])}return o},
+pect:()=>{const o=[];for(let i=0;i<150;i++){const t=i*.25,y=(i/150-.5)*3;o.push([.5*Math.cos(t),y,.5*Math.sin(t),200,2.4]);if(i%7===0)o.push([.85*Math.cos(t),y,.85*Math.sin(t),5,4,"–COOH"]);if(i%21===3)o.push([1.1*Math.cos(t+.5),y,1.1*Math.sin(t+.5),215,5,"Ca²⁺"])}return o},
+pore:()=>pgen(6,1.25,170),
+grp:()=>{const o=[];for(let i=0;i<14;i++)for(let j=0;j<14;j++)o.push([(i-6.5)*.2,0,(j-6.5)*.2,185,1.6]);[[-.6,.35,-.4,"–COOH",5],[.5,.4,.2,"–OH",270],[-.1,.38,.6,"–COOH",5],[.7,.35,-.6,"–OH",270]].forEach(g=>o.push([g[0],g[1],g[2],g[4],4.5,g[3]]));return o}};
+const MO=[["Celuloză","cell","Lanțuri liniare de glucoză (legături β-1,4), grupate în microfibrile stabilizate de legături de hidrogen. Dau rezistență pereților celulari."],["Hemiceluloză","hemi","Polizaharide ramificate (de exemplu xilani), mai puțin ordonate decât celuloza; leagă microfibrilele și lignina."],["Lignină","lig","Polimer aromatic tridimensional, ramificat, format din unități fenilpropanoidice. Rigidizează peretele celular și se degradează greu."],["Pectină","pect","Polizaharid bogat în acid galacturonic. Grupările carboxil (–COOH) pot lega ioni de calciu și forma geluri (modelul „cutiei de ouă”)."],["Porii biocarbonului","pore","IUPAC clasifică porii în micropori (sub 2 nm), mezopori (2–50 nm) și macropori (peste 50 nm). Suprafața specifică mare vine în mare parte din micropori. Mărirea te duce „în interior”."],["Grupe funcționale","grp","La suprafața biocarbonului pot exista grupări precum –COOH și –OH (fenolice). Ele pot participa la schimb ionic și complexare cu metale, în funcție de pH."]];
+const M={i:0,a:0,b:.3,z:1,pts:GM.cell()};
+function pMol(){$('#lpan').innerHTML=`<div class="lp"><h3>🔬 Universul molecular</h3><p>Modele conceptuale 3D. Trage pentru a roti; folosește glisorul sau rotița mouse-ului pentru mărire.</p><div class="chips" id="mt">${MO.map((m,i)=>`<button data-i="${i}" aria-pressed="${i===M.i}">${m[0]}</button>`).join('')}</div><canvas class="kc" id="mc" aria-label="Model molecular conceptual"></canvas><label>Mărire <input type="range" id="mz" min=".6" max="3.2" step=".05" value="${M.z}"></label><div class="hol" id="mi"></div></div>`;
+$('#mt').querySelectorAll('button').forEach(b=>b.onclick=()=>{M.i=+b.dataset.i;M.pts=GM[MO[M.i][1]]();M.z=1;const k=MO[M.i][0];if(!L.mol.includes(k))L.mol.push(k);chk();pMol()});
+$('#mz').oninput=e=>M.z=+e.target.value;$('#mc').addEventListener('wheel',e=>{e.preventDefault();M.z=Math.max(.6,Math.min(3.2,M.z*(e.deltaY<0?1.08:.93)));$('#mz').value=M.z},{passive:false});
+drag($('#mc'),M);$('#mi').innerHTML=`<b>${MO[M.i][0]}</b><p>${MO[M.i][2]}</p><small>⚠️ Model conceptual, nu imagine microscopică reală. Scara și poziția atomilor nu sunt reale.</small>`;const k=MO[M.i][0];if(!L.mol.includes(k)){L.mol.push(k);chk()}}
+function dMol(t){const c=$('#mc');if(!c)return;const[x,w,h]=sz(c);x.clearRect(0,0,w,h);if(!M.d&&!rm)M.a+=.004;d3(x,w,h,M.pts,M.a,M.b,Math.min(w,h)*.22*M.z)}
+// ---- Model de simulare (parametri ilustrativi)
+const CT=[["Pb²⁺ (metal greu)","cat",1],["Albastru de metilen (colorant)","cat",1.6],["Cr(VI) (anion)","an",.7]];
+const MT=[{n:"Coji de orez",q:35,K:.06,k:.004,S:2,P:3,G:3,h:200},{n:"Zaț de cafea",q:50,K:.04,k:.003,S:3,P:3,G:4,h:30},{n:"Paie",q:28,K:.05,k:.006,S:2,P:2,G:3,h:140}];
+MT.forEach(m=>m.pts=pgen(3+m.P*2,1.25,m.h));
+const X={c:0,m:0,pH:6,C0:50,D:1,T:25,t:60};
+function sim(x,mi){const m=MT[mi],c=CT[x.c],f=c[1]==='cat'?1/(1+Math.exp(-(x.pH-4)/.8)):1/(1+Math.exp((x.pH-3.5)/.8)),Q=m.q*c[2]*f*(1+.004*(x.T-25));let lo=0,hi=x.C0;for(let i=0;i<50;i++){const ce=(lo+hi)/2,g=x.C0-ce-x.D*Q*m.K*ce/(1+m.K*ce);g>0?lo=ce:hi=ce}const ce=(lo+hi)/2,qe=(x.C0-ce)/x.D;return{qe,ce,at:t=>{const q=qe*m.k*qe*t/(1+m.k*qe*t);return{q,ce:x.C0-x.D*q}}}}
+const res=(x,mi)=>{const s=sim(x,mi).at(x.t);return{q:s.q,ce:s.ce,eff:(x.C0-s.ce)/x.C0*100}};
+// ---- Camera de purificare + Sala de control
+const Z={run:null,p:0,last:null,P:Array.from({length:60},()=>({x:R(),y:R(),vx:rnd()*.002,vy:rnd()*.002}))};
+const SL=[["pH","pH",2,9,.1],["T","Temperatura (°C)",15,45,1],["t","Timp de contact (min)",1,240,1],["C0","Concentrația inițială (mg/L)",5,200,1],["D","Cantitate de adsorbant (g/L)",.2,5,.1]];
+function pCh(){$('#lpan').innerHTML=`<div class="lp"><h3>💧 Camera de purificare și Sala de control științific <span class="sim">SIMULARE</span></h3><div class="lg"><div class="hol"><label>Contaminant<select id="xc">${CT.map((c,i)=>`<option value="${i}">${c[0]}</option>`).join('')}</select></label><label>Adsorbant<select id="xm">${MT.map((c,i)=>`<option value="${i}">${c.n}</option>`).join('')}</select></label>${SL.map(s=>`<label>${s[1]}: <b id="v${s[0]}"></b><input type="range" id="x${s[0]}" min="${s[2]}" max="${s[3]}" step="${s[4]}" value="${X[s[0]]}"></label>`).join('')}<small id="pw"></small><div class="row"><button class="btn" id="go">▶ Pornește experimentul</button><button class="btn o" id="sn" disabled>📓 Salvează fișa</button></div></div><div><canvas class="kc" id="cc" style="height:300px;cursor:default" aria-label="Camera de purificare"></canvas><canvas class="kc" id="gc" style="height:210px;margin-top:.6rem;cursor:default" aria-label="Grafic eficiență și capacitate"></canvas></div></div><div class="hol" id="ro" style="margin-top:1rem" aria-live="polite"></div></div>`;
+$('#xc').value=X.c;$('#xm').value=X.m;$('#xc').onchange=e=>{X.c=+e.target.value;upd()};$('#xm').onchange=e=>{X.m=+e.target.value;upd()};SL.forEach(s=>$('#x'+s[0]).oninput=e=>{X[s[0]]=+e.target.value;upd()});
+$('#go').onclick=()=>{Z.run=performance.now();Z.p=0;$('#sn').disabled=true};$('#sn').onclick=saveNb;upd(1)}
+function upd(f){if(!f){Z.p=0;Z.run=null;$('#sn').disabled=true}SL.forEach(s=>$('#v'+s[0]).textContent=X[s[0]]);$('#pw').textContent=X.c===0&&X.pH>7?'⚠️ La pH>7 plumbul poate precipita; modelul nu separă precipitarea de adsorbție.':'';const r=res(X,X.m),s=sim(X,X.m);
+$('#ro').innerHTML=`<b>Rezultate simulate la t = ${X.t} min</b> <span class="sim">SIMULARE</span><div class="mk"><div>Eficiența îndepărtării: <b>${r.eff.toFixed(1)}%</b><div class="bw2"><i style="width:${r.eff}%"></i></div></div><div>Capacitatea de adsorbție q<sub>t</sub>: <b>${r.q.toFixed(1)} mg/g</b><div class="bw2"><i style="width:${Math.min(100,r.q/MT[X.m].q/CT[X.c][2]*100)}%"></i></div></div><div>C<sub>t</sub>: <b>${r.ce.toFixed(1)} mg/L</b></div><div>q<sub>e</sub> (echilibru): <b>${s.qe.toFixed(1)} mg/g</b></div></div><small>Model: izotermă Langmuir cu bilanț de masă, cinetică pseudo-ordin doi, efect de pH și temperatură. Parametrii sunt <b>ilustrativi</b>, nu date experimentale. Apa simulată <b>nu este potabilă</b>.</small>`}
+function dCh(t){const c=$('#cc'),g=$('#gc');if(!c||!g)return;if(Z.run!==null){Z.p=rm?1:Math.min(1,(t-Z.run)/7000);if(Z.p>=1&&!Z.last_){Z.last_=1}if(Z.p>=1){finish()}}
+const r=sim(X,X.m),ts=Z.p*X.t,st=r.at(ts),eff=(X.C0-st.ce)/X.C0*100;
+let[x,w,h]=sz(c);x.clearRect(0,0,w,h);const x0=w*.15,x1=w*.85,y0=h*.1,y1=h*.9,gr=x.createLinearGradient(0,y0,0,y1);gr.addColorStop(0,'rgba(34,211,238,.22)');gr.addColorStop(1,'rgba(59,130,246,.35)');x.fillStyle=gr;x.fillRect(x0,y0+25,x1-x0,y1-y0-25);x.fillStyle=`rgba(240,170,40,${.4*st.ce/X.C0})`;x.fillRect(x0,y0+25,x1-x0,y1-y0-25);
+x.strokeStyle='#67e8f9';x.lineWidth=3;x.beginPath();x.moveTo(x0,y0);x.lineTo(x0,y1);x.lineTo(x1,y1);x.lineTo(x1,y0);x.stroke();
+const ng=Math.min(6,1+Math.round(X.D)),GP=[[.28,.8],[.4,.85],[.52,.8],[.64,.85],[.74,.8],[.5,.7]],gr2=Math.min(w,h)*.05;
+for(let i=0;i<ng;i++){const gx=x0+GP[i][0]*(x1-x0)/.7+ -x0*0,cx=w*GP[i][0],cy=h*GP[i][1];x.beginPath();x.arc(cx,cy,gr2,0,7);x.fillStyle='#14b8a6';x.fill();x.strokeStyle='#a78bfa';x.stroke();for(let k=0;k<6;k++){x.beginPath();x.arc(cx+gr2*.5*Math.cos(k*1.7+i),cy+gr2*.5*Math.sin(k*1.7+i),2,0,7);x.fillStyle='#064e3b';x.fill()}}
+const nc=Math.round(60*eff/100);Z.P.forEach((p,i)=>{let tx,ty;if(i<nc){const gi=i%ng,a=i*2.4,cx=w*GP[gi][0],cy=h*GP[gi][1];tx=(cx+(gr2+3)*Math.cos(a)-x0)/(x1-x0);ty=(cy+(gr2+3)*Math.sin(a)-y0-25)/(y1-y0-25);p.x+=(tx-p.x)*.08;p.y+=(ty-p.y)*.08}else{p.vx+=rnd()*.0006;p.vy+=rnd()*.0006;p.x+=p.vx;p.y+=p.vy;if(p.x<.02||p.x>.98)p.vx*=-1;if(p.y<.02||p.y>.9)p.vy*=-1;p.x=Math.max(0,Math.min(1,p.x));p.y=Math.max(0,Math.min(.95,p.y))}
+x.beginPath();x.arc(x0+p.x*(x1-x0),y0+25+p.y*(y1-y0-25),3,0,7);x.fillStyle='#f0b73a';x.fill()});
+x.fillStyle='#fff';x.font='13px system-ui';x.fillText('t = '+ts.toFixed(0)+' min · eficiență '+eff.toFixed(0)+'%',10,18);x.fillStyle='#c4b5fd';x.fillText('SIMULARE · nu este apă potabilă',10,h-8);
+[x,w,h]=sz(g);x.clearRect(0,0,w,h);const pl=28,pb=22,qmax=Math.max(1,r.qe),cx=t2=>pl+t2/240*(w-pl-10),line=(f,col,sc)=>{x.beginPath();for(let i=0;i<=120;i++){const t2=i*2,v=f(t2),px=cx(t2),py=h-pb-v*(h-pb-10)/sc;i?x.lineTo(px,py):x.moveTo(px,py)}x.strokeStyle=col;x.lineWidth=2;x.stroke()};
+x.strokeStyle='#22d3ee55';x.strokeRect(pl,10,w-pl-10,h-pb-10);line(t2=>(X.C0-r.at(t2).ce)/X.C0*100,'#22d3ee',100);line(t2=>r.at(t2).q,'#a78bfa',qmax);x.strokeStyle='#fff';x.beginPath();x.moveTo(cx(X.t),10);x.lineTo(cx(X.t),h-pb);x.stroke();x.fillStyle='#22d3ee';x.font='11px system-ui';x.fillText('Eficiență (%) – cian',pl+6,24);x.fillStyle='#a78bfa';x.fillText('qₜ (mg/g) – violet, scalat la qₑ',pl+6,38);x.fillStyle='#b6d4e6';x.fillText('0',pl,h-6);x.fillText('120',cx(120)-8,h-6);x.fillText('240 min',cx(240)-34,h-6)}
+function finish(){if(!Z.run)return;Z.run=null;const r=res(X,X.m);L.sims.push([X.pH,r.eff]);L.sims=L.sims.slice(-40);Z.last={...X,...r};$('#sn').disabled=false;chk()}
+function saveNb(){const z=Z.last;if(!z)return;const sm=sim(z,z.m),ser=[0,10,20,40,60,90,120,180,240].map(t=>[t,(z.C0-sm.at(t).ce)/z.C0*100]);const cat=CT[z.c][1]==='cat';
+L.nb.unshift({id:Date.now(),d:new Date().toLocaleString('ro-RO'),obj:`Simularea adsorbției pentru ${CT[z.c][0]} pe ${MT[z.m].n}.`,mat:`${MT[z.m].n}; soluție apoasă cu ${CT[z.c][0]}.`,par:`pH ${z.pH}, ${z.T} °C, ${z.t} min, C₀ ${z.C0} mg/L, doză ${z.D} g/L.`,met:'Simulare: izotermă Langmuir + bilanț de masă, cinetică pseudo-ordin doi, factori de pH și temperatură (parametri ilustrativi).',rez:`Eficiență ${z.eff.toFixed(1)}%, q_t ${z.q.toFixed(1)} mg/g, C_t ${z.ce.toFixed(1)} mg/L.`,obs:`În model, ${cat?'cationii se adsorb mai bine la pH mai mare, pe măsură ce suprafața devine mai încărcată negativ':'anionii se adsorb mai bine la pH mai mic, pe măsură ce suprafața devine mai încărcată pozitiv'}.`,con:`În condițiile simulate, eficiența este ${z.eff.toFixed(1)}%.`,lim:'Nu sunt date experimentale. Se ignoră competiția dintre ioni, precipitarea, materia organică din apă și variabilitatea materialului. Apa simulată nu este potabilă.',ser});L.nb=L.nb.slice(0,20);sv();toast('📓 Fișa a fost salvată în Caietul de laborator')}
+// ---- Battle
+const B={a:0,b:1,ra:0,rb:0};
+function pBat(){const opt=s=>MT.map((m,i)=>`<option value="${i}" ${i===s?'selected':''}>${m.n}</option>`).join('');$('#lpan').innerHTML=`<div class="lp"><h3>⚔️ Confruntarea materialelor</h3><p>Compară două materiale în aceleași condiții simulate (cele din Sala de control). Nu declarăm un câștigător: parametrii sunt ilustrativi, iar în realitate rezultatele depind de condițiile experimentale.</p><div class="mk"><label>Material A<select id="ba">${opt(B.a)}</select></label><label>Material B<select id="bb">${opt(B.b)}</select></label></div><div class="mk"><canvas class="kc" id="b1" style="height:220px"></canvas><canvas class="kc" id="b2" style="height:220px"></canvas></div><div class="hol" id="bt" style="margin-top:1rem"></div><canvas class="kc" id="bg" style="height:200px;margin-top:.6rem;cursor:default"></canvas></div>`;
+const f=()=>{B.a=+$('#ba').value;B.b=+$('#bb').value;if(B.a!==B.b&&L.bat!==1){L.bat=1;chk()}tab_()};$('#ba').onchange=f;$('#bb').onchange=f;drag($('#b1'),B);tab_()}
+function tab_(){const bar=v=>`<div class="bw2"><i style="width:${v/5*100}%"></i></div>`,ra=res(X,B.a),rb=res(X,B.b),A=MT[B.a],Bm=MT[B.b];
+$('#bt').innerHTML=`<small>Condiții comune simulate: ${CT[X.c][0]}, pH ${X.pH}, ${X.T} °C, ${X.t} min, C₀ ${X.C0} mg/L, doză ${X.D} g/L. Schimbă-le în Sala de control.</small><div class="mk"><b>${A.n}</b><b>${Bm.n}</b>${[["Suprafață specifică (relativ, ilustrativ)","S"],["Porozitate (relativ, ilustrativ)","P"],["Grupe funcționale (relativ, ilustrativ)","G"]].map(r=>`<div>${r[0]}${bar(A[r[1]])}</div><div>${r[0]}${bar(Bm[r[1]])}</div>`).join('')}<div>Eficiență simulată: <b>${ra.eff.toFixed(1)}%</b></div><div>Eficiență simulată: <b>${rb.eff.toFixed(1)}%</b></div><div>q<sub>t</sub> simulat: <b>${ra.q.toFixed(1)} mg/g</b></div><div>q<sub>t</sub> simulat: <b>${rb.q.toFixed(1)} mg/g</b></div></div><p>⚖️ Aceasta este o comparație simulată cu parametri ilustrativi, <b>nu un verdict</b> și nu date experimentale. Avantaje și limite reale depind de temperatura de piroliză, activare, materia primă și apa tratată. Comparația reală cere date publicate obținute în aceleași condiții.</p>`}
+function dBat(t){const a=$('#b1'),b=$('#b2'),g=$('#bg');if(!a||!b||!g)return;B.a2=B.a2||0;if(!B.d&&!rm)B.a+=.0;B.r=(B.r||0)+(B.d||rm?0:.004);[[a,B.a],[b,B.b]].forEach(([c,i])=>{const[x,w,h]=sz(c);x.clearRect(0,0,w,h);d3(x,w,h,MT[i].pts,B.r,.3,Math.min(w,h)*.26)});
+const[x,w,h]=sz(g);x.clearRect(0,0,w,h);const pl=28,pb=20,cx=t2=>pl+t2/240*(w-pl-10);x.strokeStyle='#22d3ee55';x.strokeRect(pl,10,w-pl-10,h-pb-10);[[B.a,'#22d3ee'],[B.b,'#f0b73a']].forEach(([i,col])=>{const s=sim(X,i);x.beginPath();for(let k=0;k<=120;k++){const t2=k*2,v=(X.C0-s.at(t2).ce)/X.C0*100;k?x.lineTo(cx(t2),h-pb-v*(h-pb-10)/100):x.moveTo(cx(t2),h-pb-v*(h-pb-10)/100)}x.strokeStyle=col;x.lineWidth=2;x.stroke()});x.fillStyle='#22d3ee';x.font='11px system-ui';x.fillText('A (cian)',pl+6,24);x.fillStyle='#f0b73a';x.fillText('B (galben) · eficiență (%) în timp, SIMULARE',pl+60,24);x.fillStyle='#b6d4e6';x.fillText('0',pl,h-6);x.fillText('240 min',cx(240)-36,h-6)}
+// ---- Missions + Notebook
+function pMis(){$('#lpan').innerHTML=`<div class="lp"><h3>🎯 Misiunile cercetătorului</h3><p>${$('#lxp').textContent}</p>${MS.map((m,i)=>`<div class="nbc">${L.done.includes(i)?'✅':'⬜'} <b>${m[0]}</b><br><small>${m[1]}</small></div>`).join('')}${L.gq?'':`<div class="nbc"><b>Analizează un grafic:</b> în graficul q<sub>t</sub> din Sala de control, curba se aplatizează după un timp. Ce înseamnă?<div class="chips" id="gq"><button data-k="1">Se apropie de echilibru</button><button data-k="0">Adsorbantul a dispărut</button><button data-k="0">Poluantul a dispărut din natură</button></div><small id="gm"></small></div>`}</div>`;
+if(!L.gq)$('#gq').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.k==='1'){L.gq=1;chk();pMis()}else $('#gm').textContent='Nu chiar. Gândește-te la locurile libere de pe suprafața adsorbantului.'})}
+function pNb(){$('#lpan').innerHTML=`<div class="lp"><h3>📓 Caietul digital de cercetare</h3>${L.nb.length?L.nb.map(n=>{const mx=100,pts=n.ser.map(s=>`${s[0]/240*200},${60-s[1]*.55}`).join(' ');return`<div class="nbc"><small>${n.d}</small><p><b>Obiectiv:</b> ${n.obj}<br><b>Materiale:</b> ${n.mat}<br><b>Parametri:</b> ${n.par}<br><b>Metodă:</b> ${n.met}<br><b>Rezultate:</b> ${n.rez} <span class="sim">SIMULARE</span><br><b>Observații:</b> ${n.obs}<br><b>Concluzii:</b> ${n.con}<br><b>Limitări:</b> ${n.lim}</p><svg viewBox="0 0 200 62" width="220" role="img" aria-label="Grafic eficiență în timp"><polyline points="${pts}" fill="none" stroke="#22d3ee" stroke-width="2"/></svg><div><button class="btn o" data-d="${n.id}">Șterge</button></div></div>`}).join(''):'<p>Nu ai fișe salvate. Rulează un experiment în Sala de control și apasă „Salvează fișa”.</p>'}</div>`;$('#lpan').querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{L.nb=L.nb.filter(n=>n.id!=b.dataset.d);sv();pNb()})}
+// ---- Tabs
+const TB=[['core','🧬 Nucleul de transformare',pCore],['mol','🔬 Universul molecular',pMol],['chamber','💧 Purificare și Sala de control',pCh],['battle','⚔️ Confruntarea materialelor',pBat],['mis','🎯 Misiuni',pMis],['nb','📓 Caiet de laborator',pNb],['calc','⚗️ Calculator clasic']];
+let tab='core',on=0;
+function setTab(id){tab=id;$('#ltabs').innerHTML=TB.map(t=>`<button role="tab" data-t="${t[0]}" aria-pressed="${t[0]===id}">${t[1]}</button>`).join('');$('#ltabs').querySelectorAll('button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));const t=TB.find(x=>x[0]===id);$('#lcalc').hidden=id!=='calc';$('#lpan').hidden=id==='calc';if(t[2]){t[2]();if(id==='core')setSt(C.st);}kick()}
+function loop(t){if($('#lab').hidden){on=0;return}requestAnimationFrame(loop);if(tab==='core')dCore(t);else if(tab==='mol')dMol(t);else if(tab==='chamber')dCh(t);else if(tab==='battle')dBat(t)}
+function kick(){if(!on&&!$('#lab').hidden){on=1;requestAnimationFrame(loop)}}
+addEventListener('hashchange',kick);document.addEventListener('click',()=>setTimeout(kick,0));xp();setTab('core');
+})();
+// ===== Scanare deșeu: cameră + recunoaștere =====
+(function(){
+const q=s=>document.querySelector(s);
+const M={
+orange:{e:'🍊',t:'Coji de portocală',rm:'Coji de citrice rămase după stoarcerea sucului, în industrie sau în gospodării.',co:'Pectină, celuloză, hemiceluloză, uleiuri esențiale (în special limonen), flavonoide și zaharuri; peste 70% apă în stare proaspătă.',pr:'Acide, aromatice, bogate în polizaharide gelifiante. Uleiurile esențiale pot încetini compostarea și fermentarea.',pc:'Uscare și măcinare, extracție acidă la cald a pectinei, precipitare cu alcool și uscare. Uleiul esențial se separă prin presare sau distilare cu abur.',ob:'Pectină, ulei esențial de citrice, fibre alimentare; biogaz din fracția rămasă, după pretratare.',en:'Evită depozitarea unui deșeu valoros, reduce emisiile de metan din gropile de gunoi și oferă o alternativă la materiile prime obținute special.',ap:'Gelifiant pentru dulcețuri și produse alimentare, excipient farmaceutic, arome și produse de curățare naturale; filme comestibile (cercetare).'},
+banana:{e:'🍌',t:'Coji de banană',rm:'Cojile rămase după consumul sau procesarea bananelor.',co:'Celuloză, hemiceluloză, lignină, pectină, amidon rezidual, compuși fenolici și potasiu.',pr:'Bogate în fibre și minerale, cu umiditate mare; se înnegresc rapid prin oxidare enzimatică și conțin antioxidanți naturali.',pc:'Compostare; digestie anaerobă; uscare, măcinare și piroliză fără oxigen (aprox. 400–600 °C) pentru biocarbon; extracție de fibre sau pectină.',ob:'Compost, biogaz, biocarbon sau carbon activ (testat în laborator ca adsorbant), fibre.',en:'Reduc deșeul organic, închid ciclul nutrienților prin compost și pot lega carbon în biocarbon.',ap:'Îngrășământ organic; adsorbant pentru metale grele și coloranți (rezultate de laborator, nu aplicare industrială); fibre pentru hârtie sau materiale compozite (cercetare).'},
+potato:{e:'🥔',t:'Coji de cartofi',rm:'Cojile rămase de la curățarea cartofilor, în bucătării și în industria alimentară.',co:'Amidon rezidual, celuloză, pectină, proteine, compuși fenolici și glicoalcaloizi (precum solanina).',pr:'Umede, putrezesc repede; cojile înverzite conțin mai multă solanină, deci nu se folosesc ca furaj fără evaluare.',pc:'Compostare; digestie anaerobă pentru biogaz; hidroliza amidonului și fermentație pentru bioetanol; extracție de antioxidanți fenolici; piroliză pentru biocarbon.',ob:'Compost, biogaz, bioetanol, extracte fenolice, biocarbon.',en:'Reduc risipa alimentară și emisiile de metan din depozite, iar bioenergia poate înlocui parțial combustibilii fosili.',ap:'Îngrășământ organic, energie din biogaz, bioetanol și extracte antioxidante (cercetare și proiecte pilot).'},
+rice:{e:'🍚',t:'Coji de orez',rm:'Cojile rămase la decorticarea orezului, aproximativ 20% din masa orezului nedecorticat.',co:'Celuloză, hemiceluloză, lignină și mult SiO₂ (silice), de ordinul a 15–20% în cenușă.',pr:'Abrazive, ușoare, cu degradare lentă și conținut mare de cenușă. Prin ardere controlată cenușa rămâne bogată în silice amorfă.',pc:'Ardere controlată pentru cenușă cu silice sau piroliză fără oxigen pentru biocarbon silicios; opțional activare fizică sau chimică.',ob:'Cenușă de coji de orez (silice), biocarbon silicios, carbon activ, brichete.',en:'Evită arderea în câmp, care poluează aerul; cenușa poate înlocui o parte din ciment, iar biocarbonul stochează carbon.',ap:'Adaos în beton și materiale de construcție (practicat în unele regiuni), adsorbant, amendament de sol, combustibil.'},
+coffee:{e:'☕',t:'Zaț de cafea',rm:'Zațul rămas după prepararea cafelei, colectat din cafenele și gospodării.',co:'Celuloză, hemiceluloză, lignină, lipide, proteine, compuși fenolici și cofeină reziduală.',pr:'Bogat în carbon și azot, umed, ușor acid; uleiurile și umiditatea trebuie gestionate. Se mucegăiește repede dacă nu se usucă.',pc:'Uscare; compostare sau substrat pentru ciuperci; extracția uleiului; piroliză fără oxigen și, opțional, activare pentru mai mulți pori.',ob:'Compost, substrat pentru ciuperci, biocarbon sau carbon activ (testat ca adsorbant), brichete, ulei pentru biocombustibil.',en:'Deviază un deșeu foarte comun de la depozitare, reduce metanul din gropi și oferă materii utile local.',ap:'Compost și cultivarea ciupercilor (practicate); adsorbția coloranților sau a metalelor și biocombustibilii: în mare parte rezultate de laborator.'},
+straw:{e:'🌾',t:'Paie',rm:'Tulpinile uscate rămase după recoltarea cerealelor.',co:'Material lignocelulozic: celuloză (aprox. 35–40%), hemiceluloză, lignină și silice.',pr:'Densitate mică, fibroase, izolante termic, cu conținut de silice și umiditate variabilă. Se degradează lent din cauza ligninei.',pc:'Balotare; pretratare, hidroliză enzimatică și fermentație pentru bioetanol; digestie anaerobă; piroliză pentru biocarbon; compostare sau folosire ca mulci.',ob:'Bioetanol celulozic, biogaz, biocarbon, compost, materiale de construcție.',en:'Evită arderea pe câmp, care emite particule și CO₂; o parte lăsată pe sol menține materia organică.',ap:'Bioenergie, amendament de sol, panouri de izolație și construcții din baloți de paie, adsorbant (cercetare), furaj sau așternut.'},
+fruit:{e:'🍎',t:'Coji și resturi de fructe',rm:'Coji, semințe și resturi rămase de la consumul sau procesarea fructelor.',co:'Zaharuri, pectină, fibre (celuloză, hemiceluloză), polifenoli și acizi organici.',pr:'Umede, bogate în zaharuri, se fermentează și putrezesc repede; compoziția variază mult în funcție de fruct.',pc:'Compostare; digestie anaerobă pentru biogaz; fermentație pentru bioetanol sau oțet; extracție de pectină sau polifenoli; uscare pentru făină de fibre.',ob:'Compost, biogaz, pectină, bioetanol, extracte antioxidante, fibre alimentare.',en:'Reduc risipa alimentară și emisiile de metan și recuperează compuși valoroși.',ap:'Îngrășământ organic, energie, ingrediente alimentare și cosmetice, ambalaje biodegradabile (cercetare).'},
+veg:{e:'🥬',t:'Resturi vegetale',rm:'Frunze, tulpini și alte resturi de legume sau plante verzi.',co:'Multă apă (adesea peste 80%), celuloză, hemiceluloză, puțină lignină, azot și minerale.',pr:'Se degradează rapid, au raport C:N mic (bogate în azot) și se compostează ușor, de preferat amestecate cu material uscat.',pc:'Compostare sau vermicompostare; digestie anaerobă; folosire ca mulci; uscare și piroliză pentru biocarbon.',ob:'Compost, vermicompost, biogaz împreună cu digestat, mulci.',en:'Închid ciclul nutrienților, îmbunătățesc solul și reduc metanul din depozite.',ap:'Fertilizare organică în grădini și agricultură, energie din biogaz, acoperirea solului.'},
+biocarbon:{e:'⚫',t:'Biocarbon și carbon activ (material procesat)',rm:'Material carbonizat obținut prin piroliză din resurse organice (cum sunt cojile de orez, zațul de cafea sau paiele).',co:'Predominant carbon, cu cenușă minerală; proporțiile variază mult în funcție de materia primă și de temperatură.',pr:'Poros, cu suprafață specifică mare, stabil, adesea alcalin; capacitatea de adsorbție depinde de materie primă, de activare și de poluant.',pc:'Poate fi folosit direct sau activat fizic (abur sau CO₂ la temperaturi mari) ori chimic (KOH sau H₃PO₄) pentru mai mulți pori și suprafață.',ob:'Carbon activ, biocarbon activat sau modificat, amendament de sol.',en:'Stochează carbon pe termen lung în sol, îmbunătățește solul și poate reține poluanți din apă.',ap:'Amendament de sol (comercial), filtre și tratarea apei (cărbunele activ este larg folosit; biocarbonul din resurse organice este mai ales în cercetare), aditiv pentru compost.'},
+organic:{e:'🌱',t:'Alt deșeu organic vegetal',rm:'Un deșeu de origine vegetală pe care aplicația nu îl poate încadra sigur într-o categorie anume.',co:'De regulă celuloză, hemiceluloză, lignină și apă; proporțiile depind de sursă.',pr:'Biodegradabil; umiditatea și conținutul de lignină decid cât de repede se descompune și ce proces se potrivește.',pc:'Compostare sau digestie anaerobă pentru material umed; piroliză pentru material uscat și lemnos; fermentație dacă are zaharuri.',ob:'Compost, biogaz sau biocarbon, după tipul și umiditatea materialului.',en:'Valorificarea reduce deșeurile, metanul din depozite și nevoia de materii prime noi.',ap:'Îngrășământ organic, energie sau amendament de sol; confirmă materialul înainte de a alege procesul.'}};
+const LBL=[['Materia primă','rm'],['Compoziție','co'],['Proprietăți','pr'],['Procesul de transformare','pc'],['Material obținut','ob'],['Beneficii pentru mediu','en'],['Aplicații posibile','ap']];
+// ---- Catalog de clase (reguli pe categorii + suprascrieri). Fiecare clasă are descrieri în engleză pentru CLIP.
+const CG={
+fr:{n:'Fructe și resturi de fructe',b:'Da',k:'Da, în compostul de gospodărie (fructele mucegăite doar în cantități mici)',r:'Nu (deșeu organic, nu ambalaj)',c:'Compost de grădină sau container pentru biodeșeuri, unde există colectare separată; altfel, deșeuri reziduale',f:'fruit'},
+ve:{n:'Legume și zarzavaturi',b:'Da',k:'Da, în compostul de gospodărie',r:'Nu (deșeu organic, nu ambalaj)',c:'Compost de grădină sau container pentru biodeșeuri, unde există colectare separată; altfel, deșeuri reziduale',f:'veg'},
+fd:{n:'Resturi alimentare',b:'Da',k:'Limitat: resturile vegetale simple da; mâncarea gătită cu ulei, carne sau lactate nu se pune în compostul de gospodărie',r:'Nu (deșeu organic)',c:'Container pentru biodeșeuri, dacă există, sau deșeuri reziduale',f:'organic'},
+an:{n:'Resturi de origine animală',b:'Da (se degradează lent)',k:'Nu în compostul de gospodărie (miros, dăunători); doar în compostare industrială, unde este acceptat',r:'Nu',c:'Biodeșeuri sau deșeuri reziduale, conform regulilor locale',f:''},
+ga:{n:'Vegetație, grădină și lemn',b:'Da',k:'Da (crengile groase și lemnul se mărunțesc întâi)',r:'Nu (deșeu organic)',c:'Compost de grădină sau colectare de deșeuri verzi; nu se ard în aer liber',f:'veg'},
+pa:{n:'Hârtie și carton',b:'Parțial (se degradează, dar hârtia tipărită sau tratată nu e potrivită pentru compost)',k:'Doar hârtie simplă, nelucioasă și mărunțită, fără grăsime',r:'Da, dacă este curată și uscată',c:'Container pentru hârtie și carton (de regulă albastru)',f:''},
+pl:{n:'Plastic',b:'Nu',k:'Nu',r:'Da, dacă este golit și, pe cât posibil, curat; depinde de tipul de plastic',c:'Container pentru plastic și metal (de regulă galben)',f:''},
+gl:{n:'Sticlă',b:'Nu',k:'Nu',r:'Da, se poate recicla de multe ori',c:'Container pentru sticlă; fără dopuri și capace',f:''},
+me:{n:'Metale',b:'Nu',k:'Nu',r:'Da',c:'Container pentru plastic și metal (de regulă galben); piesele mari, la centru de colectare a fierului vechi',f:''},
+tx:{n:'Textile și materiale sintetice',b:'Depinde: fibrele naturale (bumbac, in, lână, iută) da, lent; cele sintetice nu',k:'Nu în compostul de gospodărie',r:'Reutilizare, donare sau container pentru textile',c:'Container pentru textile sau centru de donații',f:''},
+el:{n:'Deșeuri electronice',b:'Nu',k:'Nu',r:'Da, prin colectarea DEEE (conține materiale valoroase și substanțe periculoase)',c:'Punct de colectare DEEE (magazine, centre de colectare); nu la coșul menajer',f:''},
+co:{n:'Deșeuri din construcții',b:'Nu',k:'Nu',r:'Da, ca agregate reciclate, prin operatori specializați',c:'Centru de colectare sau container pentru deșeuri din construcții; nu în containerele stradale',f:''},
+ot:{n:'Alte deșeuri',b:'Nu',k:'Nu',r:'În general nu',c:'Deșeuri reziduale (container pentru deșeuri menajere nereciclabile)',f:''}};
+const OV={
+rotf:{k:'Doar în cantități mici'},rotv:{k:'Doar în cantități mici'},rotw:{k:'Da, se poate adăuga în compost'},
+eggs:{k:'Da, zdrobite (adaugă calciu)'},nutsh:{k:'Da, dar se degradează lent (zdrobește-le)'},tea:{k:'Doar cele fără plastic în țesătură; frunzele de ceai da'},
+dung:{k:'Da, după maturare / compostare',s:'Deșeuri din ferme'},
+pizb:{k:'Doar părțile fără grăsime',r:'Doar părțile curate; partea grasă merge la deșeuri reziduale'},
+bag:{r:'Da, dacă este curată; unele sisteme locale nu acceptă pungi și folii'},film:{r:'Da, dacă este curată; unele sisteme locale nu acceptă pungi și folii'},
+foam:{r:'În general nu în colectarea obișnuită; verifică sistemul local',c:'Deșeuri reziduale sau punct de colectare dedicat, dacă există'},
+pane:{r:'Nu în containerul pentru sticlă de ambalaj (topire diferită)',c:'Centru de colectare / deșeuri din construcții'},
+shat:{c:'Container pentru sticlă, învelit în siguranță (risc de tăiere); sticla de geam și ceramica nu se pun aici'},
+foil:{r:'Da, dacă este curată și strânsă într-o bilă'},
+bulb:{c:'Becurile LED și fluorescente: punct de colectare DEEE; cele cu incandescență: deșeuri reziduale'},
+batt:{r:'Da, prin sisteme speciale (conțin metale și substanțe periculoase)',c:'Punct de colectare pentru baterii (magazine, școli, centre); niciodată la coșul menajer'},
+cig:{b:'Nu (filtrul din acetat de celuloză se degradează foarte lent și este toxic)'},
+cupp:{r:'În general nu (stratul de plastic din interior)'},
+clot:{r:'Da: reutilizare, donare sau container pentru textile, dacă nu sunt uzate'},
+cera:{r:'În general nu în ambalaje; poate fi agregat reciclat',c:'Centru de colectare / deșeuri din construcții'}};
+const FS={banp:'banana',orap:'orange',manp:'orange',potp:'potato',potr:'potato',cof:'coffee',hay:'straw',saw:'straw'};
+const K=`banp|Coajă de banană|🍌|fr|Coji de fructe|banana peel;discarded banana skin
+banw|Banană|🍌|fr|Fructe întregi|a whole yellow banana;ripe bananas
+orap|Coajă de portocală|🍊|fr|Coji de citrice|orange peel;pieces of orange rind
+oraw|Portocală|🍊|fr|Fructe întregi|a whole orange fruit;oranges
+manp|Coajă de mandarină|🍊|fr|Coji de citrice|tangerine peel;mandarin peel
+citp|Coajă de lămâie, lime sau grapefruit|🍋|fr|Coji de citrice|lemon peel;lime peel;grapefruit rind
+citw|Lămâie sau lime|🍋|fr|Fructe întregi|a whole lemon;a whole lime
+appw|Măr|🍎|fr|Fructe întregi|a whole apple;a red apple;a green apple
+appc|Cotor de măr|🍎|fr|Resturi de fructe|an eaten apple core;apple core with bite marks
+perw|Pară|🍐|fr|Fructe întregi|a whole pear
+perp|Coji de măr sau de pară|🍏|fr|Coji de fructe|apple peel;pear peel
+exop|Coajă de kiwi, mango sau avocado|🥑|fr|Coji de fructe|kiwi skin;mango peel;avocado skin and pit
+melp|Coajă de pepene verde sau galben|🍉|fr|Coji de fructe|watermelon rind;melon rind
+pinp|Coajă de ananas|🍍|fr|Coji de fructe|pineapple peel and crown
+pomp|Coajă de rodie|🍎|fr|Coji de fructe|pomegranate peel
+cocs|Coajă de cocos|🥥|fr|Coji de fructe|coconut shell
+pit|Sâmburi de fructe|🍑|fr|Sâmburi|cherry pits;peach pit;plum stones
+grap|Ciorchini de struguri|🍇|fr|Resturi de fructe|grape stems;stripped grape bunch
+rotf|Fructe putrezite sau mucegăite|🍎|fr|Fructe alterate|rotten fruit;moldy fruit;spoiled fruit
+berr|Resturi de fructe de pădure|🍓|fr|Resturi de fructe|strawberry tops;rotten berries
+potw|Cartof|🥔|ve|Legume rădăcinoase|a whole raw potato;potatoes with brown skin
+potp|Coajă de cartof|🥔|ve|Coji de legume|potato peelings;peeled potato skins
+potr|Cartof încolțit sau stricat|🥔|ve|Legume alterate|sprouting potato;rotten potato
+carw|Morcov|🥕|ve|Legume rădăcinoase|a whole carrot;orange carrots
+carp|Coajă sau capete de morcov|🥕|ve|Coji de legume|carrot peelings;carrot tops
+oniw|Ceapă|🧅|ve|Bulbi|a whole onion;yellow onion bulb;red onion
+onip|Coajă de ceapă|🧅|ve|Coji de legume|onion skins;dry onion peel
+garw|Usturoi|🧄|ve|Bulbi|a garlic bulb;garlic cloves
+garp|Coajă de usturoi|🧄|ve|Coji de legume|garlic peel;garlic skins
+beet|Sfeclă|🟣|ve|Legume rădăcinoase|a beetroot;red beets
+radi|Ridichi|🔴|ve|Legume rădăcinoase|radishes;red radish
+rootv|Țelină, păstârnac sau rădăcină de pătrunjel|🌿|ve|Legume rădăcinoase|celery root;parsnip;parsley root
+cabb|Varză|🥬|ve|Legume cu frunze|a head of cabbage;cabbage leaves
+lett|Salată|🥬|ve|Legume cu frunze|lettuce leaves;a head of lettuce
+spin|Spanac sau kale|🥬|ve|Legume cu frunze|spinach leaves;kale leaves
+brocc|Broccoli|🥦|ve|Legume|broccoli;broccoli stalks
+caul|Conopidă|🥦|ve|Legume|cauliflower
+pump|Dovleac|🎃|ve|Legume|pumpkin;winter squash;pumpkin seeds
+zucc|Dovlecel|🥒|ve|Legume|zucchini;courgette
+cucu|Castravete|🥒|ve|Legume|cucumber;cucumber slices
+eggp|Vânătă|🍆|ve|Legume|eggplant;aubergine
+pepp|Ardei|🫑|ve|Legume|bell pepper;pepper cores and seeds
+toma|Roșie|🍅|ve|Legume|tomato;tomato scraps
+corn|Porumb (știulete sau coji)|🌽|ve|Legume|corn cob;corn husks
+pods|Păstăi de fasole sau mazăre|🫛|ve|Legume|green bean pods;pea pods
+mush|Ciuperci|🍄|ve|Legume|mushrooms
+leek|Praz sau ceapă verde|🧅|ve|Legume|leek;spring onions;scallions
+ging|Ghimbir, hrean sau turmeric|🫚|ve|Rădăcini aromatice|ginger root;horseradish root;turmeric root
+rotv|Legume putrezite sau mucegăite|🥬|ve|Legume alterate|rotten vegetables;moldy vegetables
+brea|Pâine veche|🍞|fd|Panificație|stale bread;bread crumbs;moldy bread
+past|Produse de patiserie, biscuiți sau covrigi|🥨|fd|Patiserie|cookies;pretzels;pastry
+cook|Paste, orez sau mâncare gătită|🍝|fd|Mâncare gătită|cooked pasta;cooked rice;leftover cooked food on a plate
+pizz|Resturi de pizza|🍕|fd|Mâncare gătită|pizza leftovers;pizza crust
+cere|Mămăligă sau cereale|🥣|fd|Cereale|polenta;oatmeal;breakfast cereal
+eggs|Coji de ouă|🥚|fd|Coji|egg shells;broken eggshells
+nutsh|Coji de nuci, alune, fistic sau migdale|🌰|fd|Coji|walnut shells;hazelnut shells;pistachio shells;almond shells
+cof|Zaț de cafea|☕|fd|Cafea și ceai|used coffee grounds
+tea|Filtre de cafea sau pliculețe de ceai|🍵|fd|Cafea și ceai|used coffee filter;used tea bags
+bone|Oase alimentare|🦴|an|Oase|chicken bones;leftover meat bones
+meat|Resturi de carne|🥩|an|Carne|raw meat scraps;cooked meat leftovers
+fish|Resturi de pește|🐟|an|Pește|fish bones;fish heads;fish scales
+shrim|Carapace de crustacee|🦐|an|Fructe de mare|shrimp shells;crab shell;lobster shell
+mollu|Cochilii de scoici, midii sau melci|🐚|an|Cochilii|mussel shells;seashells;snail shells
+feat|Pene|🪶|an|Pene și păr|feathers
+wool|Lână sau păr animal|🐑|an|Pene și păr|raw wool;animal fur
+lgrn|Frunze verzi|🍃|ga|Frunze|fresh green leaves
+ldry|Frunze uscate|🍂|ga|Frunze|dry fallen autumn leaves;brown dead leaves
+gras|Iarbă tăiată|🌿|ga|Iarbă|freshly cut grass clippings;lawn clippings
+hay|Paie sau fân|🌾|ga|Resturi agricole|straw;hay;dry straw
+flow|Flori ofilite sau petale|🥀|ga|Flori|wilted flowers;dead flowers;fallen petals
+weed|Buruieni sau plante moarte|🌱|ga|Plante|weeds pulled from garden;dead dried plants
+need|Ace de brad sau pin|🌲|ga|Conifere|pine needles;fir needles
+cone|Conuri de brad sau pin|🌲|ga|Conifere|pine cones;fir cones
+acor|Ghinde sau castane|🌰|ga|Semințe de copaci|acorns;chestnuts fallen from tree
+twig|Crengi și ramuri|🌿|ga|Lemn|small twigs;tree branches;broken branches
+bark|Scoarță de copac|🪵|ga|Lemn|tree bark
+wood|Lemn natural netratat|🪵|ga|Lemn|a piece of natural wood;firewood logs
+saw|Rumeguș sau așchii de lemn|🪵|ga|Lemn|sawdust;wood chips;wood shavings
+rotw|Lemn putrezit|🪵|ga|Lemn|rotten wood;decomposing wood
+moss|Mușchi sau licheni|🌿|ga|Plante|moss;lichen
+alga|Alge|🌊|ga|Vegetație acvatică|seaweed;algae;dried seaweed
+reed|Stuf, trestie sau papură|🌾|ga|Vegetație acvatică|reeds;cattail;dry reeds
+dung|Bălegar sau gunoi de grajd|🐄|ga|Deșeuri din ferme|manure;horse dung;cow dung
+sunf|Coji de semințe de floarea-soarelui|🌻|ga|Deșeuri agricole|sunflower seed shells;sunflower stalks
+soil|Pământ cu resturi vegetale|🪴|ga|Plante|soil with plant debris;potting soil with dead roots
+cbox|Carton ondulat|📦|pa|Carton|corrugated cardboard;cardboard box;flattened cardboard
+cart|Carton simplu|📦|pa|Carton|grey cardboard;paperboard
+eggc|Carton pentru ouă|🥚|pa|Carton|egg carton made of paper pulp
+pap|Hârtie simplă sau de imprimantă|📄|pa|Hârtie|sheets of white paper;crumpled printer paper
+news|Ziare și reviste|📰|pa|Hârtie|newspapers;magazines
+pbag|Pungi sau plicuri de hârtie|🛍️|pa|Hârtie|brown paper bag;paper envelope
+tiss|Șervețele de hârtie curate|🧻|pa|Hârtie|clean paper napkin;clean paper towel
+roll|Role de carton|🧻|pa|Carton|toilet paper tube;cardboard tube
+pizb|Cutie de pizza|🍕|pa|Carton|pizza box
+plat|Farfurii de hârtie|📄|pa|Hârtie|paper plate
+shred|Hârtie mărunțită|📄|pa|Hârtie|shredded paper
+pet|Sticlă de plastic (PET)|🧴|pl|Ambalaje|a plastic water bottle;empty PET bottle;plastic soda bottle
+pcap|Dopuri de plastic|🧴|pl|Ambalaje|plastic bottle caps
+bag|Pungă de plastic|🛍️|pl|Pungi și folii|plastic bag;plastic shopping bag
+film|Folie de plastic|🧴|pl|Pungi și folii|plastic wrap;stretch film;plastic film
+tray|Caserolă sau ambalaj alimentar din plastic|🥡|pl|Ambalaje|plastic food container;plastic food tray;plastic packaging
+pcup|Pahar, tacâmuri sau farfurie de plastic|🥤|pl|De unică folosință|plastic cup;plastic cutlery;disposable plastic plates
+pstr|Pai de plastic|🥤|pl|De unică folosință|plastic drinking straw
+jug|Recipient de detergent sau bidon|🧴|pl|Ambalaje rigide|detergent bottle;plastic jug;plastic canister
+foam|Polistiren expandat|🧴|pl|Ambalaje|styrofoam;expanded polystyrene packaging
+pnet|Plasă de plastic|🧴|pl|Pungi și folii|plastic mesh net bag;fruit net bag
+gbot|Sticlă de sticlă (băutură)|🍾|gl|Recipiente|glass bottle;green glass bottle;brown glass beer bottle;clear glass bottle
+jar|Borcan de sticlă|🫙|gl|Recipiente|glass jar
+shat|Cioburi de sticlă|🫙|gl|Cioburi|broken glass;glass shards
+pane|Geam spart|🫙|gl|Geam|window glass pane;broken window glass
+can|Doză de aluminiu|🥫|me|Ambalaje|an aluminum soda can;beer can;crushed aluminum can
+tin|Conservă (oțel)|🥫|me|Ambalaje|steel food can;tin can;canned food can
+mcap|Capac metalic|🥫|me|Ambalaje|metal jar lid;metal bottle cap
+foil|Folie de aluminiu|🥫|me|Ambalaje|aluminum foil;crumpled tin foil
+nail|Cuie, șuruburi, piulițe sau sârmă|🔩|me|Piese mici|nails;screws and bolts;metal wire
+scrap|Piese sau bucăți de fier și oțel|🔩|me|Fier vechi|rusty iron scrap;steel pipe;metal scrap parts
+clot|Haine și țesături|👕|tx|Haine|clothes;old clothing;pieces of fabric
+shoe|Pantofi uzați|👟|tx|Încălțăminte|worn shoes;old sneakers
+rope|Sfoară sau sac de iută|🧶|tx|Fibre naturale|jute rope;burlap sack;natural twine
+phon|Telefon vechi|📱|el|Dispozitive|old smartphone;broken mobile phone
+cabl|Cabluri și încărcătoare|🔌|el|Accesorii|electrical cables;phone chargers;USB cable
+keyb|Tastatură sau mouse|⌨️|el|Periferice|computer keyboard;computer mouse
+pcb|Placă electronică|🔌|el|Componente|circuit board;electronic components
+moni|Monitor sau televizor|🖥️|el|Dispozitive|computer monitor;television
+audi|Căști, boxe sau telecomandă|🎧|el|Dispozitive|headphones;speaker;remote control
+batt|Baterii uzate|🔋|el|Baterii|batteries;AA batteries;lithium battery
+bulb|Bec|💡|el|Becuri|a light bulb;LED bulb;fluorescent tube
+brik|Cărămidă|🧱|co|Materiale de construcție|brick;broken bricks
+conc|Beton sau ciment|🧱|co|Materiale de construcție|concrete rubble;pieces of concrete;cement
+cera|Gresie, faianță sau ceramică spartă|🧱|co|Ceramică|broken ceramic tiles;broken ceramic dish;broken pottery
+gyps|Gips-carton|🧱|co|Materiale de construcție|drywall;plasterboard;gypsum board
+asph|Asfalt sau pietriș|🧱|co|Materiale de construcție|asphalt pieces;gravel;crushed stone
+cig|Mucuri de țigară|🚬|ot|Diverse|cigarette butts
+wrap|Ambalaj de bomboane sau chipsuri|🍬|ot|Ambalaje mixte|candy wrapper;potato chips bag;snack packaging
+nap|Șervețele sau măști folosite|😷|ot|Igienă|used tissue;used paper napkin;disposable face mask
+rubb|Obiecte din cauciuc sau anvelope|🛞|ot|Cauciuc|rubber object;tire
+spon|Burete|🧽|ot|Diverse|kitchen sponge
+cand|Lumânare sau ceară|🕯️|ot|Diverse|candle;wax
+cupp|Pahar de hârtie plastifiat|🥤|ot|Ambalaje mixte|paper coffee cup with plastic lid
+toy|Jucărie ruptă|🧸|ot|Diverse|broken toy;plastic toy
+bg|Fundal|▫️|bg|Fundal|an empty table;a plain wall;an empty floor;a hand;a person;a blurry photo;nothing`.split('\n').map(s=>{const a=s.split('|');return{id:a[0],n:a[1],e:a[2],c:a[3],s:(OV[a[0]]&&OV[a[0]].s)||a[4],pr:a[5].split(';')}});
+const BASE=['orange','banana','potato','rice','coffee','straw','fruit','veg','biocarbon'];
+let stream=null,facing='environment',net=null,netTried=false,busy=false;
+const V=q('#scVid'),C=q('#scCv'),MSG=q('#scMsg');
+const show=(id,on)=>{q(id).hidden=!on};
+function msg(t,err){MSG.textContent=t||'';MSG.className=err?'err':''}
+function stop(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}V.srcObject=null}
+function ui(mode){ // live | still | idle
+show('#scVid',mode==='live');show('#scFrm',mode==='live');show('#scCv',mode==='still');show('#scShot',mode==='live');show('#scFlip',mode==='live');show('#scAgain',mode==='still');show('#scGo',mode==='still');show('#scDel',mode==='still');show('#scCam',mode==='idle')}
+let tries=0,gen=0;
+async function getStream(){const sets=[{video:{facingMode:{ideal:facing},width:{ideal:1280},height:{ideal:960}},audio:false},{video:{facingMode:facing},audio:false},{video:true,audio:false}];let last;
+for(const c of sets){try{return await navigator.mediaDevices.getUserMedia(c)}catch(e){last=e;const n=e&&e.name;if(n==='NotAllowedError'||n==='SecurityError'||n==='NotReadableError')break}}throw last}
+async function startCam(){stop();gen++;q('#scRes').innerHTML='';msg('');const tok=++tries;
+if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){msg((window.isSecureContext===false?'Camera în direct cere o conexiune sigură (HTTPS) sau fișierul deschis direct în browser. ':'Camera în direct nu este disponibilă aici. ')+'Apasă „Aplicația camerei” ca să faci poza cu camera telefonului sau alege una din galerie.',1);ui('idle');return}
+msg('Se solicită accesul la cameră…');
+try{const st=await getStream();if(tok!==tries||q('#scanM').hidden){st.getTracks().forEach(t=>t.stop());return}
+stream=st;V.muted=true;V.setAttribute('playsinline','');V.srcObject=st;ui('live');try{await V.play()}catch(_){}msg('');getClip()}
+catch(e){stop();ui('idle');const n=e&&e.name,fr=window.self!==window.top?' Dacă pagina rulează într-o previzualizare, deschide-o direct în browser.':'';msg((n==='NotAllowedError'||n==='SecurityError'?'Accesul la cameră a fost refuzat. Permite camera din setările browserului pentru acest site sau încarcă o poză din galerie.':n==='NotFoundError'||n==='OverconstrainedError'?'Nu a fost găsită nicio cameră pe acest dispozitiv. Încarcă o poză din galerie.':n==='NotReadableError'?'Camera este folosită de altă aplicație. Închide-o și încearcă din nou.':'Camera nu a putut fi pornită. Încarcă o poză din galerie.')+fr,1)}}
+function open(){q('#scanM').hidden=false;document.body.style.overflow='hidden';q('#scRes').innerHTML='';startCam()}
+function close(){stop();q('#scanM').hidden=true;document.body.style.overflow=''}
+function toCanvas(src,w,h){const k=Math.min(1,800/Math.max(w,h));C.width=Math.round(w*k);C.height=Math.round(h*k);C.getContext('2d').drawImage(src,0,0,C.width,C.height)}
+function shot(){if(!V.videoWidth)return;toCanvas(V,V.videoWidth,V.videoHeight);stop();gen++;ui('still');q('#scRes').innerHTML='';msg('Previzualizare. Apasă „Analizează fotografia” sau fă altă poză.')}
+function readBytes(f){return new Promise((ok,no)=>{if(f.arrayBuffer){f.arrayBuffer().then(ok,no);return}const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>no(r.error);r.readAsArrayBuffer(f)})}
+function loadImg(src){return new Promise((ok,no)=>{const im=new Image();im.onload=()=>ok(im);im.onerror=()=>no(new Error('img'));im.src=src})}
+function sniff(b){const u=new Uint8Array(b,0,Math.min(16,b.byteLength)),s=String.fromCharCode.apply(null,u);
+if(u[0]===0xFF&&u[1]===0xD8)return'image/jpeg';if(u[0]===0x89&&s.slice(1,4)==='PNG')return'image/png';if(s.slice(0,3)==='GIF')return'image/gif';
+if(s.slice(0,4)==='RIFF'&&s.slice(8,12)==='WEBP')return'image/webp';if(s.slice(0,2)==='BM')return'image/bmp';
+if(s.slice(4,8)==='ftyp'){const br=s.slice(8,12);return /^avif|^avis/.test(br)?'image/avif':'image/heic'}return''}
+// Decodare în 3 pași (fără să depindă de un singur mecanism): createImageBitmap -> data URL -> blob URL
+async function decode(f){const buf=await readBytes(f);if(!buf||!buf.byteLength)throw new Error('empty');const type=sniff(buf)||f.type||'',blob=new Blob([buf],{type:type||'image/jpeg'});
+if(window.createImageBitmap){try{const bm=await createImageBitmap(blob);if(bm.width&&bm.height)return{src:bm,w:bm.width,h:bm.height,type}}catch(e){}}
+try{const url=await new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>no(r.error);r.readAsDataURL(blob)});const im=await loadImg(url);if(im.naturalWidth)return{src:im,w:im.naturalWidth,h:im.naturalHeight,type}}catch(e){}
+const u=URL.createObjectURL(blob);setTimeout(()=>URL.revokeObjectURL(u),60000);const im=await loadImg(u);if(!im.naturalWidth)throw new Error('size');return{src:im,w:im.naturalWidth,h:im.naturalHeight,type}}
+async function fromFile(f){if(!f)return;stop();if(f.type&&!/^image\//i.test(f.type)){ui('idle');msg('Acest format de imagine nu este acceptat. Alege o fotografie JPG, PNG sau WEBP.',1);return}msg('Se încarcă imaginea…');
+try{const d=await decode(f);toCanvas(d.src,d.w,d.h);if(d.src.close)d.src.close();gen++;ui('still');q('#scRes').innerHTML='';msg('Previzualizare. Apasă „Analizează fotografia” sau alege altă poză.')}
+catch(e){ui('idle');const heic=/hei[cf]|avif/i.test((f&&f.type)||'')||/\.(heic|heif|avif)$/i.test((f&&f.name)||'');
+msg(heic?'Formatul HEIC/HEIF nu este acceptat de acest browser. Fă poza cu „Fotografiază” (camera în direct), setează camera telefonului pe „Cel mai compatibil” sau alege o poză JPG/PNG.':'Fotografia nu este validă. Te rugăm să selectezi alta.',1)}}
+// ---- Analiza culorilor și texturii
+function feats(K){K=K||C;const S=80,o=document.createElement('canvas');o.width=o.height=S;const x=o.getContext('2d',{willReadFrequently:true}),m=Math.min(K.width,K.height);x.drawImage(K,(K.width-m)/2,(K.height-m)/2,m,m,0,0,S,S);const d=x.getImageData(0,0,S,S).data,n=S*S,L=new Float32Array(n),f={or:0,ye:0,gr:0,dk:0,bk:0,br:0,tan:0,pot:0,wh:0,cool:0,red:0,gray:0,edge:0};
+for(let i=0;i<n;i++){const r=d[i*4]/255,g=d[i*4+1]/255,b=d[i*4+2]/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),df=mx-mn,v=mx,s=mx?df/mx:0;let h=0;if(df){h=mx===r?((g-b)/df)%6:mx===g?(b-r)/df+2:(r-g)/df+4;h*=60;if(h<0)h+=360}
+L[i]=.3*r+.59*g+.11*b;
+if(v<.2&&s<.4)f.bk++;else if(v<.3)f.dk++;
+if(s<.12&&v>=.2&&v<.85)f.gray++;if(s<.12&&v>=.85)f.wh++;
+if(s>.3&&h>=180&&h<=300)f.cool++;
+if(h>=14&&h<=38&&s>.55&&v>.5)f.or++;
+if(h>=42&&h<=62&&s>.45&&v>.55)f.ye++;
+if(h>=70&&h<=160&&s>.25&&v>.2)f.gr++;
+if(h>=10&&h<=40&&s>=.3&&s<=.75&&v>=.15&&v<=.5)f.br++;
+if(h>=30&&h<=55&&s>=.15&&s<=.5&&v>.5)f.tan++;
+if(h>=20&&h<=42&&s>=.2&&s<=.5&&v>=.35&&v<=.65)f.pot++;
+if((h<12||h>340)&&s>.5&&v>.3)f.red++}
+let e=0;for(let y=0;y<S-1;y++)for(let xx=0;xx<S-1;xx++){const i=y*S+xx;if(Math.abs(L[i]-L[i+1])+Math.abs(L[i]-L[i+S])>.12)e++}
+f.edge=e/((S-1)*(S-1));for(const k in f)if(k!=='edge')f[k]/=n;let ls=0;for(let i=0;i<n;i++)ls+=L[i];f.lum=ls/n;return f}
+// ---- Model AI: CLIP (zero-shot) + verificare în 2 etape + memorie locală de corecții
+let clipP=null,CL=null,impN=0;
+const QT=p=>Promise.race([p,new Promise((_,no)=>setTimeout(()=>no(new Error('timeout')),240000))]);
+const TPL=['a photo of {}.','a close-up smartphone photo of {}, discarded waste.'];
+// Descrieri bogate în indicii vizuale (formă, culoare, textură, margini) pentru etapa de verificare a obiectelor ușor de confundat
+const XPR={orap:['large thick curved pieces of orange peel with a bumpy dimpled bright orange surface and white pith'],manp:['small thin loose pale orange tangerine skin pieces, smooth, with white stringy threads'],citp:['bright yellow lemon peel strips or green lime peel with a pitted waxy surface'],banp:['a yellow banana peel with brown spots, elongated, soft, with a stem'],melp:['a green striped watermelon rind with pink flesh left on'],perp:['thin curled apple or pear peel strips, red green or yellow-brown'],
+oraw:['a round bright orange citrus fruit with dimpled skin'],citw:['a yellow oval lemon or a small green lime'],appw:['a round apple with smooth glossy red or green skin and a stem dimple'],perw:['a pear with a narrow neck and wide base'],potw:['an oval, brown, dusty, slightly irregular potato with small eyes'],oniw:['an onion bulb with dry papery golden or purple layers and a pointed tip'],garw:['a garlic bulb with white papery skin and separate cloves'],beet:['a deep purple-red round beetroot with thin roots'],carw:['a long tapered orange carrot'],radi:['a small round red radish with white inside'],rootv:['a pale beige tapered parsnip or a knobby celery root'],
+potp:['thin curled strips of brown potato skin, pale on the inside, starchy'],carp:['thin orange carrot peel strips and leafy green carrot tops'],onip:['dry thin papery brown or purple onion skins'],garp:['dry thin white papery garlic skins'],lgrn:['fresh green leaves with veins'],weed:['tangled dry weeds and stalks'],rotv:['soft rotten vegetables with dark slimy patches and mold'],
+ldry:['dry crispy brown fallen leaves with veins'],pap:['flat smooth white sheets of paper'],cart:['flat grey-brown cardboard board'],cbox:['brown corrugated cardboard with a visible wavy layer'],bark:['rough brown tree bark with deep grooves'],hay:['thin dry yellow straw stems'],
+cof:['a pile of fine dark brown moist granular used coffee grounds'],soil:['garden soil with uneven clumps, small roots, pebbles and plant debris'],dung:['brown clumpy manure mixed with straw'],saw:['light pale wood shavings and fine sawdust'],tea:['a used wet brown paper tea bag or paper coffee filter'],
+toma:['a smooth round shiny red tomato with a green star-shaped calyx'],pepp:['a glossy blocky bell pepper with deep creases and a thick stem'],eggp:['a glossy deep purple elongated eggplant'],cucu:['a long green cucumber with thin smooth skin'],zucc:['a thick dark green zucchini with a firm stem end'],pump:['a large orange ribbed pumpkin or squash'],cabb:['a tight round cabbage head with thick pale veins'],lett:['loose ruffled soft lettuce leaves'],spin:['dark green smooth spinach or curly kale leaves'],brocc:['green broccoli florets on thick stalks'],caul:['a white cauliflower head with dense curds'],
+gbot:['a transparent or green glass bottle with a narrow neck, rigid and shiny with sharp reflections'],jar:['a glass jar with a wide mouth'],shat:['sharp transparent glass fragments'],pet:['a thin flexible plastic bottle with a ribbed bottom and a plastic screw cap'],jug:['an opaque thick plastic container with a handle'],pcup:['a thin disposable plastic cup or plastic cutlery'],tray:['a clear plastic food tray or clamshell'],
+can:['a shiny aluminum drink can with a pull tab and a printed design'],tin:['a steel food can with ridged sides and a rolled rim'],mcap:['a small round metal lid'],foil:['crumpled thin shiny aluminum foil'],nail:['small steel nails, screws and wire'],scrap:['heavy rusty iron or steel pieces'],wood:['natural wood with visible grain rings'],twig:['thin brown branches with small knots']};
+const GRP=[['orap','manp','citp','banp','melp','perp'],['oraw','citw','appw','perw','potw','oniw','garw','beet'],['potw','carw','beet','radi','rootv','oniw'],['potp','carp','onip','garp','lgrn','weed','rotv'],['cof','soil','dung','saw','tea'],['toma','pepp','eggp'],['cucu','zucc','pump'],['cabb','lett','spin','brocc','caul'],['ldry','lgrn','pap','cart','cbox','bark','hay'],['wood','twig','bark','saw','pet','jug','pcup','tray'],['gbot','jar','shat','pet','jug','pcup','tray'],['can','tin','mcap','foil','nail','scrap']];
+const MKEY='revalis_scan_mem_v1';let MEM=[];try{MEM=JSON.parse(localStorage.getItem(MKEY)||'[]')}catch(e){MEM=[]}
+const nrm=v=>{let n=0;for(let d=0;d<v.length;d++)n+=v[d]*v[d];n=Math.sqrt(n)||1;return Float32Array.from(v,x=>x/n)};
+function memSave(){try{localStorage.setItem(MKEY,JSON.stringify(MEM))}catch(e){}}
+// Vectorul unei clase = text + (dacă există) poze reale confirmate de utilizator
+function rebuild(){const L=CL;L.cls=K.map((k,i)=>{const mm=MEM.filter(m=>m.m===L.id&&m.id===k.id).map(m=>m.v);let v=L.txt[i];if(mm.length){const D=v.length,s=new Float32Array(D);mm.forEach(x=>{for(let d=0;d<D;d++)s[d]+=x[d]/mm.length});const a=nrm(s),w=Math.min(1,.35*mm.length);v=nrm(Array.from(v,(x,d)=>x+w*a[d]))}return v});
+L.xv=K.map((k,i)=>XPR[k.id]?nrm(Array.from(L.cls[i],(x,d)=>x+.7*L.xpe[k.id][d])):L.cls[i])}
+function learn(e,i){if(!CL||!e)return;const id=K[i].id;MEM.push({m:CL.id,id,v:Array.from(e,x=>+x.toFixed(3))});
+let c=MEM.filter(m=>m.id===id);while(c.length>12){MEM.splice(MEM.indexOf(c[0]),1);c=MEM.filter(m=>m.id===id)}while(MEM.length>240)MEM.shift();memSave();rebuild();msg('Salvat. Voi ține cont de această confirmare la următoarele analize.')}
+function getClip(){if(clipP)return clipP;clipP=(async()=>{try{
+const m=await QT(import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2/+esm'+(impN++?'?r='+impN:'')));m.env.allowLocalModels=false;let L=null;
+for(const id of ['Xenova/clip-vit-base-patch16','Xenova/clip-vit-base-patch32']){try{const tok=await m.AutoTokenizer.from_pretrained(id),tx=await m.CLIPTextModelWithProjection.from_pretrained(id,{dtype:'q8'}),pr=await m.AutoProcessor.from_pretrained(id),vi=await m.CLIPVisionModelWithProjection.from_pretrained(id,{dtype:'q8'});L={m,tok,tx,pr,vi,id};break}catch(e){}}
+if(!L)throw new Error('model');
+const enc=async arr=>{const o=[];for(let i=0;i<arr.length;i+=24){const {text_embeds}=await L.tx(L.tok(arr.slice(i,i+24),{padding:true,truncation:true}));o.push(...text_embeds.normalize(2,-1).tolist())}return o};
+const texts=[],own=[];K.forEach((k,i)=>k.pr.forEach(p=>TPL.forEach(t=>{texts.push(t.replace('{}',p));own.push(i)})));
+const emb=await enc(texts),D=emb[0].length,sum=K.map(()=>new Float32Array(D));own.forEach((o,i)=>{for(let d=0;d<D;d++)sum[o][d]+=emb[i][d]});L.txt=sum.map(v=>nrm(v));
+const xk=Object.keys(XPR),xt=[],xo=[];xk.forEach(k=>XPR[k].forEach(p=>{xt.push('a photo of '+p+'.');xo.push(k)}));
+const xe=await enc(xt);L.xpe={};xk.forEach(k=>{const s=new Float32Array(D);xe.forEach((e,i)=>{if(xo[i]===k)for(let d=0;d<D;d++)s[d]+=e[d]});L.xpe[k]=nrm(s)});
+CL=L;rebuild()}catch(e){CL=null}return CL})();return clipP}
+async function embed(cv){const im=await CL.m.RawImage.read(cv.toDataURL('image/jpeg',.9)),px=await CL.pr(im),{image_embeds}=await CL.vi(px);return image_embeds.normalize(2,-1).tolist()[0]}
+const avgE=es=>{const s=new Float32Array(es[0].length);es.forEach(e=>{for(let d=0;d<s.length;d++)s[d]+=e[d]});return nrm(s)};
+// Variante pentru robustețe la lumină și unghi: oglindire și balans de alb (gray-world)
+function flip(cv){const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;const x=c.getContext('2d');x.translate(cv.width,0);x.scale(-1,1);x.drawImage(cv,0,0);return c}
+function wbal(cv){const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(cv,0,0);const im=x.getImageData(0,0,c.width,c.height),d=im.data,n=d.length/4;let r=0,g=0,b=0;for(let i=0;i<d.length;i+=4){r+=d[i];g+=d[i+1];b+=d[i+2]}r/=n;g/=n;b/=n;const m=(r+g+b)/3,k=[m/(r||1),m/(g||1),m/(b||1)].map(v=>Math.max(.7,Math.min(1.4,v)));for(let i=0;i<d.length;i+=4){d[i]=Math.min(255,d[i]*k[0]);d[i+1]=Math.min(255,d[i+1]*k[1]);d[i+2]=Math.min(255,d[i+2]*k[2])}x.putImageData(im,0,0);return c}
+// Softmax pe TOATE clasele din catalog (scor relativ al modelului, nu probabilitate calibrată)
+function probs(e,cls){const z=cls.map(v=>{let s=0;for(let d=0;d<e.length;d++)s+=v[d]*e[d];return 100*s}),mx=Math.max(...z),ex=z.map(v=>Math.exp(v-mx)),sm=ex.reduce((a,b)=>a+b,0);return ex.map(v=>v/sm)}
+// Etapa 2: dacă locul 1 are concurenți vizual apropiați (grup de confuzie), se reia decizia între ei cu descrieri detaliate (formă, culoare, textură)
+function verify(e,P,e2){const o=P.map((v,i)=>[i,v]).filter(x=>K[x[0]].id!=='bg').sort((a,b)=>b[1]-a[1]),top=o[0][0],near=new Set(o.slice(0,5).map(x=>K[x[0]].id));
+const g=GRP.find(g=>g.includes(K[top].id)&&g.some(id=>id!==K[top].id&&near.has(id)));if(!g||!CL.xv)return{P,v:''};
+const mem=g.map(id=>K.findIndex(k=>k.id===id)),M0=mem.reduce((s,i)=>s+P[i],0)||1e-9;
+const lg=mem.map(i=>{let s=0;const v=CL.xv[i];for(let d=0;d<e.length;d++)s+=v[d]*(e2?(e[d]+e2[d])/2:e[d]);return 100*s}),mx=Math.max(...lg),ex=lg.map(v=>Math.exp(v-mx)),sm=ex.reduce((a,b)=>a+b,0);
+const post=mem.map((i,j)=>Math.max(P[i],1e-9)/M0*ex[j]/sm),ps=post.reduce((a,b)=>a+b,0),P2=P.slice();mem.forEach((i,j)=>{P2[i]=M0*post[j]/ps});
+const nt=[...P2.keys()].filter(i=>K[i].id!=='bg').sort((a,b)=>P2[b]-P2[a])[0];return{P:P2,v:nt===top?'confirmat':'corectat'}}
+// Decizie: se oferă mereu cel mai probabil rezultat, cu alternativă; „neidentificat” doar dacă domină fundalul sau scorurile sunt difuze
+function judge(p){const o=p.map((v,i)=>[i,v]).sort((a,b)=>b[1]-a[1]),a=o[0],b=o[1],k=K[a[0]],r=a[1]/Math.max(b[1],1e-9);
+const cm=K.reduce((s,x,i)=>x.c===k.c?s+p[i]:s,0),bgp=K.reduce((s,x,i)=>x.c==='bg'?s+p[i]:s,0);let t='none';
+if(k.c!=='bg'&&bgp<.5&&(a[1]>=.06||cm>=.35))t=a[1]>=.5&&r>=2?'high':(a[1]>=.25||cm>=.6)?'mid':'low';
+return{id:k.id,i:a[0],p:a[1],r,cm,t,alt:o.filter(x=>K[x[0]].c!=='bg').slice(0,4)}}
+// Vederi: [x,y,w,h,tip] tip 2 = pătratul central (decizia principală), 0 = pătrate laterale (imagini late), 1 = sub-zone (alte obiecte)
+function views(W,H){const s=Math.min(W,H),xs=W>H*1.25?[0,(W-s)/2,W-s]:[(W-s)/2],ys=H>W*1.25?[0,(H-s)/2,H-s]:[(H-s)/2],cx=xs[xs.length>>1],cy=ys[ys.length>>1],v=[[cx,cy,s,s,2]];
+xs.forEach(x=>ys.forEach(y=>{if(x!==cx||y!==cy)v.push([x,y,s,s,0])}));const u=s*.62;[[0,0],[1,0],[0,1],[1,1]].forEach(([a,b])=>v.push([cx+a*(s-u),cy+b*(s-u),u,u,1]));return v}
+function cropTo(x,y,w,h){const c=document.createElement('canvas'),k=Math.min(1,336/Math.max(w,h));c.width=Math.round(w*k);c.height=Math.round(h*k);c.getContext('2d').drawImage(C,x,y,w,h,0,0,c.width,c.height);return c}
+let IT=new Map(),CTX={};
+async function run(){if(busy)return;try{await run2()}catch(e){console.error('Scanare deșeu:',e);q('#scRes').innerHTML=`<div class="scr"><div class="card"><p class="err">Analiza fotografiei nu a putut fi finalizată.</p>${rbtn()}</div></div>`}finally{busy=false}}
+const rbtn=()=>'<div class="row" style="margin-top:.6rem"><button class="btn" type="button" data-retry="1">🔁 Reîncearcă</button></div>';
+function retake(why){q('#scRes').innerHTML=`<div class="scr"><div class="scrh" style="background:linear-gradient(135deg,#6b3a1f,#a5562a)"><div class="em">📷</div><div><small>Recunoașterea deșeurilor</small><h3>Fotografiază din nou</h3><p style="margin:0">Nu pot da un rezultat sigur: ${why}.</p></div></div><div class="card" style="margin-top:.8rem"><p>Nu ghicesc. Apropie camera, folosește lumină naturală, pune deșeul pe un fundal simplu și ține telefonul nemișcat. Pentru mai multe deșeuri, așază-le separat, nu suprapuse.</p>${rbtn()}</div></div>`}
+function unknown(){q('#scRes').innerHTML=`<div class="scr"><div class="scrh" style="background:linear-gradient(135deg,#6b3a1f,#a5562a)"><div class="em">❓</div><div><small>Recunoașterea deșeurilor</small><h3>Deșeu neidentificat</h3><p style="margin:0">Imaginea nu se potrivește clar cu nicio clasă din catalog.</p></div></div><div class="card" style="margin-top:.8rem"><p>Poți încerca o fotografie mai apropiată, pe fundal simplu, sau poți alege manual materialul:</p><div class="scfix">${BASE.map(k=>`<button class="btn o" type="button" data-fx="${k}">${M[k].e} ${M[k].t}</button>`).join('')}</div>${rbtn()}</div></div>`}
+function noModel(){q('#scRes').innerHTML=`<div class="scr"><div class="scrh" style="background:linear-gradient(135deg,#6b3a1f,#a5562a)"><div class="em">📡</div><div><small>Recunoașterea deșeurilor</small><h3>Modelul IA nu este disponibil</h3><p style="margin:0">Nu am putut conecta sistemul de recunoaștere. Încearcă din nou.</p></div></div><div class="card" style="margin-top:.8rem"><p>Fără model nu identific deșeul (nu folosesc culoarea ca să ghicesc). Verifică conexiunea și fă din nou poza, sau alege manual:</p><div class="scfix">${BASE.map(k=>`<button class="btn o" type="button" data-fx="${k}">${M[k].e} ${M[k].t}</button>`).join('')}</div>${rbtn()}</div></div>`}
+async function run2(){busy=true;const g=gen,R=q('#scRes');R.innerHTML='<p class="scnote">⏳ Se verifică imaginea…</p>';
+const f0=feats(),bad=C.width<120||C.height<120?'rezoluția este prea mică':f0.lum<.1?'imaginea este prea întunecată':f0.lum>.94?'imaginea este supraexpusă':f0.edge<.012?'imaginea pare neclară sau fără detalii':'';
+if(bad){retake(bad);busy=false;return}
+R.innerHTML='<p class="scnote">⏳ Se încarcă modelul IA (la prima utilizare poate dura câteva minute)…</p>';
+await getClip();if(g!==gen){busy=false;return}if(!CL){noModel();busy=false;return}
+const VW=views(C.width,C.height),res=[];
+for(let n=0;n<VW.length;n++){const v=VW[n];R.innerHTML=`<p class="scnote">⏳ Se analizează imaginea (${n+1}/${VW.length})…</p>`;let cv=cropTo(v[0],v[1],v[2],v[3]),e;
+if(v[4]===2)e=avgE([await embed(cv),await embed(flip(cv)),await embed(wbal(cv))]);else e=await embed(cv);
+if(g!==gen){busy=false;return}
+let P=probs(e,CL.cls),vr=verify(e,P);
+if(v[4]===2&&vr.v){const e2=await embed(cropTo(v[0]+v[2]*.15,v[1]+v[3]*.15,v[2]*.7,v[3]*.7));if(g!==gen){busy=false;return}vr=verify(e,P,e2)}
+res.push(Object.assign(judge(vr.P),{type:v[4],ver:vr.v,emb:e}))}
+IT=new Map();
+res.forEach(r=>{const ok=r.type===2?r.t!=='none':(r.t==='high'&&r.p>=.7&&r.r>=3);if(!ok)return;const o=IT.get(r.id);if(!o||(r.type===2&&!o.main)||(r.p>o.p&&!o.main))IT.set(r.id,Object.assign(r,{main:r.type===2}))});
+if(!IT.size){unknown();busy=false;return}
+IT=new Map([...IT].sort((x,y)=>(y[1].main?9:0)+y[1].p-((x[1].main?9:0)+x[1].p)));
+CTX={model:CL.id};showItem([...IT.keys()][0]);busy=false}
+function showItem(id){const r=IT.get(id);CTX.emb=r.emb;renderItem(r,false);const sc=q('#scRes .scr');if(!sc||IT.size<2)return;
+sc.insertAdjacentHTML('afterbegin',`<p class="scalt">Obiecte identificate (${IT.size}) — atinge pentru fișă:</p><div class="row">${[...IT].map(([k,v])=>`<button class="btn ${k===id?'':'o'}" type="button" data-it="${k}">${K[v.i].e} ${K[v.i].n} · ${v.t==='high'?'încredere ridicată':v.t==='mid'?'probabil':'verifică'}</button>`).join('')}</div>`)}
+function renderItem(r,man){const k=K[r.i],g=CG[k.c],ov=OV[k.id]||{},R=q('#scRes'),b=ov.b||g.b,fs=M[FS[k.id]||g.f];
+const lab=man?'Confirmat de tine':r.t==='high'?'Încredere ridicată':r.t==='mid'?'Probabil':'Încredere scăzută · verifică',pc=man?0:Math.round(r.p*100);
+const alts=(r.alt||[]).filter(a=>a[0]!==r.i).slice(0,3),a1=alts[0];
+const info=[['Categorie principală',g.n],['Subcategorie',k.s],['Biodegradabil',b],['Compostabil',ov.k||g.k],['Reciclabil',ov.r||g.r],['Colectare recomandată',ov.c||g.c]];
+R.innerHTML=`<div class="scr"><div class="scrh"><div class="em">${k.e}</div><div><small>Recunoașterea deșeurilor</small><h3>${!man&&r.t==='low'?'Posibil: ':''}${k.n}</h3>${man?'':`<div class="scbar" role="img" aria-label="Scor relativ al modelului ${r.p.toFixed(2)}"><i style="width:0"></i></div>`}<div><span class="scbd">${lab}</span>${man?'':`<span class="scbd">Scor model: ${r.p.toFixed(2)}</span>`}${r.ver?`<span class="scbd">Verificare: ${r.ver}</span>`:''}<span class="scbd">CLIP (IA, zero-shot)</span></div></div></div>
+${!man&&a1&&(r.t!=='high'||a1[1]>=.15)?`<p class="scalt">Alternativă apropiată: <b>${K[a1[0]].e} ${K[a1[0]].n}</b> (scor ${a1[1].toFixed(2)})</p>`:''}
+<div class="scg">${info.map(x=>`<div class="card"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div>
+${fs?`<p class="scalt">Fișă educativă (generală pentru acest tip de material):</p><div class="scg">${LBL.map(l=>`<div class="card"><b>${l[0]}</b><p>${fs[l[1]]}</p></div>`).join('')}</div>`:''}
+<p class="scnote">Scorul este calculat de model și arată cât de clar se potrivește imaginea cu această clasă față de celelalte din catalog; nu este o probabilitate calibrată. Pragurile sunt alese empiric. „Verificare” = a doua etapă, care compară între ele clasele ușor de confundat. Biodegradabil nu înseamnă automat compostabil în gospodărie; regulile de colectare diferă de la o localitate la alta.</p>
+<div class="scfix"><p class="scalt">${man?'Confirmarea ta a fost folosită ca exemplu pentru analizele următoare.':'Ajută modelul să învețe din pozele tale:'}</p>${man?'':`<button class="btn" type="button" data-ok="${r.i}">✓ Corect</button>`}${alts.map(a=>`<button class="btn o" type="button" data-pick="${a[0]}">${K[a[0]].e} ${K[a[0]].n}</button>`).join('')}${MEM.length?`<button class="btn o" type="button" data-memreset="1">🧹 Șterge corecțiile salvate (${MEM.length})</button>`:''}</div>
+<div class="scfix"><p class="scalt">Sau alege un material pentru fișa educativă:</p>${BASE.map(x=>`<button class="btn o" type="button" data-fx="${x}">${M[x].e} ${M[x].t}</button>`).join('')}</div></div>`;
+requestAnimationFrame(()=>{const bar=R.querySelector('.scbar i');if(bar)bar.style.width=pc+'%'});R.scrollIntoView({behavior:'smooth',block:'nearest'})}
+function render(id,conf,alt,used,nets,noVeg){const R=q('#scRes');
+if(!id){R.innerHTML=`<div class="scr"><div class="scrh" style="background:linear-gradient(135deg,#6b3a1f,#a5562a)"><div class="em">❓</div><div><small>Recunoașterea deșeurilor</small><h3>Material neidentificat</h3><p style="margin:0">Nu am găsit suficiente indicii că imaginea conține un deșeu vegetal cunoscut.</p></div></div><div class="card" style="margin-top:.8rem"><p>Încearcă din nou: pune deșeul pe un fundal simplu și neutru, apropie camera, folosește lumină naturală și evită reflexiile. Poți încărca și o poză din galerie.</p></div></div>`;return}
+const m=M[id],man=used[0]==='ales de tine',pc=Math.round(conf*100);
+R.innerHTML=`<div class="scr"><div class="scrh"><div class="em">${m.e}</div><div><small>Recunoașterea deșeurilor</small><h3>${m.t}</h3><div class="scbar" role="img" aria-label="Încredere estimată ${pc}%"><i style="width:0"></i></div><div><span class="scbd">${man?'Material ales de tine':'Încredere estimată: '+pc+'%'}</span>${used.map(u=>`<span class="scbd">${u}</span>`).join('')}</div></div></div>
+${id==='organic'?'<p class="scalt">Imaginea arată indicii vegetale, dar nu se potrivește clar cu o categorie. Fișa de mai jos este generală.</p>':''}
+<div class="scg">${LBL.map(l=>`<div class="card"><b>${l[0]}</b><p>${m[l[1]]}</p></div>`).join('')}</div>
+<p class="scalt">Alte posibilități: ${alt.filter(a=>a[0]!==id).map(a=>`${M[a[0]].t} (${Math.round(a[1]*100)}%)`).join(', ')||'–'}${nets.length?` · Model: ${[...new Set(nets)].join(', ')}`:''}</p>
+<p class="scnote">Recunoaștere orientativă, pe baza culorii și texturii${used.length>1?' și a unui model IA general':''}. Compoziția reală depinde de sursă și de procesare; la nevoie, verifică materialul cu un specialist.</p>
+<div class="scfix"><p class="scalt">Nu este corect? Alege materialul:</p>${BASE.filter(k=>k!==id).map(k=>`<button class="btn o" type="button" data-fx="${k}">${M[k].e} ${M[k].t}</button>`).join('')}</div></div>`;
+requestAnimationFrame(()=>{const b=R.querySelector('.scbar i');if(b)b.style.width=pc+'%'});R.scrollIntoView({behavior:'smooth',block:'nearest'})}
+// ---- Evenimente
+q('#scRes').addEventListener('click',e=>{const it=e.target.closest('[data-it]');if(it){showItem(it.dataset.it);return}if(e.target.closest('[data-retry]')){if(!CL)clipP=null;run();return}if(e.target.closest('[data-memreset]')){MEM=[];memSave();if(CL)rebuild();msg('Corecțiile salvate au fost șterse.');return}const ok=e.target.closest('[data-ok]');if(ok){learn(CTX.emb,+ok.dataset.ok);renderItem({i:+ok.dataset.ok,p:1,t:'high',alt:[]},true);return}const pk=e.target.closest('[data-pick]');if(pk){learn(CTX.emb,+pk.dataset.pick);renderItem({i:+pk.dataset.pick,p:1,t:'high',alt:[]},true);return}const b=e.target.closest('[data-fx]');if(b)render(b.dataset.fx,1,[],['ales de tine'],[],false)});q('#scanOpen').onclick=open;q('#scGo').onclick=run;q('#scCam').onclick=startCam;q('#scDel').onclick=()=>{gen++;C.getContext('2d').clearRect(0,0,C.width,C.height);q('#scRes').innerHTML='';ui('idle');msg('Fotografia a fost ștearsă. Deschide camera sau alege o fotografie din galerie.')};q('#scX').onclick=close;q('#scShot').onclick=shot;
+q('#scFlip').onclick=()=>{facing=facing==='environment'?'user':'environment';startCam()};
+q('#scAgain').onclick=startCam;q('#scGal').onclick=()=>q('#scF1').click();q('#scNat').onclick=()=>q('#scF2').click();
+['#scF1','#scF2'].forEach(i=>q(i).onchange=e=>{const t=e.target,f=t.files&&t.files[0];fromFile(f).then(()=>{t.value=''},()=>{t.value=''})});
+q('#scanM').addEventListener('click',e=>{if(e.target.id==='scanM')close()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!q('#scanM').hidden)close()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(stream){stop();ui('idle')}}else if(!q('#scanM').hidden&&!stream&&q('#scCv').hidden)startCam()});
+addEventListener('hashchange',()=>{if(!q('#scanM').hidden)close()});
+})();
+</script>
+</body>
+</html>
